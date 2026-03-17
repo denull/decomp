@@ -1,0 +1,75 @@
+import { Meta } from '@storybook/addon-docs/blocks';
+
+<Meta title="Theming" />
+
+# Theming
+
+Decomp uses a three-tier CSS custom property system. Themes are applied via `data-theme` and `data-scheme` attributes.
+
+## How It Works
+
+```html
+<div data-theme="ios" data-scheme="night" style="--accent-base: oklch(0.6 0.2 330)">
+```
+
+### Tier 1: Global Tokens (theme-independent)
+```css
+--space-xs: 4px;   --space-sm: 8px;   --space-md: 12px;
+--radius-sm: 4px;  --radius-md: 8px;  --radius-lg: 12px;
+--duration-fast: 100ms; --duration-normal: 200ms;
+```
+
+Themes may override these (e.g., Win98 sets all radii to 0, iOS increases them to 10px+).
+
+### Tier 2: Semantic Variables (per theme)
+```css
+--surface-primary    --text-primary       --accent
+--surface-secondary  --text-secondary     --accent-hover
+--control-bg         --control-border     --accent-subtle
+--shadow-sm          --shadow-md          --border-default
+```
+
+Every theme defines all semantic variables for each of its 4 color schemes.
+
+### Tier 3: Component-Private (`--_` prefix)
+Inside component `<style>` blocks, components define private variables that reference tier-2:
+```css
+.button {
+  --_bg: var(--control-bg);
+  background: var(--_bg);
+}
+.button.is-primary {
+  --_bg: var(--accent);
+}
+```
+
+## Color Schemes
+
+| Scheme | Attribute | Description |
+|---|---|---|
+| Day | `data-scheme="day"` | Default light appearance |
+| Night | `data-scheme="night"` | Dark appearance |
+| HC Day | `data-scheme="hc-day"` | High contrast light |
+| HC Night | `data-scheme="hc-night"` | High contrast dark |
+
+## Accent Color
+
+Provide `--accent-base` as an oklch color. The theme derives hover, active, subtle, and text variants automatically:
+
+```css
+--accent: var(--accent-base, oklch(0.59 0.24 255));
+--accent-hover:  oklch(from var(--accent) calc(l - 0.05) c h);
+--accent-active: oklch(from var(--accent) calc(l - 0.1) c h);
+--accent-subtle: oklch(from var(--accent) l c h / 0.12);
+```
+
+## Theme Differences
+
+Each theme adjusts tokens, shadows, radii, fonts, and component behavior:
+
+- **Semi-Flat**: Clean defaults, moderate shadows
+- **iOS**: Large radii (10px), 44px targets, backdrop-filter blur, scale-on-press
+- **Android**: State layers, ripple effect, elevation shadows, pill-shaped primary buttons
+- **Windows**: Compact 4px radii, Segoe UI, accent bottom-border on focused inputs
+- **Skeuomorphic**: Gradient backgrounds, inset shadows, embossed text, 3D raised controls
+- **Win98**: Zero radii, beveled box-shadows, instant transitions, system font

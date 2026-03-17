@@ -1,0 +1,225 @@
+/* === Skeuomorphic Theme ===
+ * Raised 3D controls, gradients, inset shadows, textured surfaces.
+ * Inspired by vintage cassette players, radios, DJ mixers —
+ * tactile, analog feel with pronounced depth.
+ */
+
+[data-theme="skeuo"] {
+  --font-family: 'Lucida Grande', 'Helvetica Neue', Geneva, Verdana, sans-serif;
+  --font-family-mono: Menlo, 'Courier New', monospace;
+
+  /* Generous radii */
+  --radius-sm: 5px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+  --radius-xl: 16px;
+
+  --control-height-sm: 28px;
+  --control-height-md: 36px;
+  --control-height-lg: 44px;
+
+  /* Surfaces — warm, textured tones */
+  --surface-primary: oklch(0.92 0.008 70);
+  --surface-secondary: oklch(0.88 0.01 70);
+  --surface-tertiary: oklch(0.84 0.012 70);
+  --surface-elevated: oklch(0.94 0.006 70);
+  --surface-inset: oklch(0.82 0.012 70);
+
+  /* Text */
+  --text-primary: oklch(0.18 0.02 50);
+  --text-secondary: oklch(0.4 0.02 50);
+  --text-tertiary: oklch(0.55 0.015 50);
+  --text-disabled: oklch(0.65 0.01 50);
+  --text-on-accent: oklch(1 0 0);
+
+  /* Borders */
+  --border-default: oklch(0.7 0.015 50);
+  --border-strong: oklch(0.55 0.02 50);
+  --border-subtle: oklch(0.8 0.01 60);
+
+  /* Accent */
+  --accent: var(--accent-base, oklch(0.55 0.2 250));
+  --accent-hover: oklch(from var(--accent) calc(l - 0.04) c h);
+  --accent-active: oklch(from var(--accent) calc(l - 0.08) c h);
+  --accent-subtle: oklch(from var(--accent) l c h / 0.12);
+  --accent-text: oklch(from var(--accent) calc(l - 0.08) calc(c + 0.02) h);
+
+  /* Feedback */
+  --danger: oklch(0.55 0.22 22);
+  --danger-hover: oklch(0.5 0.22 22);
+  --danger-subtle: oklch(0.55 0.22 22 / 0.12);
+  --success: oklch(0.55 0.18 145);
+  --warning: oklch(0.72 0.16 70);
+  --info: oklch(0.55 0.15 245);
+
+  /* Controls — gradient backgrounds for 3D raised effect */
+  --control-bg: linear-gradient(to bottom, oklch(0.96 0.005 70), oklch(0.88 0.01 70));
+  --control-bg-hover: linear-gradient(to bottom, oklch(0.98 0.003 70), oklch(0.9 0.008 70));
+  --control-bg-active: linear-gradient(to bottom, oklch(0.85 0.012 70), oklch(0.9 0.008 70));
+  --control-border: oklch(0.62 0.02 50);
+
+  /* Skeuomorphic shadows — pronounced depth */
+  --shadow-sm:
+    0 1px 1px oklch(0 0 0 / 0.12),
+    inset 0 1px 0 oklch(1 0 0 / 0.25);
+  --shadow-md:
+    0 2px 6px oklch(0 0 0 / 0.15),
+    0 1px 2px oklch(0 0 0 / 0.1),
+    inset 0 1px 0 oklch(1 0 0 / 0.2);
+  --shadow-lg:
+    0 6px 20px oklch(0 0 0 / 0.2),
+    0 2px 6px oklch(0 0 0 / 0.12),
+    inset 0 1px 0 oklch(1 0 0 / 0.15);
+
+  /* Transition feel */
+  --ease-default: cubic-bezier(0.25, 0.1, 0.25, 1);
+}
+
+/* Skeuo overrides — embossed/debossed effects */
+
+/* Buttons: glossy gradient with inset highlight */
+[data-theme="skeuo"] [class*="button"] {
+  text-shadow: 0 1px 0 oklch(1 0 0 / 0.3);
+  border-width: 1px;
+  border-style: solid;
+  border-color: oklch(0.6 0.02 50) oklch(0.55 0.02 50) oklch(0.5 0.02 50) oklch(0.55 0.02 50);
+}
+
+[data-theme="skeuo"] [class*="button"]:active:not(:disabled) {
+  transform: translateY(1px);
+  box-shadow: inset 0 2px 4px oklch(0 0 0 / 0.15);
+  text-shadow: none;
+}
+
+/* Primary buttons: accent gradient */
+[data-theme="skeuo"] [class*="button"].is-primary {
+  background: linear-gradient(
+    to bottom,
+    oklch(from var(--accent) calc(l + 0.08) c h),
+    var(--accent)
+  );
+  border-color: oklch(from var(--accent) calc(l - 0.12) c h);
+  text-shadow: 0 -1px 0 oklch(0 0 0 / 0.2);
+}
+
+/* Inputs: sunken inset effect */
+[data-theme="skeuo"] [class*="input__wrapper"] {
+  background: oklch(1 0 0);
+  box-shadow: inset 0 2px 4px oklch(0 0 0 / 0.1), inset 0 1px 1px oklch(0 0 0 / 0.06);
+  border-color: oklch(0.55 0.02 50) oklch(0.6 0.02 50) oklch(0.65 0.02 50) oklch(0.6 0.02 50);
+}
+
+/* Cards: raised panels */
+[data-theme="skeuo"] [class*="card"] {
+  background: linear-gradient(
+    to bottom,
+    oklch(0.95 0.006 70),
+    oklch(0.9 0.01 70)
+  );
+  border-color: oklch(0.68 0.015 50);
+  box-shadow: var(--shadow-md);
+}
+
+/* Toolbar: brushed metal look */
+[data-theme="skeuo"] [class*="toolbar"] {
+  background: linear-gradient(
+    to bottom,
+    oklch(0.94 0.008 70),
+    oklch(0.86 0.012 70)
+  );
+  border-bottom-color: oklch(0.6 0.015 50);
+  box-shadow: 0 1px 2px oklch(0 0 0 / 0.1), inset 0 1px 0 oklch(1 0 0 / 0.3);
+}
+
+/* Toggle: deep track groove */
+[data-theme="skeuo"] [class*="check--toggle"] [class*="check__indicator"] {
+  box-shadow: inset 0 2px 4px oklch(0 0 0 / 0.2), inset 0 1px 2px oklch(0 0 0 / 0.1);
+}
+
+[data-theme="skeuo"] [class*="check__knob"] {
+  background: linear-gradient(to bottom, oklch(0.98 0 0), oklch(0.88 0 0));
+  box-shadow: 0 1px 3px oklch(0 0 0 / 0.2), inset 0 1px 0 oklch(1 0 0 / 0.5);
+}
+
+/* Slider: grooved track */
+[data-theme="skeuo"] [class*="slider__input"] {
+  box-shadow: inset 0 1px 3px oklch(0 0 0 / 0.15);
+}
+
+[data-theme="skeuo"] [class*="slider__input"]::-webkit-slider-thumb {
+  background: linear-gradient(to bottom, oklch(0.98 0 0), oklch(0.85 0 0));
+  box-shadow: 0 1px 4px oklch(0 0 0 / 0.25), inset 0 1px 0 oklch(1 0 0 / 0.5);
+  border-color: oklch(0.55 0 0);
+}
+
+/* === Night === */
+[data-theme="skeuo"][data-scheme="night"] {
+  --surface-primary: oklch(0.2 0.01 50);
+  --surface-secondary: oklch(0.17 0.012 50);
+  --surface-tertiary: oklch(0.15 0.015 50);
+  --surface-elevated: oklch(0.22 0.01 50);
+  --surface-inset: oklch(0.12 0.01 50);
+
+  --text-primary: oklch(0.9 0.005 50);
+  --text-secondary: oklch(0.65 0.01 50);
+  --text-tertiary: oklch(0.5 0.01 50);
+  --text-disabled: oklch(0.38 0 0);
+
+  --border-default: oklch(0.35 0.015 50);
+  --border-strong: oklch(0.5 0.02 50);
+  --border-subtle: oklch(0.28 0.01 50);
+
+  --control-bg: linear-gradient(to bottom, oklch(0.28 0.01 50), oklch(0.2 0.012 50));
+  --control-bg-hover: linear-gradient(to bottom, oklch(0.32 0.01 50), oklch(0.24 0.012 50));
+  --control-bg-active: linear-gradient(to bottom, oklch(0.18 0.012 50), oklch(0.22 0.01 50));
+  --control-border: oklch(0.42 0.015 50);
+
+  --shadow-sm:
+    0 1px 2px oklch(0 0 0 / 0.25),
+    inset 0 1px 0 oklch(1 0 0 / 0.06);
+  --shadow-md:
+    0 2px 8px oklch(0 0 0 / 0.3),
+    inset 0 1px 0 oklch(1 0 0 / 0.05);
+  --shadow-lg:
+    0 8px 24px oklch(0 0 0 / 0.4),
+    inset 0 1px 0 oklch(1 0 0 / 0.04);
+
+  --accent-hover: oklch(from var(--accent) calc(l + 0.06) c h);
+  --accent-active: oklch(from var(--accent) calc(l + 0.1) c h);
+  --accent-subtle: oklch(from var(--accent) l c h / 0.18);
+}
+
+[data-theme="skeuo"][data-scheme="night"] [class*="input__wrapper"] {
+  background: oklch(0.12 0.01 50);
+  box-shadow: inset 0 2px 4px oklch(0 0 0 / 0.25);
+}
+
+[data-theme="skeuo"][data-scheme="night"] [class*="toolbar"] {
+  background: linear-gradient(
+    to bottom,
+    oklch(0.25 0.01 50),
+    oklch(0.18 0.012 50)
+  );
+}
+
+/* === HC Day === */
+[data-theme="skeuo"][data-scheme="hc-day"] {
+  --surface-primary: oklch(1 0 0);
+  --text-primary: oklch(0 0 0);
+  --border-default: oklch(0.3 0 0);
+  --border-strong: oklch(0 0 0);
+  --control-bg: oklch(0.95 0 0);
+  --control-border: oklch(0.2 0 0);
+}
+
+/* === HC Night === */
+[data-theme="skeuo"][data-scheme="hc-night"] {
+  --surface-primary: oklch(0.05 0 0);
+  --surface-elevated: oklch(0.1 0 0);
+  --text-primary: oklch(1 0 0);
+  --text-secondary: oklch(0.82 0 0);
+  --border-default: oklch(0.6 0 0);
+  --border-strong: oklch(0.8 0 0);
+  --control-bg: oklch(0.1 0 0);
+  --control-border: oklch(0.65 0 0);
+}

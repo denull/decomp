@@ -1,43 +1,130 @@
-# Svelte + Vite
+# Decomp UI
 
-This template should help get you started developing with Svelte in Vite.
+A universal, themable component library for **Svelte 5**. Designed to look and feel native across platforms — from iOS to Windows 98.
 
-## Recommended IDE Setup
+## Features
 
-[VS Code](https://code.visualstudio.com/) + [Svelte](https://marketplace.visualstudio.com/items?itemName=svelte.svelte-vscode).
+- **6 visual themes**: Semi-Flat, iOS/macOS, Android (Material), Windows (Fluent), Skeuomorphic, Win98
+- **4 color schemes**: Day, Night, High Contrast Day, High Contrast Night
+- **Configurable accent color** via CSS custom properties with `oklch(from ...)` derivation
+- **Mobile-first**: bottom sheets, safe area insets, 44px touch targets
+- **Accessible**: ARIA roles, keyboard navigation, focus management
+- **Zero dependencies**: pure Svelte 5 + CSS
 
-## Need an official Svelte framework?
+## Quick Start
 
-Check out [SvelteKit](https://github.com/sveltejs/kit#readme), which is also powered by Vite. Deploy anywhere with its serverless-first approach and adapt to various platforms, with out of the box support for TypeScript, SCSS, and Less, and easily-added support for mdsvex, GraphQL, PostCSS, Tailwind CSS, and more.
+Wrap your app in `ThemeProvider`:
 
-## Technical considerations
+```svelte
+<script>
+  import { ThemeProvider, Button, Input, Check } from '$lib';
+</script>
 
-**Why use this over SvelteKit?**
-
-- It brings its own routing solution which might not be preferable for some users.
-- It is first and foremost a framework that just happens to use Vite under the hood, not a Vite app.
-
-This template contains as little as possible to get started with Vite + Svelte, while taking into account the developer experience with regards to HMR and intellisense. It demonstrates capabilities on par with the other `create-vite` templates and is a good starting point for beginners dipping their toes into a Vite + Svelte project.
-
-Should you later need the extended capabilities and extensibility provided by SvelteKit, the template has been structured similarly to SvelteKit so that it is easy to migrate.
-
-**Why include `.vscode/extensions.json`?**
-
-Other templates indirectly recommend extensions via the README, but this file allows VS Code to prompt the user to install the recommended extension upon opening the project.
-
-**Why enable `checkJs` in the JS template?**
-
-It is likely that most cases of changing variable types in runtime are likely to be accidental, rather than deliberate. This provides advanced typechecking out of the box. Should you like to take advantage of the dynamically-typed nature of JavaScript, it is trivial to change the configuration.
-
-**Why is HMR not preserving my local component state?**
-
-HMR state preservation comes with a number of gotchas! It has been disabled by default in both `svelte-hmr` and `@sveltejs/vite-plugin-svelte` due to its often surprising behavior. You can read the details [here](https://github.com/sveltejs/svelte-hmr/tree/master/packages/svelte-hmr#preservation-of-local-state).
-
-If you have state that's important to retain within a component, consider creating an external store which would not be replaced by HMR.
-
-```js
-// store.js
-// An extremely simple external store
-import { writable } from 'svelte/store'
-export default writable(0)
+<ThemeProvider theme="semiflat" scheme="day" accent="oklch(0.6 0.2 280)">
+  <Button variant="primary">Hello World</Button>
+</ThemeProvider>
 ```
+
+### Theme options
+
+| Prop | Values | Default |
+|---|---|---|
+| `theme` | `semiflat`, `ios`, `android`, `windows`, `skeuo`, `win98` | `semiflat` |
+| `scheme` | `day`, `night`, `hc-day`, `hc-night` | `day` |
+| `accent` | Any oklch color string | Theme default |
+
+## Components
+
+### Primitives
+- **Button** — default, primary, destructive, ghost variants. Supports grouped/segment mode, icon-only, loading state.
+- **Check** — Unified checkbox, radio, and toggle via `type` prop. Supports labels, sizes, disabled.
+- **Slider** — Range input with optional label and value display.
+
+### Input
+- **Input** — Universal input covering text, multiline (textarea), search, tags, select (dropdown), and combobox (autocomplete). Mode determined by props: `multiline`, `options`, `autocomplete`, `tags`, `type="search"`.
+
+### Lists
+- **List** — Scrollable container for list items.
+- **ListItem** — Row with leading/trailing snippets, title, description. Interactive by default.
+- **Group** — Section wrapper with title/description. Use standalone or inside List for grouped sections. `inset` prop for card-like appearance.
+
+### Navigation
+- **Tabs** — Top tab strip (`position="top"`) or bottom tab bar (`position="bottom"`). Supports badges, disabled tabs, keyboard navigation.
+
+### Layout
+- **AppShell** — CSS Grid layout: toolbar + sidebar + main + tabbar. Sidebar collapses to drawer on mobile.
+- **Toolbar** — Sticky header with title, leading/trailing action areas.
+- **Sidebar** — Collapsible side panel. Becomes overlay drawer on mobile with backdrop.
+- **Card** — Elevated content container with optional header/footer.
+- **Stack** — Flex primitive: vertical/horizontal with gap tokens.
+- **Divider** — Separator with optional text label.
+
+### Overlays
+- **Overlay** — Unified overlay: popover (`mode="popover"`), modal (`mode="modal"`), or tooltip (`mode="tooltip"`). Modals become bottom sheets on mobile. Auto-positioning for popovers.
+
+### Feedback
+- **Progress** — Progress bar (`type="bar"`) or spinner (`type="spinner"`). Supports determinate and indeterminate states.
+
+### Display
+- **Badge** — Standalone or anchored notification indicator. Dot mode, multiple color variants.
+- **Avatar** — Image with fallback initials. Multiple sizes.
+
+## Svelte Actions
+
+```svelte
+<script>
+  import { ripple, clickOutside, focusTrap, portal } from '$lib';
+</script>
+
+<button use:ripple={{ enabled: true }}>Material ripple</button>
+<div use:clickOutside={{ handler: close }}>Click outside to close</div>
+<div use:focusTrap={{ enabled: isOpen }}>Focus is trapped here</div>
+<div use:portal={'body'}>Teleported to body</div>
+```
+
+## CSS Custom Properties
+
+The library uses a three-tier system with **no prefix** for clean, readable names:
+
+```css
+/* Tier 1: Global tokens (theme-independent) */
+--space-md: 12px;  --radius-md: 8px;  --font-md: 15px;
+
+/* Tier 2: Semantic variables (set by theme + scheme) */
+--surface-primary   --text-primary     --accent
+--control-bg        --control-border   --accent-hover
+--shadow-sm         --border-default   --danger
+
+/* Tier 3: Component-private (--_ prefix) */
+.button { --_bg: var(--control-bg); }
+```
+
+## Class Naming
+
+```
+component-name              → block
+component-name__part-name   → element
+component-name--sm          → size variant
+is-active, is-primary       → state/modifier
+```
+
+## Development
+
+```bash
+npm run storybook     # Start Storybook on port 6006
+npm run dev           # Start Vite dev server
+npm run build         # Build for production
+```
+
+## Storybook
+
+All components are showcased in Storybook with interactive controls. Use the toolbar to switch between themes and color schemes.
+
+## Browser Support
+
+Targets evergreen browsers. Uses modern CSS features:
+- `oklch()` and `oklch(from ...)` for color derivation
+- `container queries` for responsive components
+- `100dvh` for viewport-relative layouts
+- `env(safe-area-inset-*)` for iOS safe areas
+- `backdrop-filter` for translucent surfaces

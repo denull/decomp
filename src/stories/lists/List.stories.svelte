@@ -1,0 +1,108 @@
+<script module>
+  import { defineMeta } from '@storybook/addon-svelte-csf';
+  import List from '$lib/components/List.svelte';
+  import ListItem from '$lib/components/ListItem.svelte';
+  import Group from '$lib/components/Group.svelte';
+
+  const { Story } = defineMeta({
+    title: 'Lists/List',
+    component: List,
+    tags: ['autodocs'],
+  });
+</script>
+
+<Story name="Simple List">
+  {#snippet children(args)}
+    <div style="width: 320px;">
+      <List>
+        <ListItem>Inbox</ListItem>
+        <ListItem>Sent</ListItem>
+        <ListItem>Drafts</ListItem>
+        <ListItem>Trash</ListItem>
+      </List>
+    </div>
+  {/snippet}
+</Story>
+
+<Story name="With Descriptions">
+  {#snippet children(args)}
+    <div style="width: 360px;">
+      <List>
+        <ListItem>
+          {#snippet leading()}<span style="font-size: 24px;">📱</span>{/snippet}
+          iPhone 15 Pro
+          {#snippet description()}256 GB · Space Black{/snippet}
+          {#snippet trailing()}$999{/snippet}
+        </ListItem>
+        <ListItem>
+          {#snippet leading()}<span style="font-size: 24px;">💻</span>{/snippet}
+          MacBook Air
+          {#snippet description()}M3 · 16 GB · Midnight{/snippet}
+          {#snippet trailing()}$1,299{/snippet}
+        </ListItem>
+        <ListItem>
+          {#snippet leading()}<span style="font-size: 24px;">⌚</span>{/snippet}
+          Apple Watch Ultra
+          {#snippet description()}49mm · Titanium{/snippet}
+          {#snippet trailing()}$799{/snippet}
+        </ListItem>
+      </List>
+    </div>
+  {/snippet}
+</Story>
+
+<Story name="Grouped (Settings Style)">
+  {#snippet children(args)}
+    <div style="width: 360px;">
+      <Group title="General" inset>
+        <ListItem>
+          Language
+          {#snippet trailing()}English ›{/snippet}
+        </ListItem>
+        <ListItem>
+          Region
+          {#snippet trailing()}United States ›{/snippet}
+        </ListItem>
+      </Group>
+      <Group title="Notifications" inset>
+        <ListItem>
+          Push Notifications
+          {#snippet trailing()}On{/snippet}
+        </ListItem>
+        <ListItem>
+          Email Alerts
+          {#snippet trailing()}Off{/snippet}
+        </ListItem>
+        <ListItem>
+          Sound
+          {#snippet trailing()}Default ›{/snippet}
+        </ListItem>
+      </Group>
+    </div>
+  {/snippet}
+</Story>
+
+<Story name="Scrollable">
+  {#snippet children(args)}
+    <div style="width: 320px;">
+      <List scrollable maxHeight="200px">
+        {#each Array.from({ length: 20 }, (_, i) => i + 1) as item}
+          <ListItem>Item {item}</ListItem>
+        {/each}
+      </List>
+    </div>
+  {/snippet}
+</Story>
+
+<Story name="With Selection">
+  {#snippet children(args)}
+    <div style="width: 320px;">
+      <List>
+        <ListItem selected>Selected item</ListItem>
+        <ListItem>Normal item</ListItem>
+        <ListItem disabled>Disabled item</ListItem>
+        <ListItem>Another item</ListItem>
+      </List>
+    </div>
+  {/snippet}
+</Story>

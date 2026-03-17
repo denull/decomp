@@ -1,0 +1,85 @@
+import { Meta } from '@storybook/addon-docs/blocks';
+
+<Meta title="Layout" />
+
+# Layout System
+
+Decomp provides layout components for structuring apps that work on both desktop and mobile.
+
+## AppShell
+
+The top-level layout uses CSS Grid with 4 named regions:
+
+```
+┌─────────────────────────────┐
+│ Toolbar (sticky)            │
+├────────┬────────────────────┤
+│Sidebar │ Main (scrollable)  │
+│(opt.)  │                    │
+├────────┴────────────────────┤
+│ TabBar (mobile bottom nav)  │
+└─────────────────────────────┘
+```
+
+```svelte
+<AppShell>
+  {#snippet toolbar()}<Toolbar title="My App" />{/snippet}
+  {#snippet sidebar()}<Sidebar>...</Sidebar>{/snippet}
+  {#snippet tabbar()}<Tabs position="bottom" ... />{/snippet}
+  <main content here>
+</AppShell>
+```
+
+- `height: 100dvh` — fills the viewport
+- Main content scrolls independently
+- Sidebar collapses to a drawer overlay on screens ≤ 768px
+
+## Stack
+
+Flex layout primitive for consistent spacing:
+
+```svelte
+<Stack direction="horizontal" gap="md">
+  <Button>Cancel</Button>
+  <Button variant="primary">Save</Button>
+</Stack>
+```
+
+Props: `direction` (vertical/horizontal), `gap` (xs–3xl), `align`, `justify`, `wrap`, `fill`.
+
+## Spacing Scale
+
+| Token | Value | Usage |
+|---|---|---|
+| `--space-xs` | 4px | Tight gaps, icon padding |
+| `--space-sm` | 8px | Related element gaps |
+| `--space-md` | 12px | Default component padding |
+| `--space-lg` | 16px | Section spacing |
+| `--space-xl` | 24px | Major section breaks |
+| `--space-2xl` | 32px | Page-level spacing |
+| `--space-3xl` | 48px | Hero-level spacing |
+
+## Overflow Prevention
+
+- `box-sizing: border-box` is set globally
+- Flex children use `min-width: 0` to prevent blowout
+- Overlay content is capped to viewport bounds
+- Text defaults to `text-overflow: ellipsis` in constrained contexts
+
+## Mobile Adaptations
+
+- **Sidebar** → drawer overlay with backdrop on narrow screens
+- **Modal** → bottom sheet that slides up
+- **Popover** → full-width action sheet anchored to bottom
+- **Tabs (bottom)** → respects `env(safe-area-inset-bottom)` for iOS
+- **Toolbar** → respects `env(safe-area-inset-top)`
+- All interactive elements have 44px minimum touch targets on touch devices
+
+## Class Naming Convention
+
+```
+component-name              → block
+component-name__part-name   → element
+component-name--size        → size variant
+is-active, is-primary       → state/modifier
+```
