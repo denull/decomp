@@ -1,0 +1,34 @@
+[data-theme="aqua"] {
+  .button {
+    background: linear-gradient(180deg, #6dcfff 0%, #38a3f0 50%, #2890e0 51%, #45b0f5 100%);
+    color: #fff;
+    border: 1px solid #2080cc;
+    border-radius: 20px;
+    padding: 10px 32px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    cursor: pointer;
+    box-shadow: 0 4px 12px rgba(40,128,204,0.35), inset 0 1px 0 rgba(255,255,255,0.5);
+    text-shadow: 0 -1px 0 rgba(0,0,0,0.2);
+    transition: all 0.15s;
+    position: relative;
+    overflow: hidden;
+
+    &::before {
+      content: '';
+      position: absolute;
+      top: 1px; left: 10%; right: 10%;
+      height: 40%;
+      background: linear-gradient(180deg, rgba(255,255,255,0.6), rgba(255,255,255,0));
+      border-radius: 20px;
+    }
+
+    &:hover {
+      background: linear-gradient(180deg, #7dd8ff 0%, #48b3ff 50%, #38a0f0 51%, #55c0ff 100%);
+    }
+
+    &:active {
+      box-shadow: inset 0 2px 6px rgba(0,0,0,0.2);
+    }
+  }
+}

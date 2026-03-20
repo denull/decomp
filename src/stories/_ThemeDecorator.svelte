@@ -1,5 +1,5 @@
 <script>
-  import ThemeProvider from '$lib/components/ThemeProvider.svelte';
+  import ThemeProvider from '$lib/_components/ThemeProvider.svelte';
 
   let { globals, children } = $props();
   let theme = $derived(globals?.theme ?? 'semiflat');

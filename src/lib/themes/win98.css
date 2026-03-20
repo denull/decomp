@@ -1,170 +1,157 @@
-/* === Windows 98 Theme ===
- * Classic beveled 3D borders, zero border-radius, system fonts.
- * Raised/sunken effects via multi-layered box-shadows.
- */
+/* Based on 98.css */
 
 [data-theme="win98"] {
-  --font-family: 'MS Sans Serif', 'Microsoft Sans Serif', Tahoma, Geneva, sans-serif;
-  --font-family-mono: 'Fixedsys', 'Courier New', monospace;
+  /* Color */
+  --text-color: #222222;
+  --surface: #c0c0c0;
+  --button-highlight: #ffffff;
+  --button-face: #dfdfdf;
+  --button-shadow: #808080;
+  --window-frame: #0a0a0a;
+  --dialog-blue: #000080;
+  --dialog-blue-light: #1084d0;
+  --dialog-gray: #808080;
+  --dialog-gray-light: #b5b5b5;
+  --link-blue: #0000ff;
 
-  /* Override radii to zero */
-  --radius-sm: 0;
-  --radius-md: 0;
-  --radius-lg: 0;
-  --radius-xl: 0;
-  --radius-full: 0;
+  /* Spacing */
+  --element-spacing: 8px;
+  --grouped-button-spacing: 4px;
+  --grouped-element-spacing: 6px;
+  --radio-width: 12px;
+  --checkbox-width: 13px;
+  --radio-label-spacing: 6px;
+  --range-track-height: 4px;
+  --range-spacing: 10px;
 
-  /* Override spacing: tighter */
-  --space-md: 8px;
-  --space-lg: 12px;
+  /* Some detailed computations for radio buttons and checkboxes */
+  --radio-total-width-precalc: var(--radio-width) + var(--radio-label-spacing);
+  --radio-total-width: calc(var(--radio-total-width-precalc));
+  --radio-left: calc(-1 * var(--radio-total-width-precalc));
+  --radio-dot-width: 4px;
+  --radio-dot-top: calc(var(--radio-width) / 2 - var(--radio-dot-width) / 2);
+  --radio-dot-left: calc(
+    -1 * (var(--radio-total-width-precalc)) + var(--radio-width) / 2 - var(
+        --radio-dot-width
+      ) / 2
+  );
 
-  /* Surfaces */
-  --surface-primary: oklch(0.82 0 0);    /* Classic silver/gray */
-  --surface-secondary: oklch(0.82 0 0);
-  --surface-tertiary: oklch(0.78 0 0);
-  --surface-elevated: oklch(0.82 0 0);
-  --surface-inset: oklch(1 0 0);
-
-  /* Text */
-  --text-primary: oklch(0 0 0);
-  --text-secondary: oklch(0.3 0 0);
-  --text-tertiary: oklch(0.45 0 0);
-  --text-disabled: oklch(0.55 0 0);
-  --text-on-accent: oklch(1 0 0);
+  --checkbox-total-width-precalc: var(--checkbox-width) +
+    var(--radio-label-spacing);
+  --checkbox-total-width: calc(var(--checkbox-total-width-precalc));
+  --checkbox-left: calc(-1 * var(--checkbox-total-width-precalc));
+  --checkmark-width: 7px;
+  --checkmark-left: 3px;
 
   /* Borders */
-  --border-default: oklch(0.55 0 0);
-  --border-strong: oklch(0.3 0 0);
-  --border-subtle: oklch(0.7 0 0);
+  --border-width: 1px;
+  --border-raised-outer: inset -1px -1px var(--window-frame),
+    inset 1px 1px var(--button-highlight);
+  --border-raised-inner: inset -2px -2px var(--button-shadow),
+    inset 2px 2px var(--button-face);
+  --border-sunken-outer: inset -1px -1px var(--button-highlight),
+    inset 1px 1px var(--window-frame);
+  --border-sunken-inner: inset -2px -2px var(--button-face),
+    inset 2px 2px var(--button-shadow);
+  --default-button-border-raised-outer: inset -2px -2px var(--window-frame), inset 1px 1px var(--window-frame);
+  --default-button-border-raised-inner: inset 2px 2px var(--button-highlight), inset -3px -3px var(--button-shadow), inset 3px 3px var(--button-face);
+  --default-button-border-sunken-outer: inset 2px 2px var(--window-frame), inset -1px -1px var(--window-frame);
+  --default-button-border-sunken-inner: inset -2px -2px var(--button-highlight), inset 3px 3px var(--button-shadow), inset -3px -3px var(--button-face);
 
-  /* Accent */
-  --accent: var(--accent-base, oklch(0.42 0.15 250));
-  --accent-hover: oklch(from var(--accent) calc(l + 0.05) c h);
-  --accent-active: oklch(from var(--accent) calc(l - 0.05) c h);
-  --accent-subtle: oklch(from var(--accent) l c h / 0.2);
-  --accent-text: oklch(from var(--accent) calc(l - 0.1) c h);
 
-  /* Feedback */
-  --danger: oklch(0.52 0.22 25);
-  --danger-hover: oklch(0.47 0.22 25);
-  --danger-subtle: oklch(0.52 0.22 25 / 0.15);
-  --success: oklch(0.5 0.17 145);
-  --warning: oklch(0.7 0.16 75);
-  --info: oklch(0.5 0.14 245);
+  /* Window borders flip button-face and button-highlight */
+  --border-window-outer: inset -1px -1px var(--window-frame),
+    inset 1px 1px var(--button-face);
+  --border-window-inner: inset -2px -2px var(--button-shadow),
+    inset 2px 2px var(--button-highlight);
 
-  /* Controls */
-  --control-bg: oklch(0.82 0 0);
-  --control-bg-hover: oklch(0.85 0 0);
-  --control-bg-active: oklch(0.78 0 0);
-  --control-border: none;
-  --control-height-sm: 22px;
-  --control-height-md: 26px;
-  --control-height-lg: 32px;
+  /* Field borders (checkbox, input, etc) flip window-frame and button-shadow */
+  --border-field: inset -1px -1px var(--button-highlight),
+    inset 1px 1px var(--button-shadow), inset -2px -2px var(--button-face),
+    inset 2px 2px var(--window-frame);
+  --border-status-field: inset -1px -1px var(--button-face), inset 1px 1px var(--button-shadow);
 
-  /* Classic 3D shadows */
-  --shadow-raised: inset -1px -1px 0 oklch(0.35 0 0), inset 1px 1px 0 oklch(1 0 0), inset -2px -2px 0 oklch(0.55 0 0), inset 2px 2px 0 oklch(0.9 0 0);
-  --shadow-sunken: inset 1px 1px 0 oklch(0.55 0 0), inset -1px -1px 0 oklch(1 0 0), inset 2px 2px 0 oklch(0.35 0 0), inset -2px -2px 0 oklch(0.9 0 0);
+  /* Tabs */
+  --border-tab: inset -1px 0 var(--window-frame),
+    inset 1px 1px var(--button-face),
+    inset -2px 0 var(--button-shadow),
+    inset 2px 2px var(--button-highlight);
 
-  --shadow-sm: var(--shadow-raised);
-  --shadow-md: var(--shadow-raised);
-  --shadow-lg: var(--shadow-raised);
+  color: #222;
+  font-family: Arial;
+  font-size: 12px;
 
-  /* Font sizing */
-  --font-xs: 11px;
-  --font-sm: 11px;
-  --font-md: 12px;
-  --font-lg: 13px;
-  --font-xl: 16px;
-  --font-2xl: 20px;
+  .button {
+    font-family: "Pixelated MS Sans Serif", Arial;
+    -webkit-font-smoothing: none;
+    font-size: 11px;
+  }
 
-  /* Faster transitions (Win98 was snappy) */
-  --duration-fast: 0ms;
-  --duration-normal: 50ms;
-  --duration-slow: 100ms;
+  /* Button */
+
+  .button {
+    box-sizing: border-box;
+    border: none;
+    color: transparent;
+    text-shadow: 0 0 var(--text-color);
+    background: var(--surface);
+    box-shadow: var(--border-raised-outer), var(--border-raised-inner);
+    border-radius: 0;
+
+    min-width: 75px;
+    min-height: 23px;
+    padding: 0 12px;
+
+    &.is-primary {
+      box-shadow: var(--default-button-border-raised-outer), var(--default-button-border-raised-inner);
+      
+      &:not(:disabled):active {
+        box-shadow: var(--default-button-border-sunken-outer), var(--default-button-border-sunken-inner);
+      }
+    }
+
+    &:not(:disabled):active {
+      box-shadow: var(--border-sunken-outer), var(--border-sunken-inner);
+      text-shadow: 1px 1px var(--text-color);
+    }
+
+    &:focus {
+      outline: 1px dotted #000000;
+      outline-offset: -4px;
+    }
+
+    &::-moz-focus-inner {
+      border: 0;
+    }
+
+    &:disabled {
+      text-shadow: 1px 1px 0 var(--button-highlight);
+    }
+  }
+
+  @media (not(hover)) {
+    .button:not(:disabled):hover {
+      box-shadow: var(--border-sunken-outer), var(--border-sunken-inner);
+    }
+  }
+
+  :disabled {
+    color: var(--button-shadow);
+  }
 }
 
-/* Win98 component overrides via attribute selectors */
-[data-theme="win98"] [class*="button"] {
-  box-shadow: var(--shadow-raised);
-  text-shadow: none;
+@font-face {
+  font-family: 'Pixelated MS Sans Serif';
+  src: url('$lib/fonts/ms_sans_serif.woff') format('woff');
+  src: url('$lib/fonts/ms_sans_serif.woff2') format('woff2');
+  font-weight: normal;
+  font-style: normal;
 }
 
-[data-theme="win98"] [class*="button"]:active:not(:disabled) {
-  box-shadow: var(--shadow-sunken);
-  transform: none;
-}
-
-[data-theme="win98"] [class*="input__wrapper"],
-[data-theme="win98"] [class*="slider__input"] {
-  box-shadow: var(--shadow-sunken);
-  background: oklch(1 0 0);
-}
-
-[data-theme="win98"] [class*="card"],
-[data-theme="win98"] [class*="toolbar"] {
-  box-shadow: var(--shadow-raised);
-  border: none;
-}
-
-/* Tabs: Win98 style */
-[data-theme="win98"] [class*="tabs__tab"] {
-  box-shadow: var(--shadow-raised);
-  border-bottom: none;
-}
-
-[data-theme="win98"] [class*="tabs__tab"][class*="is-active"] {
-  box-shadow: var(--shadow-raised);
-  background: var(--surface-primary);
-}
-
-/* === Night === */
-[data-theme="win98"][data-scheme="night"] {
-  --surface-primary: oklch(0.25 0 0);
-  --surface-secondary: oklch(0.25 0 0);
-  --surface-tertiary: oklch(0.2 0 0);
-  --surface-elevated: oklch(0.25 0 0);
-  --surface-inset: oklch(0.15 0 0);
-
-  --text-primary: oklch(0.9 0 0);
-  --text-secondary: oklch(0.7 0 0);
-  --text-tertiary: oklch(0.55 0 0);
-  --text-disabled: oklch(0.4 0 0);
-
-  --border-default: oklch(0.4 0 0);
-  --border-strong: oklch(0.55 0 0);
-  --border-subtle: oklch(0.35 0 0);
-
-  --control-bg: oklch(0.25 0 0);
-  --control-bg-hover: oklch(0.28 0 0);
-  --control-bg-active: oklch(0.2 0 0);
-
-  --shadow-raised: inset -1px -1px 0 oklch(0.12 0 0), inset 1px 1px 0 oklch(0.4 0 0), inset -2px -2px 0 oklch(0.18 0 0), inset 2px 2px 0 oklch(0.33 0 0);
-  --shadow-sunken: inset 1px 1px 0 oklch(0.12 0 0), inset -1px -1px 0 oklch(0.4 0 0), inset 2px 2px 0 oklch(0.08 0 0), inset -2px -2px 0 oklch(0.33 0 0);
-  --shadow-sm: var(--shadow-raised);
-  --shadow-md: var(--shadow-raised);
-  --shadow-lg: var(--shadow-raised);
-}
-
-/* === HC Day === */
-[data-theme="win98"][data-scheme="hc-day"] {
-  --surface-primary: oklch(1 0 0);
-  --surface-elevated: oklch(1 0 0);
-  --text-primary: oklch(0 0 0);
-  --border-default: oklch(0 0 0);
-  --border-strong: oklch(0 0 0);
-  --control-bg: oklch(1 0 0);
-  --control-border: oklch(0 0 0);
-}
-
-/* === HC Night === */
-[data-theme="win98"][data-scheme="hc-night"] {
-  --surface-primary: oklch(0 0 0);
-  --surface-elevated: oklch(0 0 0);
-  --surface-inset: oklch(0 0 0);
-  --text-primary: oklch(1 0 0);
-  --text-secondary: oklch(0.85 0 0);
-  --border-default: oklch(1 0 0);
-  --border-strong: oklch(1 0 0);
-  --control-bg: oklch(0 0 0);
-  --accent: var(--accent-base, oklch(0.65 0.25 200));
+@font-face {
+  font-family: "Pixelated MS Sans Serif";
+  src: url('$lib/fonts/ms_sans_serif_bold.woff') format('woff');
+  src: url('$lib/fonts/ms_sans_serif_bold.woff2') format('woff2');
+  font-weight: bold;
+  font-style: normal;
 }

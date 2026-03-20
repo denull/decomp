@@ -1,17 +1,17 @@
 <script>
-  import { setThemeContext } from '$lib/core/theme.js';
-  import '$lib/core/reset.css';
-  import '$lib/core/tokens.css';
-  import '$lib/themes/semiflat.css';
-  import '$lib/themes/ios.css';
-  import '$lib/themes/android.css';
-  import '$lib/themes/windows.css';
-  import '$lib/themes/skeuo.css';
-  import '$lib/themes/win98.css';
+  import { setThemeContext } from '$lib/_core/theme.js';
+  import '$lib/_core/reset.css';
+  import '$lib/_core/tokens.css';
+  import '$lib/_themes/semiflat.css';
+  import '$lib/_themes/ios.css';
+  import '$lib/_themes/android.css';
+  import '$lib/_themes/windows.css';
+  import '$lib/_themes/skeuo.css';
+  import '$lib/_themes/win98.css';
 
   /**
-   * @typedef {import('$lib/core/theme.js').ThemeName} ThemeName
-   * @typedef {import('$lib/core/theme.js').SchemeName} SchemeName
+   * @typedef {import('$lib/_core/theme.js').ThemeName} ThemeName
+   * @typedef {import('$lib/_core/theme.js').SchemeName} SchemeName
    */
 
   let {
@@ -23,7 +23,7 @@
     accent = undefined,
     /** @type {import('svelte').Snippet} */
     children,
-    class: className,
+    class: className = null,
     ...rest
   } = $props();
 

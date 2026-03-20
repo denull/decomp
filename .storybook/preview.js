@@ -1,4 +1,4 @@
-import ThemeDecorator from '../src/stories/ThemeDecorator.svelte';
+import AppShell from '../src/lib/components/AppShell.svelte';
 
 /** @type { import('@storybook/svelte-vite').Preview } */
 const preview = {
@@ -23,12 +23,13 @@ const preview = {
         icon: 'paintbrush',
         title: 'Theme',
         items: [
-          { value: 'semiflat', title: 'Semi-Flat' },
+          /*{ value: 'semiflat', title: 'Semi-Flat' },
           { value: 'ios', title: 'iOS / macOS' },
           { value: 'android', title: 'Android' },
           { value: 'windows', title: 'Windows' },
-          { value: 'skeuo', title: 'Skeuomorphic' },
+          { value: 'skeuo', title: 'Skeuomorphic' },*/
           { value: 'win98', title: 'Win98' },
+          { value: 'aqua', title: 'Aqua' },
         ],
         dynamicTitle: true,
       },
@@ -52,9 +53,10 @@ const preview = {
 
   decorators: [
     (storyFn, context) => ({
-      Component: ThemeDecorator,
+      Component: AppShell,
       props: {
-        globals: context.globals,
+        theme: context.globals.theme,
+        scheme: context.globals.scheme,
       },
     }),
   ],
