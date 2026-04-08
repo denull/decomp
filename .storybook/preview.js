@@ -28,6 +28,7 @@ const preview = {
           { value: 'android', title: 'Android' },
           { value: 'windows', title: 'Windows' },
           { value: 'skeuo', title: 'Skeuomorphic' },*/
+          { value: 'apple', title: 'Apple' },
           { value: 'win98', title: 'Win98' },
           { value: 'aqua', title: 'Aqua' },
         ],

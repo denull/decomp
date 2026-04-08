@@ -23,19 +23,19 @@
 
 <!-- Single-button stories: children snippet becomes Button's children prop -->
 <Story name="Default" args={{ variant: 'default' }}>
-  {#snippet children()}Button{/snippet}
+  Button
 </Story>
 
 <Story name="Primary" args={{ variant: 'primary' }}>
-  {#snippet children()}Primary{/snippet}
+  Primary
 </Story>
 
 <Story name="Destructive" args={{ variant: 'destructive' }}>
-  {#snippet children()}Delete{/snippet}
+  Delete
 </Story>
 
 <Story name="Ghost" args={{ variant: 'ghost' }}>
-  {#snippet children()}Ghost{/snippet}
+  Ghost
 </Story>
 
 <!-- Multi-button stories: template snippet for full rendering control -->

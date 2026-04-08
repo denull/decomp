@@ -1,0 +1,64 @@
+[data-theme="apple"] {
+  background-color: var(--surface-0);
+
+  /* Button */
+
+  .button {
+    padding: 13px 16px;
+    border-radius: 100px;
+    background-color: rgba(120, 120, 128, 0.16);
+    mix-blend-mode: plus-darker;
+    
+    font-weight: 510;
+    font-size: 17px;
+    line-height: 22px;
+
+    &.is-primary {
+      background-color: #0088FF;
+      color: #FFFFFF;
+    }
+    &.is-destructive {
+      color: #FF383C;
+    }
+
+    &.is-grouped:not(:first-child) {
+      border-left: 1px solid #eee;
+      border-top-left-radius: 0;
+      border-bottom-left-radius: 0;
+    }
+    &.is-grouped:not(:last-child) {
+      border-top-right-radius: 0;
+      border-bottom-right-radius: 0;
+    }
+  }
+
+  /* Lists */
+
+  .list-section__body {
+    border-radius: 26px;
+    background-color: var(--surface-1);
+  }
+
+  .list-item {
+    position: relative;
+    min-height: 52px;
+
+    + .list-item:before {
+      content: '';
+      position: absolute;
+      top: 0px;
+      left: 12px;
+      right: 12px;
+      height: 1px;
+      background: #E6E6E6;
+    }
+  }
+
+  &[data-scheme="day"] {
+    --surface-0: #F2F2F7;
+    --surface-1: #FFFFFF;
+  }
+  &[data-scheme="night"] {
+    --surface-0: #000000;
+  }
+}

@@ -1,7 +1,7 @@
 <script>
   let {
-    /** @type {null | 'primary' | 'destructive'} */
-    variant = null,
+    /** @type {boolean} */
+    multiline = false,
     /** @type {boolean} */
     disabled = false,
     /** @type {import('svelte').Snippet | undefined} */
@@ -11,13 +11,21 @@
 
 <div
   class={[
-    'input', 
-    variant && `is-${variant}`,
+    'input',
+    multiline && `is-multiline`,
+    disabled && `is-disabled`,
   ]}
 >
+  {#if multiline}
+    <textarea {disabled}></textarea>
+  {:else}
+    <input type="text" {disabled}/>
+  {/if}
   {@render children?.()}
 </div>
 
 <style>
-  
+  .input {
+    display: flex;
+  }
 </style>

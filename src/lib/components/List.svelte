@@ -4,32 +4,21 @@
     variant = null,
     /** @type {boolean} */
     disabled = false,
-    /** @type {boolean} */
-    grouped = false,
     /** @type {import('svelte').Snippet | undefined} */
     children = null,
   } = $props();
 </script>
 
-<button
+<div
   class={[
-    'button', 
+    'list', 
     variant && `is-${variant}`,
-    grouped && `is-grouped`,
   ]}
-  {disabled}
+  role="list"
 >
   {@render children?.()}
-</button>
+</div>
 
 <style>
-  :global {
-    .button {
-      cursor: pointer;
-      border: none;
-    }
-    .button:disabled {
-      cursor: default;
-    }
-  }
+  
 </style>
