@@ -22,6 +22,7 @@
         ]}
         role="tab"
         tabindex={i}
+        aria-selected={activeTabIndex == i}
         onclick={() => activeTabIndex = i}>
         {item.name}
       </div>

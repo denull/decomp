@@ -18,7 +18,3 @@
 >
   {@render children?.()}
 </div>
-
-<style>
-  
-</style>
