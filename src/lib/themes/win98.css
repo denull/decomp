@@ -87,7 +87,9 @@
     font-size: 11px;
   }
 
-  /* Button */
+  /**
+  MARK: Button
+  **/
 
   .button {
     border: none;
@@ -134,7 +136,9 @@
     }
   }
 
-  /* Input */
+  /**
+  MARK: Input
+  **/
 
   .input {
     background-color: #fff;
@@ -166,11 +170,13 @@
     }
   }
 
-  /* Table */
+  /**
+  MARK: Table
+  **/
+
   .table {
     box-sizing: border-box;
     border: 2px groove transparent;
-    border-collapse: collapse;
     overflow: auto;
 
     position: relative;
@@ -196,31 +202,35 @@
     > thead > tr {
       cursor: default;
       user-select: none;
+
+      > * {
+        position: sticky;
+        top: 0;
+        height: 17px;
+        box-shadow: var(--border-raised-outer), var(--border-raised-inner);
+        background: var(--surface);
+        box-sizing: border-box;
+        font-weight: normal;
+        padding: 0 var(--grouped-element-spacing);
+      }
     }
 
-    > thead > tr > * {
-      position: sticky;
-      top: 0;
-      height: 17px;
-      box-shadow: var(--border-raised-outer), var(--border-raised-inner);
-      background: var(--surface);
-      box-sizing: border-box;
-      font-weight: normal;
-      padding: 0 var(--grouped-element-spacing);
-    }
+    > tbody > tr {
+      &.is-active {
+        color: #fff;
+        background-color: var(--dialog-blue);
+      }
 
-    > tbody > tr.is-active {
-      color: #fff;
-      background-color: var(--dialog-blue);
-    }
-
-    > tbody > tr > * {
-      padding: 0 var(--grouped-element-spacing);
-      height: 14px;
+      > * {
+        padding: 0 var(--grouped-element-spacing);
+        height: 14px;
+      }
     }
   }
 
-  /* Tabs */
+  /**
+  MARK: Tabs
+  **/
 
   .tabs {
     .tabs__head {
@@ -239,8 +249,6 @@
       z-index: 1;
       color: #222;
       padding: 6px;
-      cursor: pointer;
-      user-select: none;
 
       &:focus {
         outline: 1px dotted #222;
@@ -272,6 +280,10 @@
     color: var(--button-shadow);
   }
 }
+
+/**
+MARK: Fonts
+**/
 
 @font-face {
   font-family: 'Pixelated MS Sans Serif';

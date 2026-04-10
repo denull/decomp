@@ -52,3 +52,13 @@
     {/each}
   </tbody>
 </table>
+
+<style>
+  :global {
+    .table {
+      > thead > tr > th {
+        cursor: pointer;
+      }
+    }
+  }
+</style>

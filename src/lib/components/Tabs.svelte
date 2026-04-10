@@ -37,5 +37,12 @@
 </div>
 
 <style>
-  
+  :global {
+    .tabs {
+      .tabs__tab {
+        cursor: pointer;
+        user-select: none;
+      }
+    }
+  }
 </style>
