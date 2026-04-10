@@ -1,8 +1,12 @@
 [data-theme="default"] {
   --accent: oklch(0.61 0.11 247);
   --danger: oklch(0.55 0.20 25);
-  --radius: 6px;
-  --radius-lg: 10px;
+  --radius: 8px;
+  --radius-lg: 12px;
+  --brm: 1;
+  @supports (corner-shape: squircle) {
+    --brm: 2;
+  }
 
   color-scheme: light dark;
   --page-bg: light-dark(#eaeaea, oklch(0.17 0.015 260));
@@ -66,18 +70,20 @@
     font-family: inherit;
     font-size: 14px;
     outline: none;
-    padding: 10px 24px;
+    padding: 9px 22px;
     font-weight: 500;
     color: var(--ctrl-text);
     text-shadow: 0 1px var(--ctrl-text-shadow);
     transition: text-shadow 0.15s ease;
     white-space: nowrap;
+    --_surface: var(--ctrl-surface);
 
     .button__back {
-      border-radius: var(--radius);
+      corner-shape: squircle;
+      border-radius: calc(var(--radius) * var(--brm));
       background: linear-gradient(180deg,
-        oklch(from var(--ctrl-surface) calc(l + 0.04) c h) 0%,
-        var(--ctrl-surface) 100%);
+        oklch(from var(--_surface) calc(l + 0.04) c h) 0%,
+        var(--_surface) 100%);
       box-shadow:
         inset 0 -1px 0 var(--ctrl-shadow-bottom),
         inset 0 -2px 0 var(--ctrl-shadow-bottom),
@@ -88,8 +94,8 @@
 
     &:hover .button__back {
       background: linear-gradient(180deg,
-        oklch(from var(--ctrl-surface) calc(l + 0.07) c h) 0%,
-        oklch(from var(--ctrl-surface) calc(l + 0.03) c h) 100%);
+        oklch(from var(--_surface) calc(l + 0.07) c h) 0%,
+        oklch(from var(--_surface) calc(l + 0.03) c h) 100%);
     }
 
     &:active {
@@ -99,8 +105,8 @@
       .button__back {
         transform: translateY(-1px);
         background: linear-gradient(180deg,
-          oklch(from var(--ctrl-surface) calc(l - 0.02) c h) 0%,
-          oklch(from var(--ctrl-surface) calc(l - 0.05) c h) 100%);
+          oklch(from var(--_surface) calc(l - 0.02) c h) 0%,
+          oklch(from var(--_surface) calc(l - 0.05) c h) 100%);
         box-shadow: inset 0 1px 3px var(--ctrl-shadow-active);
       }
     }
@@ -113,77 +119,72 @@
       opacity: 0.4;
     }
 
-    &.is-primary {
+    &:where(.is-primary), &:where(.is-destructive) {
       color: #fff;
       text-shadow: 0 1px rgba(0,0,0,0.2);
-      
+
       .button__back {
         background: linear-gradient(180deg,
-          oklch(from var(--accent) calc(l + 0.03) c h) 0%,
-          oklch(from var(--accent) calc(l - 0.03) c h) 100%);
+          oklch(from var(--_surface) calc(l + 0.03) c h) 0%,
+          oklch(from var(--_surface) calc(l - 0.03) c h) 100%);
         box-shadow:
           inset 0 -1px 0 rgba(0,0,0,0.1),
           inset 0 -2px 0 rgba(0,0,0,0.1),
           0 1px 2px rgba(0,0,0,0.15),
           inset 0 1px 0 rgba(255,255,255,0.18);
       }
-
-      &:hover .button__back {
-        background: linear-gradient(180deg,
-          oklch(from var(--accent) calc(l + 0.07) c h) 0%,
-          oklch(from var(--accent) calc(l + 0.03) c h) 100%);
-      }
-
+      
       &:active {
         text-shadow: 0 1px rgba(0,0,0,0.1);
-
         .button__back {
-          background: linear-gradient(180deg,
-            oklch(from var(--accent) calc(l - 0.02) c h) 0%,
-            oklch(from var(--accent) calc(l - 0.05) c h) 100%);
-          box-shadow: inset 0 1px 3px rgba(0,0,0,0.2);
+          box-shadow: inset 0 1px 3px rgba(0,0,0,0.25);
         }
       }
     }
+
+    &.is-primary {
+      --_surface: var(--accent);
+    }
     &.is-destructive {
-      color: #fff;
-      text-shadow: 0 1px rgba(0,0,0,0.2);
-      
+      --_surface: var(--danger);
+    }
+
+    &.is-ghost {
       .button__back {
-        background: linear-gradient(180deg,
-          oklch(from var(--danger) calc(l + 0.03) c h) 0%,
-          oklch(from var(--danger) calc(l - 0.03) c h) 100%);
-        box-shadow:
-          inset 0 -1px 0 rgba(0,0,0,0.1),
-          inset 0 -2px 0 rgba(0,0,0,0.1),
-          0 1px 2px rgba(0,0,0,0.15),
-          inset 0 1px 0 rgba(255,255,255,0.15);
+        background: transparent;
+        box-shadow: none;
       }
 
       &:hover .button__back {
-        background: linear-gradient(180deg,
-          oklch(from var(--danger) calc(l + 0.07) c h) 0%,
-          oklch(from var(--danger) calc(l + 0.03) c h) 100%);
+        background: oklch(from var(--_surface) l c h / 0.5);
+        box-shadow: none;
       }
 
       &:active {
-        text-shadow: 0 1px rgba(0,0,0,0.1);
-
         .button__back {
           background: linear-gradient(180deg,
-            oklch(from var(--danger) calc(l - 0.02) c h) 0%,
-            oklch(from var(--danger) calc(l - 0.05) c h) 100%);
-          box-shadow: inset 0 1px 3px rgba(0,0,0,0.25);
+            oklch(from var(--_surface) calc(l - 0.02) c h / 0.7) 0%,
+            oklch(from var(--_surface) calc(l - 0.05) c h / 0.7) 100%);
+          box-shadow: inset 0 1px 3px var(--ctrl-shadow-active);
         }
       }
     }
 
     &.is-sm {
       font-size: 12px;
-      padding: 6px 14px;
+      padding: 5px 12px;
 
       .button__back {
-        border-radius: 5px;
+        border-radius: calc(5px * var(--brm));
+      }
+    }
+
+    &.is-lg {
+      font-size: 16px;
+      padding: 11px 28px;
+
+      .button__back {
+        border-radius: calc(11px * var(--brm));
       }
     }
   }

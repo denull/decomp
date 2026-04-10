@@ -1,7 +1,9 @@
 <script>
   let {
-    /** @type {null | 'primary' | 'destructive'} */
+    /** @type {null | 'primary' | 'destructive' | 'ghost'} */
     variant = null,
+    /** @type {'sm' | 'md' | 'lg'} */
+    size = 'md',
     /** @type {boolean} */
     disabled = false,
     /** @type {boolean} */
@@ -15,6 +17,7 @@
   class={[
     'button', 
     variant && `is-${variant}`,
+    size != 'md' && `is-${size}`,
     grouped && `is-grouped`,
   ]}
   {disabled}
@@ -28,6 +31,7 @@
   :global {
     .button {
       position: relative;
+      isolation: isolate;
       cursor: pointer;
       border: none;
     }

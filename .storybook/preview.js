@@ -38,15 +38,16 @@ const preview = {
     },
     scheme: {
       name: 'Color Scheme',
-      defaultValue: 'day',
+      defaultValue: null,
       toolbar: {
         icon: 'sun',
         title: 'Scheme',
         items: [
-          { value: 'day', title: 'Day' },
-          { value: 'night', title: 'Night' },
-          { value: 'hc-day', title: 'HC Day' },
-          { value: 'hc-night', title: 'HC Night' },
+          { value: null, title: 'Default' },
+          { value: 'light', title: 'Light' },
+          { value: 'dark', title: 'Dark' },
+          { value: 'hc-light', title: 'HC Light' },
+          { value: 'hc-dark', title: 'HC Dark' },
         ],
         dynamicTitle: true,
       },
