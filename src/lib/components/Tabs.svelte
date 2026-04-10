@@ -51,6 +51,10 @@
         cursor: pointer;
         user-select: none;
       }
+      .tabs__body {
+        display: flex;
+        flex-direction: column;
+      }
     }
   }
 </style>

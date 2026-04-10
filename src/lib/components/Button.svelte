@@ -8,8 +8,10 @@
     disabled = false,
     /** @type {boolean} */
     grouped = false,
-    /** @type {import('svelte').Snippet | undefined} */
+    /** @type {import('svelte').Snippet | null} */
     children = null,
+    /** @type {Function | null} */
+    onclick = null,
   } = $props();
 </script>
 
@@ -22,6 +24,7 @@
   ]}
   {disabled}
   ontouchstart={() => {}}
+  {onclick}
 >
   <div class="button__back"></div>
   {@render children?.()}
@@ -34,6 +37,7 @@
       isolation: isolate;
       cursor: pointer;
       border: none;
+      align-self: start;
     }
     .button:disabled {
       cursor: default;

@@ -9,7 +9,7 @@
   }
 
   color-scheme: light dark;
-  --page-bg: light-dark(#eaeaea, oklch(0.17 0.015 260));
+  --page-bg: light-dark(#eaeaea, oklch(0.24 0.015 260));
   --text: light-dark(#333, #e8e8e8);
   --text-secondary: light-dark(#555, #aaa);
   --text-muted: light-dark(#888, #666);
@@ -56,6 +56,7 @@
   --badge-neutral-bg: light-dark(oklch(0.92 0 0), oklch(0.28 0 0));
   --badge-neutral-text: light-dark(oklch(0.45 0 0), oklch(0.75 0 0));
 
+  background: var(--page-bg);
   /**
   MARK: Button
   **/
@@ -190,6 +191,41 @@
   }
 
   /**
+  MARK: Input
+  **/
+  
+  .input {
+    input, textarea {
+      width: 100%;
+      padding: 9px 12px;
+      font-size: 14px;
+      font-family: inherit;
+      border-radius: var(--radius);
+      border: 1px solid var(--input-border);
+      background: var(--input-bg);
+      color: var(--text);
+      box-shadow: inset 0 1px 2px var(--input-shadow);
+      outline: none;
+      transition: border-color 0.15s, box-shadow 0.15s;
+
+      &::placeholder {
+        color: var(--input-placeholder);
+      }
+
+      &:focus {
+        border-color: var(--accent);
+        box-shadow: inset 0 1px 2px var(--input-shadow), 0 0 0 3px oklch(from var(--accent) l c h / 0.15);
+      }
+    }
+
+    textarea {
+      resize: vertical;
+      min-height: 72px;
+      line-height: 1.5;
+    }
+  }
+
+  /**
   MARK: Table
   **/
 
@@ -276,6 +312,10 @@
 
         
       }
+    }
+
+    .tabs__body {
+      gap: 15px;
     }
   }
 }
