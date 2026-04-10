@@ -74,11 +74,29 @@ Some analysis by Perplexity and OpenAI:
 
 When deciding whether to make separate components or merge into one (as variants): more components = more code, more imports, need to style all comps for each theme (one comp with variants -> simply fallbacks to default). Each component code contains mostly logic, not visual appearance (it's defined by theme) - if two components behave (almost) identically and have very similar semantics, they probably should be merged.
 
+Some things don't need a separate Svelte component at all: some layout utilities, typography, basic HTML tags (like <a>). Rule of thumb: if it's PURELY visual component (no special behavior) and it can be expressed in a single HTML tag (no complex layout where user can make mistakes) - no component needed. Still, CSS themes can define classes for such style-only components: see, for example, ".card".
+
+## CSS
+
+We have few themes: default, win98, aqua (probably need to add apple/android/windows to better match modern OSes). Each has its own CSS file (currently they all are included at the same time).
+
+Each theme is responsible for defining rules for light and dark scheme (recommended approach: using "light-dark()" function).
+
+Currently, each theme is mostly independent from each other - their custom property names almost not overlap each other. This can be problematic: user needs a way to define their classes without relying on a specific theme. TODO: define common set of properties (like --font, --space, --surface, etc - Open Props should be a nice inspiration probably).
+
+Structure:
+- `src/lib/reset.css`: minimalistic reset file, applies sensible rules not just for components, but all HTML content;
+- `src/lib/components/<Component>.svelte`: each component defines very minimal rules, which set defaults for that component across all themes (but not for similar non-component tags: cf. <table> and <Table>);
+- `src/lib/themes/<Theme>.css`: each theme is wrapped in `[data-theme="<Theme>"] {`, and firstly contains a list of all custom properties (set on root element); then all rules are grouped by component (like `.list { ... }`), with `MARK` comments for quick navigation.
+
+Nesting child components (like `.list-section__header` in `.list-section`) is not strictly required, but is nice for organisation and being able to collapse the whole component section.
+
 ## Icon Libraries
 
 ## (Potential) Components
 
 - Button
+See also - Segmented Control, tab bar in Tabs. In some designed they can be displayed as grouped buttons, in others not.
 
 - Input (incl. numeric, multiline=textarea, auto complete, tags/chips, dropdowns)
 
@@ -87,6 +105,7 @@ When deciding whether to make separate components or merge into one (as variants
   - ListSection
 
 - Table
+*Note*: Currently, `Table` is using a different approach from `List`: instead of using some `TableRow` components, it simply accepts all data in `rows` prop, and then uses snippets for custom rendering. Both approaches are valid, we just need to keep in mind them when designing other components (like Menus).
 
 - Tabs
 Currently uses its own tab items (can be replaced with a grouped buttons/segmented control?). Also: do we need a separate tab bar / tab bar controller?
