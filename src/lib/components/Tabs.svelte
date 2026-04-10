@@ -7,6 +7,7 @@
     items = [],
     /** @type {import('svelte').Snippet | undefined} */
     children = null,
+    ...rest
   } = $props();
 
   const uid = Math.random().toString(36).slice(2, 8);
@@ -36,9 +37,11 @@
     {/each}
   </div>
   <div class="tabs__body">
-    {#if items[activeTabIndex]}
+    {#if items[activeTabIndex]?.component}
     {@const Component = items[activeTabIndex].component}
     <Component/>
+    {:else if items[activeTabIndex]?.snippet}
+    {@render rest[items[activeTabIndex]?.snippet](items[activeTabIndex], activeTabIndex, items)}
     {/if}
     {@render children?.()}
   </div>

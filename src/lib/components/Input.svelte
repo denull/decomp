@@ -1,5 +1,7 @@
 <script>
   let {
+    /** @type {null | 'email'} */
+    variant = null,
     /** @type {boolean} */
     multiline = false,
     /** @type {boolean} */
@@ -8,6 +10,8 @@
     children = null,
     /** @type {String} */
     value = $bindable(''),
+    /** @type {String} */
+    placeholder = '',
   } = $props();
 </script>
 
@@ -19,9 +23,16 @@
   ]}
 >
   {#if multiline}
-    <textarea bind:value={value} {disabled}></textarea>
+    <textarea
+      bind:value={value}
+      {disabled}
+      {placeholder}></textarea>
   {:else}
-    <input type="text" bind:value={value} {disabled}/>
+    <input
+      type={variant == 'email' ? 'email' : 'text'}
+      bind:value={value}
+      {disabled}
+      {placeholder}/>
   {/if}
   {@render children?.()}
 </div>

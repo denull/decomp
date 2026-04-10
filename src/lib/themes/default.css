@@ -3,6 +3,9 @@
   --danger: oklch(0.55 0.20 25);
   --radius: 8px;
   --radius-lg: 12px;
+  --space-lg: 20px;
+  --space: 15px;
+  --space-sm: 5px;
   --brm: 1;
   @supports (corner-shape: squircle) {
     --brm: 2;
@@ -226,6 +229,109 @@
   }
 
   /**
+  MARK: Card
+  **/
+
+  .card {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space);
+    padding: 24px;
+    border-radius: var(--radius-lg);
+    background: linear-gradient(180deg, var(--card-start), var(--card-end));
+    box-shadow:
+      0 1px 3px var(--card-shadow),
+      0 4px 12px var(--card-shadow-lg);
+    border: 1px solid var(--card-border);
+    transition: background 0.3s, box-shadow 0.3s, border-color 0.3s;
+  
+    .card__title {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      font-weight: 600;
+      color: var(--text-muted);
+      padding-bottom: var(--space-sm);
+    }
+  }
+
+  /**
+  MARK: Row
+  **/
+
+  .row {
+    display: flex;
+    gap: var(--space);
+  }
+
+  /**
+  MARK: List
+  **/
+
+  .list {
+  }
+  .list-section {
+    &:not(:last-child) {
+      margin-bottom: var(--space);
+    }
+    
+    .list-section__header {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      font-weight: 600;
+      color: var(--text-muted);
+      padding: 0 4px 8px;
+    }
+
+    .list-section__body {
+      border-radius: 8px;
+      overflow: hidden;
+      background: var(--input-bg);
+    }
+
+  }
+  .list-item {
+    padding: 12px 14px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid var(--divider);
+    cursor: pointer;
+    transition: background 0.1s;
+
+    &:last-child {
+      border-bottom: none;
+    }
+    &:hover {
+      background: oklch(from var(--accent) l c h / 0.04);
+    }
+    
+    .list-item__content {
+      display: flex;
+      flex-direction: column;
+      gap: 1px;
+    }
+
+    .list-item__title {
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--text);
+    }
+
+    .list-item__description {
+      font-size: 12px;
+      color: var(--text-muted);
+    }
+
+    .list-item__accessory {
+      color: var(--text-muted);
+      opacity: 0.5;
+      flex-shrink: 0;
+    }
+  }
+
+  /**
   MARK: Table
   **/
 
@@ -315,7 +421,7 @@
     }
 
     .tabs__body {
-      gap: 15px;
+      gap: var(--space);
     }
   }
 }

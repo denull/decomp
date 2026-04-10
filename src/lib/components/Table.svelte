@@ -5,6 +5,7 @@
     rows = [],
     activeRowIndex = $bindable(null),
     sortedBy = $bindable([]),
+    ...rest
   } = $props();
 
   function formatCell(row, col) {
@@ -46,7 +47,11 @@
     {#each sortedRows as row, i}
     <tr class={[activeRowIndex === i && 'is-active']} onclick={() => activeRowIndex = i}>
       {#each columns as col, j}
+        {#if col.snippet}
+        {@render rest[col.snippet](row, col, i, j, rows)}
+        {:else}
         <td>{formatCell(row, col)}</td>
+        {/if}
       {/each}
     </tr>
     {/each}
