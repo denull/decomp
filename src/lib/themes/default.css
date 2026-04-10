@@ -246,6 +246,20 @@
       display: flex;
       border-bottom: 1px solid var(--divider);
       margin-bottom: 16px;
+
+      &:after {
+        content: '';
+        position: absolute;
+        position-anchor: var(--_active-tab);
+        left: anchor(left);
+        right: anchor(right);
+        bottom: anchor(bottom);
+        margin-bottom: -1px;
+        height: 3px;
+        background: var(--accent);
+        border-radius: 2px 2px 0 0;
+        transition: left 300ms, right 300ms;
+      }
     }
 
     .tabs__tab {
@@ -260,16 +274,7 @@
       &.is-active {
         color: var(--accent);
 
-        &:after {
-          content: '';
-          position: absolute;
-          bottom: -1px;
-          left: 0;
-          right: 0;
-          height: 3px;
-          background: var(--accent);
-          border-radius: 2px 2px 0 0;
-        }
+        
       }
     }
   }

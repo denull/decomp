@@ -5,13 +5,17 @@
 
     /** @type {Array} */
     items = [],
+    /** @type {import('svelte').Snippet | undefined} */
+    children = null,
   } = $props();
+
+  const uid = Math.random().toString(36).slice(2, 8);
+  const anchorName = `--_active-tab-${uid}`;
 </script>
 
 <div
-  class={[
-    'tabs',
-  ]}
+  class={['tabs']}
+  style="--_active-tab: {anchorName}"
 >
   <div class="tabs__head" role="tablist">
     {#each items as item, i}
@@ -20,11 +24,14 @@
           'tabs__tab',
           i == activeTabIndex && 'is-active'
         ]}
+        style={
+          i == activeTabIndex ? `anchor-name: ${anchorName}` : ''
+        }
         role="tab"
         tabindex={i}
         aria-selected={activeTabIndex == i}
         onclick={() => activeTabIndex = i}>
-        {item.name}
+        {item.label}
       </div>
     {/each}
   </div>
@@ -33,6 +40,7 @@
     {@const Component = items[activeTabIndex].component}
     <Component/>
     {/if}
+    {@render children?.()}
   </div>
 </div>
 
