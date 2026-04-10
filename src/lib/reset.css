@@ -1,12 +1,36 @@
 *, *::before, *::after {
-  -webkit-text-size-adjust: 100%;
   box-sizing: border-box;
   margin: 0;
   padding: 0;
 }
 
-:root, button, input, textarea {
+:root {
   font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-text-size-adjust: 100%;
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+  hanging-punctuation: first allow-end last;
+  min-height: 100%;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  :root {
+    interpolate-size: allow-keywords;
+  }
+}
+
+body {
+  min-height: 100vh;
+  line-height: 1.5;
+}
+
+input, button, textarea, select {
+  font: inherit;
+}
+
+input, textarea {
+  hanging-punctuation: none;
 }
 
 table {
@@ -17,4 +41,26 @@ button {
   background: none;
   user-select: none;
   -webkit-user-select: none;
+}
+
+p, h1, h2, h3, h4, h5, h6 {
+  overflow-wrap: break-word;
+}
+
+p {
+  text-wrap: pretty;
+  font-variant-numeric: proportional-nums;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  text-wrap: balance;
+  font-variant-numeric: lining-nums;
+}
+
+math, time, table {
+	font-variant-numeric: tabular-nums lining-nums slashed-zero;
+}
+
+code {
+	font-variant-numeric: slashed-zero;
 }

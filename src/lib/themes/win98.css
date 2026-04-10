@@ -280,6 +280,7 @@
       z-index: 1;
       color: #222;
       padding: 6px;
+      line-height: 1;
 
       &:focus {
         outline: 1px dotted #222;
