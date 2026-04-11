@@ -99,10 +99,14 @@ Nesting child components (like `.list-section__header` in `.list-section`) is no
 See also - Segmented Control, tab bar in Tabs. In some designed they can be displayed as grouped buttons, in others not.
 
 - Input (incl. numeric, multiline=textarea, auto complete, tags/chips, dropdowns)
+Special case: for now, if Input has a "label", it produces different markup: <div class="field"><div class="input"> (instead of just <div class="input">). Need to be careful with it.
+
+"field" class is intended to also be used as a utility CSS class (along with "field__label") for attaching labels to any other controls.
 
 - List
   - ListItem
   - ListSection
+TODO: Currently ListItem with accessory="chevron" injects a SVG directly into the DOM, making it harder to control with theme CSS. Need to consider moving it to <theme>.css instead.
 
 - Table
 *Note*: Currently, `Table` is using a different approach from `List`: instead of using some `TableRow` components, it simply accepts all data in `rows` prop, and then uses snippets for custom rendering. Both approaches are valid, we just need to keep in mind them when designing other components (like Menus).

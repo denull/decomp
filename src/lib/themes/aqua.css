@@ -1,4 +1,8 @@
 [data-theme="aqua"] {
+  --space-lg: 24px;
+  --space: 18px;
+  --space-sm: 6px;
+
   .button {
     --_surface: #38a3f0;
 

@@ -3,15 +3,18 @@
   import List from '$lib/components/List.svelte';
   import ListItem from '$lib/components/ListItem.svelte';
   import ListSection from '$lib/components/ListSection.svelte';
-    import Button from '$lib/components/Button.svelte';
-    import Input from '$lib/components/Input.svelte';
-    import Tabs from '$lib/components/Tabs.svelte';
-    import Table from '$lib/components/Table.svelte';
+  import Button from '$lib/components/Button.svelte';
+  import Input from '$lib/components/Input.svelte';
+  import Tabs from '$lib/components/Tabs.svelte';
+  import Table from '$lib/components/Table.svelte';
+  import Checkbox from '$lib/components/Checkbox.svelte';
 
   const { Story } = defineMeta({
     title: 'Dashboard',
-    tags: ['autodocs'],
+    tags: [],
   });
+
+  let radioGroup = $state(0);
 </script>
 
 
@@ -60,21 +63,12 @@
       <div class="card__title">Form Controls</div>
       <form>
         <div class="row">
-          <div class="field">
-            <label class="label" for="f-name">Full Name</label>
-            <Input placeholder="Jane Doe"/>
-          </div>
-          <div class="field">
-            <label class="label" for="f-email">Email</label>
-            <Input variant="email" placeholder="jane@example.com"/>
-          </div>
+          <Input label="Full Name" placeholder="Jane Doe"/>
+          <Input variant="email" label="Email" placeholder="jane@example.com"/>
         </div>
+        <Input multiline label="Message" placeholder="Write something..."/>
         <div class="field">
-          <label class="label" for="f-message">Message</label>
-          <Input multiline placeholder="Write something..."/>
-        </div>
-        <div class="field">
-          <label class="label">Department</label>
+          <label class="field__label">Department</label>
           <div class="select">
             <button class="select-trigger" type="button">
               <span class="select-value is-placeholder">Select department&hellip;</span>
@@ -90,55 +84,31 @@
           </div>
         </div>
         <div class="field">
-          <label class="label">Experience <span class="label-value"><span id="slider-val">5</span> years</span></label>
+          <label class="field__label">Experience <span class="label-value"><span id="slider-val">5</span> years</span></label>
           <input type="range" min="0" max="15" value="5" data-output="slider-val">
         </div>
-        <div class="field">
-          <div class="row">
-            <label class="label-inline checkbox">
-              <input type="checkbox" checked>
-              <span class="checkbox-box"></span>
-              Email notifications
-            </label>
-            <label class="label-inline checkbox">
-              <input type="checkbox">
-              <span class="checkbox-box"></span>
-              SMS notifications
-            </label>
-          </div>
+        <div class="row">
+          <Checkbox label="Email notifications" checked disabled/>
+          <Checkbox label="SMS notifications"/>
         </div>
         <div class="field">
-          <label class="label">Priority</label>
-          <div class="radio-group">
-            <label class="label-inline radio">
-              <input type="radio" name="priority" checked>
-              <span class="radio-dot"></span>
-              Low
-            </label>
-            <label class="label-inline radio">
-              <input type="radio" name="priority">
-              <span class="radio-dot"></span>
-              Medium
-            </label>
-            <label class="label-inline radio">
-              <input type="radio" name="priority">
-              <span class="radio-dot"></span>
-              High
-            </label>
+          <label class="field__label">Priority</label>
+          <div class="row">
+            <Checkbox variant="radio" label="Low" bind:group={radioGroup} value={0} disabled/>
+            <Checkbox variant="radio" label="Medium" bind:group={radioGroup} value={1}/>
+            <Checkbox variant="radio" label="High" bind:group={radioGroup} value={2}/>
           </div>
         </div>
         <div class="field">
           <div class="row">
-            <span class="label" style="margin:0">Active status</span>
+            <span class="field__label" style="margin:0">Active status</span>
             <label class="switch">
               <input type="checkbox" checked>
               <span class="switch-track"><span class="switch-thumb"></span></span>
             </label>
           </div>
         </div>
-        <div class="field" style="margin-top:20px">
-          <Button variant="primary">Submit</Button>
-        </div>
+        <Button variant="primary">Submit</Button>
       </form>
     </section>
 
@@ -236,7 +206,7 @@
         {#snippet status(row)}
           <td><span class={[
             'badge',
-            `badge-${{ Active: 'success', Away: 'warning', Offline: 'neutral' }[row.status]}`,
+            { Active: 'is-success', Away: 'is-warning', Offline: 'is-neutral' }[row.status],
           ]}>{row.status}</span></td>
         {/snippet}
         {#snippet actions(row)}
@@ -390,4 +360,17 @@
   .span-2 {
     grid-column: span 2;
   }
+
+  .badge {
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 600;
+    padding: 3px 10px;
+    border-radius: 10px;
+    letter-spacing: 0.3px;
+  }
+  .badge.is-success { background: var(--badge-success-bg); color: var(--badge-success-text); }
+  .badge.is-warning { background: var(--badge-warning-bg); color: var(--badge-warning-text); }
+  .badge.is-neutral { background: var(--badge-neutral-bg); color: var(--badge-neutral-text); }
+
 </style>

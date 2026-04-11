@@ -64,3 +64,12 @@ math, time, table {
 code {
 	font-variant-numeric: slashed-zero;
 }
+
+form {
+  display: contents;
+}
+
+.row {
+  display: flex;
+  gap: var(--space);
+}

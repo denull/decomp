@@ -45,28 +45,28 @@
 
 <Story name="Grouped (Settings Style)">
   <ListSection header="General">
-    <ListItem>
+    <ListItem accessory="chevron">
       Language
-      {#snippet trailing()}English ›{/snippet}
+      {#snippet trailing()}English{/snippet}
     </ListItem>
     <ListItem>
       Region
-      {#snippet trailing()}United States ›{/snippet}
+      {#snippet trailing()}United States{/snippet}
     </ListItem>
   </ListSection>
 
   <ListSection header="Notifications">
-    <ListItem>
+    <ListItem accessory="switch">
       Push Notifications
       {#snippet trailing()}On{/snippet}
     </ListItem>
-    <ListItem>
+    <ListItem accessory="switch">
       Email Alerts
       {#snippet trailing()}Off{/snippet}
     </ListItem>
-    <ListItem>
+    <ListItem accessory="chevron">
       Sound
-      {#snippet trailing()}Default ›{/snippet}
+      {#snippet trailing()}Default{/snippet}
     </ListItem>
   </ListSection>
 </Story>

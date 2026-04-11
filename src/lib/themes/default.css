@@ -229,6 +229,89 @@
   }
 
   /**
+  MARK: Checkbox
+  **/
+
+  .checkbox {
+    gap: 8px;
+    font-size: 14px;
+    color: var(--text);
+
+    .checkbox__box {
+      width: 18px;
+      height: 18px;
+      border-radius: 4px;
+      background: linear-gradient(180deg, var(--recess-start), var(--recess-end));
+      box-shadow: inset 0 1px 2px var(--recess-shadow), inset 0 0 0 1px var(--recess-border);
+      position: relative;
+      flex-shrink: 0;
+      transition: background 0.2s, box-shadow 0.2s;
+    }
+
+    &.is-radio .checkbox__box {
+      border-radius: 50%;
+    }
+
+    input:checked + .checkbox__box {
+      background: linear-gradient(180deg,
+        oklch(from var(--accent) calc(l + 0.03) c h),
+        oklch(from var(--accent) calc(l - 0.03) c h));
+      box-shadow:
+        inset 0 1px 0 rgba(255,255,255,0.18),
+        0 1px 2px rgba(0,0,0,0.12);
+
+      &::after {
+        content: '';
+        position: absolute;
+        top: 2px;
+        left: 6px;
+        width: 6px;
+        height: 11px;
+        border: solid #fff;
+        border-width: 0 2px 2px 0;
+        transform: rotate(45deg);
+      }
+    }
+
+    &.is-radio input:checked + .checkbox__box::after {
+      top: 50%;
+      left: 50%;
+      width: 7px;
+      height: 7px;
+      border: none;
+      border-radius: 50%;
+      background: #fff;
+      transform: translate(-50%, -50%);
+    }
+
+    input:focus-visible + .checkbox__box {
+      outline: 2px solid var(--accent);
+      outline-offset: 2px;
+    }
+    
+    &.is-disabled {
+      opacity: 0.4;
+    }
+  }
+
+  /**
+  MARK: Field
+  **/
+
+  .field {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+
+    .field__label {
+      display: block;
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--text-secondary);
+    }
+  }
+
+  /**
   MARK: Card
   **/
 
@@ -256,15 +339,6 @@
   }
 
   /**
-  MARK: Row
-  **/
-
-  .row {
-    display: flex;
-    gap: var(--space);
-  }
-
-  /**
   MARK: List
   **/
 
@@ -274,7 +348,7 @@
     &:not(:last-child) {
       margin-bottom: var(--space);
     }
-    
+
     .list-section__header {
       font-size: 11px;
       text-transform: uppercase;
@@ -293,8 +367,6 @@
   }
   .list-item {
     padding: 12px 14px;
-    display: flex;
-    align-items: center;
     justify-content: space-between;
     border-bottom: 1px solid var(--divider);
     cursor: pointer;
@@ -308,8 +380,6 @@
     }
     
     .list-item__content {
-      display: flex;
-      flex-direction: column;
       gap: 1px;
     }
 
@@ -324,10 +394,15 @@
       color: var(--text-muted);
     }
 
+    .list-item__trailing {
+      color: var(--text-muted);
+    }
+
     .list-item__accessory {
       color: var(--text-muted);
       opacity: 0.5;
       flex-shrink: 0;
+      padding-left: 12px;
     }
   }
 
