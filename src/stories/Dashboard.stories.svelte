@@ -283,12 +283,12 @@
   </main>
 
   <!-- ======== Dialog ======== -->
-  <Dialog bind:this={dialog} title="Confirm Action" draggable>
-    Are you sure you want to proceed with this action? This operation cannot be undone and will permanently affect the selected items.
+  <Dialog bind:this={dialog} variant="alert" title="Confirm Action" draggable>
+    <p>Are you sure you want to proceed with this action? This operation cannot be undone and will permanently affect the selected items.</p>
 
     {#snippet footer()}
-      <button class="btn" type="button" data-close>Cancel</button>
-      <button class="btn btn-primary" type="button" data-close>Confirm</button>
+      <Button onclick={() => dialog.hide()}>Cancel</Button>
+      <Button variant="primary" onclick={() => dialog.hide()}>Confirm</Button>
     {/snippet}
   </Dialog>
 
@@ -347,4 +347,19 @@
     opacity: 0.6;
     font-weight: 400;
   }
+
+  .metric-card {
+    flex: 1;
+    padding: 16px;
+    border-radius: 8px;
+    /*background: linear-gradient(0deg, var(--card-start), var(--card-end));*/
+    background: var(--input-background);
+    box-shadow: var(--input-shadow);
+    border: 1px solid var(--card-border);
+  }
+  .metric-label { font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; color: var(--text-muted); }
+  .metric-value { display: block; font-size: 24px; font-weight: 700; margin: 6px 0 4px; color: var(--text); letter-spacing: -0.5px; }
+  .metric-trend { font-size: 12px; font-weight: 600; }
+  .metric-trend.is-up { color: var(--badge-success-text); }
+  .metric-trend.is-down { color: oklch(0.55 0.20 25); }
 </style>

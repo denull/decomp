@@ -34,7 +34,6 @@
   :global {
     .switch {
       display: flex;
-      overflow: hidden;
     }
   }
 </style>

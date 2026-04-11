@@ -1,5 +1,7 @@
 <script>
   let {
+    /** @type {null | 'alert'} */
+    variant = null,
     title = null,
     draggable = false,
     /** @type {import('svelte').Snippet | null} */
@@ -12,15 +14,32 @@
     open = $bindable(false),
   } = $props();
 
+  let el = $state(null);
+
   export function show() {
     open = true;
+    el.showModal();
   }
+  export function hide() {
+    open = false;
+    el.close();
+  }
+
+  $effect(() => {
+    if (!el) return;
+    if (open) {
+      el.showModal();
+    } else {
+      el.close();
+    }
+  });
 </script>
 
-{#if open}
 <dialog
+  bind:this={el}
   class={[
-    'dialog', 
+    'dialog',
+    variant && `is-${variant}`,
     draggable && `is-draggable`,
   ]}
 >
@@ -37,13 +56,15 @@
     </div>
   {/if}
 </dialog>
-{/if}
 
 <style>
   :global {
-    .dialog {
+    .dialog[open] {
       display: flex;
       flex-direction: column;
+    }
+    .dialog__title {
+      user-select: none;
     }
   }
 </style>
