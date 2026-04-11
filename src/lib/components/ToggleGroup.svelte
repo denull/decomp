@@ -7,6 +7,8 @@
     /** @type {any} */
     value = null,
   } = $props();
+
+  const uid = $props.id();
 </script>
 
 <div
@@ -14,9 +16,17 @@
     'toggle-group',
     size != 'md' && `is-${size}`,
   ]}
+  style={`--_active-toggle: --_active-toggle-${uid}`}
 >
   {#each items as item}
-    <div class={['toggle-group__item', value === item && 'is-active']}>{item}</div>
+    <div
+      class={['toggle-group__item', value === item && 'is-active']}
+      style={
+        value === item ? `anchor-name: --_active-toggle-${uid}` : ''
+      }
+      aria-selected={value === item}
+      onclick={() => value = item}
+    >{item}</div>
   {/each}
 </div>
 

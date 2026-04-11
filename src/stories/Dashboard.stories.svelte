@@ -8,12 +8,12 @@
   import Tabs from '$lib/components/Tabs.svelte';
   import Table from '$lib/components/Table.svelte';
   import Checkbox from '$lib/components/Checkbox.svelte';
-    import Progress from '$lib/components/Progress.svelte';
-    import ToggleGroup from '$lib/components/ToggleGroup.svelte';
-    import Switch from '$lib/components/Switch.svelte';
-    import Slider from '$lib/components/Slider.svelte';
-    import Spinner from '$lib/components/Spinner.svelte';
-    import Dialog from '$lib/components/Dialog.svelte';
+  import Progress from '$lib/components/Progress.svelte';
+  import ToggleGroup from '$lib/components/ToggleGroup.svelte';
+  import Switch from '$lib/components/Switch.svelte';
+  import Slider from '$lib/components/Slider.svelte';
+  import Spinner from '$lib/components/Spinner.svelte';
+  import Dialog from '$lib/components/Dialog.svelte';
 
   const { Story } = defineMeta({
     title: 'Dashboard',
@@ -58,7 +58,7 @@
         <Button variant="ghost" size="sm">Ghost</Button>
       </div>
       <hr class="separator">
-      <div class="card__title" style="margin-bottom:12px">Toggle Group</div>
+      <div class="card__title">Toggle Group</div>
       <ToggleGroup items={['Day', 'Week', 'Month']}/>
     </section>
 
