@@ -10,16 +10,18 @@
     children = null,
     /** @type {String} */
     value = $bindable(''),
+    /** @type {Array | null} */
+    options = null,
     /** @type {String} */
     placeholder = '',
-    /** @type {String | null} */
+    /** @type {String | import('svelte').Snippet | null} */
     label = null,
   } = $props();
 
   const uid = `input-${Math.random().toString(36).slice(2, 8)}`;
 </script>
 
-{#snippet input()}
+{#snippet body()}
   <div
     class={[
       'input',
@@ -45,14 +47,15 @@
   </div>
 {/snippet}
 
-{#if label !== null}
-<div class="field">
-  <label for={uid} class="field__label">{label}</label>
-
-  {@render input()}
-</div>
+{#if label === null}
+  {@render body()}
 {:else}
-{@render input()}
+  <div class="field">
+    <label for={uid} class="field__label">
+      {#if typeof label === 'function'}{@render label()}{:else}{label}{/if}
+    </label>
+    {@render body()}
+  </div>
 {/if}
 
 <style>

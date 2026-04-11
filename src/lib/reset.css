@@ -22,7 +22,6 @@
 
 body {
   min-height: 100vh;
-  line-height: 1.5;
 }
 
 input, button, textarea, select {
@@ -50,6 +49,7 @@ p, h1, h2, h3, h4, h5, h6 {
 p {
   text-wrap: pretty;
   font-variant-numeric: proportional-nums;
+  line-height: 1.4;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -69,7 +69,24 @@ form {
   display: contents;
 }
 
+/** Global utilities (theme-independent) **/
 .row {
   display: flex;
+  align-items: center;
   gap: var(--space);
+
+  > .field {
+    flex: 1;
+  }
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+
+  &.is-row {
+    flex-direction: row;
+    align-items: center;
+  }
 }

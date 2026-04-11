@@ -8,6 +8,12 @@
   import Tabs from '$lib/components/Tabs.svelte';
   import Table from '$lib/components/Table.svelte';
   import Checkbox from '$lib/components/Checkbox.svelte';
+    import Progress from '$lib/components/Progress.svelte';
+    import ToggleGroup from '$lib/components/ToggleGroup.svelte';
+    import Switch from '$lib/components/Switch.svelte';
+    import Slider from '$lib/components/Slider.svelte';
+    import Spinner from '$lib/components/Spinner.svelte';
+    import Dialog from '$lib/components/Dialog.svelte';
 
   const { Story } = defineMeta({
     title: 'Dashboard',
@@ -15,6 +21,8 @@
   });
 
   let radioGroup = $state(0);
+  let expirience = $state(5);
+  let dialog = $state(null);
 </script>
 
 
@@ -49,13 +57,9 @@
         <Button variant="destructive" size="sm">Destructive</Button>
         <Button variant="ghost" size="sm">Ghost</Button>
       </div>
-      <hr class="sep">
-      <div class="card__title" style="margin-bottom:12px">Segmented Control</div>
-      <div class="segmented">
-        <button class="seg-item is-active" type="button">Day</button>
-        <button class="seg-item" type="button">Week</button>
-        <button class="seg-item" type="button">Month</button>
-      </div>
+      <hr class="separator">
+      <div class="card__title" style="margin-bottom:12px">Toggle Group</div>
+      <ToggleGroup items={['Day', 'Week', 'Month']}/>
     </section>
 
     <!-- ---- Form Controls ---- -->
@@ -67,26 +71,12 @@
           <Input variant="email" label="Email" placeholder="jane@example.com"/>
         </div>
         <Input multiline label="Message" placeholder="Write something..."/>
-        <div class="field">
-          <label class="field__label">Department</label>
-          <div class="select">
-            <button class="select-trigger" type="button">
-              <span class="select-value is-placeholder">Select department&hellip;</span>
-              <svg class="select-chevron" width="10" height="6" viewBox="0 0 10 6" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M1 1l4 4 4-4"/></svg>
-            </button>
-            <div class="select-menu">
-              <div class="select-option">Engineering</div>
-              <div class="select-option">Design</div>
-              <div class="select-option">Marketing</div>
-              <div class="select-option">Product</div>
-              <div class="select-option">Operations</div>
-            </div>
-          </div>
-        </div>
-        <div class="field">
-          <label class="field__label">Experience <span class="label-value"><span id="slider-val">5</span> years</span></label>
-          <input type="range" min="0" max="15" value="5" data-output="slider-val">
-        </div>
+        <Input label="Department" placeholder="Select department…" options={['Engineering', 'Design', 'Marketing', 'Product', 'Operations']}/>
+        <Slider min={0} max={15} bind:value={expirience}>
+          {#snippet label()}
+            Experience <span class="label-value"><span id="slider-val">{expirience}</span> years</span>
+          {/snippet}
+        </Slider>
         <div class="row">
           <Checkbox label="Email notifications" checked disabled/>
           <Checkbox label="SMS notifications"/>
@@ -99,15 +89,7 @@
             <Checkbox variant="radio" label="High" bind:group={radioGroup} value={2}/>
           </div>
         </div>
-        <div class="field">
-          <div class="row">
-            <span class="field__label" style="margin:0">Active status</span>
-            <label class="switch">
-              <input type="checkbox" checked>
-              <span class="switch-track"><span class="switch-thumb"></span></span>
-            </label>
-          </div>
-        </div>
+        <Switch label="Active status"/>
         <Button variant="primary">Submit</Button>
       </form>
     </section>
@@ -129,14 +111,8 @@
           <strong>Mar 8</strong> &mdash; Eve updated the project roadmap</p>
         {/snippet}
         {#snippet settings()}
-          <div class="row" style="margin-bottom:12px">
-            <span style="font-size:14px">Compact view</span>
-            <label class="switch"><input type="checkbox"><span class="switch-track"><span class="switch-thumb"></span></span></label>
-          </div>
-          <div class="row">
-            <span style="font-size:14px">Show archived</span>
-            <label class="switch"><input type="checkbox"><span class="switch-track"><span class="switch-thumb"></span></span></label>
-          </div>
+          <Switch label="Compact view"/>
+          <Switch label="Show archived"/>
         {/snippet}
       </Tabs>
     </section>
@@ -144,25 +120,22 @@
     <!-- ---- Progress & Loading ---- -->
     <section class="card">
       <div class="card__title">Progress &amp; Loading</div>
-      <div class="progress-row">
+      <div class="row">
         <span class="progress-label">Project Alpha</span>
-        <div class="progress"><div class="progress-fill" style="width:67%"></div></div>
+        <Progress value={67}/>
         <span class="progress-pct">67%</span>
       </div>
-      <div class="progress-row">
+      <div class="row">
         <span class="progress-label">Storage Used</span>
-        <div class="progress"><div class="progress-fill" style="width:35%"></div></div>
+        <Progress variant="segmented" value={35}/>
         <span class="progress-pct">35%</span>
       </div>
-      <div class="progress-row">
+      <div class="row">
         <span class="progress-label">Upload</span>
-        <div class="progress"><div class="progress-fill" style="width:89%"></div></div>
+        <Progress value={89}/>
         <span class="progress-pct">89%</span>
       </div>
-      <div class="loading-row">
-        <div class="spinner spinner-lg"></div>
-        <span>Loading data&hellip;</span>
-      </div>
+      <Spinner size="lg" label="Loading data&hellip;"/>
     </section>
 
     <!-- ---- Table ---- -->
@@ -261,7 +234,7 @@
     <!-- ---- Dashboard Cards ---- -->
     <section class="card">
       <div class="card__title">Dashboard Cards</div>
-      <div class="metric-grid">
+      <div class="row">
         <div class="metric-card">
           <span class="metric-label">Revenue</span>
           <span class="metric-value">$24,500</span>
@@ -284,48 +257,40 @@
     <section class="card span-2">
       <div class="card__title">Overlays &amp; Menus</div>
       <div class="row">
-        <button class="btn" type="button" id="open-dialog">Open Dialog</button>
+        <Button onclick={() => dialog.show()}>Open Dialog</Button>
 
         <div class="popover-anchor">
-          <button class="btn popover-trigger" type="button" id="popover-trigger">Show Popover</button>
-          <div class="popover" id="demo-popover">
-            <strong>Popover Title</strong>
-            This is a contextual popover with additional information. It appears relative to the trigger element and closes on outside click.
-          </div>
+          <Button>
+            Show Popover
+            {#snippet popover()}
+              <strong>Popover Title</strong>
+              This is a contextual popover with additional information. It appears relative to the trigger element and closes on outside click.
+            {/snippet}
+          </Button>
         </div>
 
         <div class="dropdown">
-          <button class="btn dropdown-trigger" type="button">
-            Actions
-            <svg width="10" height="6" viewBox="0 0 10 6" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M1 1l4 4 4-4"/></svg>
-          </button>
-          <div class="dropdown-menu">
-            <div class="dropdown-item">Edit</div>
-            <div class="dropdown-item">Duplicate</div>
-            <div class="dropdown-item">Archive</div>
-            <div class="dropdown-sep"></div>
-            <div class="dropdown-item is-danger">Delete</div>
-          </div>
+          <Button dropdown={[
+            { label: 'Edit' },
+            { label: 'Duplicate' },
+            { label: 'Archive' },
+            { separator: true },
+            { label: 'Delete', variant: 'destructive' },
+          ]}>Actions</Button>
         </div>
       </div>
     </section>
-
   </main>
 
   <!-- ======== Dialog ======== -->
-  <dialog id="demo-dialog">
-    <div class="dialog-header">
-      <h3>Confirm Action</h3>
-      <button class="dialog-close" data-close type="button">&times;</button>
-    </div>
-    <div class="dialog-body">
-      Are you sure you want to proceed with this action? This operation cannot be undone and will permanently affect the selected items.
-    </div>
-    <div class="dialog-footer">
+  <Dialog bind:this={dialog} title="Confirm Action" draggable>
+    Are you sure you want to proceed with this action? This operation cannot be undone and will permanently affect the selected items.
+
+    {#snippet footer()}
       <button class="btn" type="button" data-close>Cancel</button>
       <button class="btn btn-primary" type="button" data-close>Confirm</button>
-    </div>
-  </dialog>
+    {/snippet}
+  </Dialog>
 
 </Story>
 <style>
@@ -363,7 +328,6 @@
 
   .badge {
     display: inline-block;
-    font-size: 11px;
     font-weight: 600;
     padding: 3px 10px;
     border-radius: 10px;
@@ -373,4 +337,14 @@
   .badge.is-warning { background: var(--badge-warning-bg); color: var(--badge-warning-text); }
   .badge.is-neutral { background: var(--badge-neutral-bg); color: var(--badge-neutral-text); }
 
+  .progress-label {
+    font-weight: 500;
+    min-width: 110px;
+    color: var(--text-secondary);
+  }
+
+  .label-value {
+    opacity: 0.6;
+    font-weight: 400;
+  }
 </style>

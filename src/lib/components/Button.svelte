@@ -12,6 +12,8 @@
     children = null,
     /** @type {Function | null} */
     onclick = null,
+    /** @type {Array | null} */
+    dropdown = null,
   } = $props();
 </script>
 
@@ -28,6 +30,9 @@
 >
   <div class="button__back"></div>
   {@render children?.()}
+  {#if dropdown}
+    <svg width="10" height="6" viewBox="0 0 10 6" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M1 1l4 4 4-4"/></svg>
+  {/if}
 </button>
 
 <style>
