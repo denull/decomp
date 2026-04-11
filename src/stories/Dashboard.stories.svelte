@@ -70,8 +70,8 @@
           <Input label="Full Name" placeholder="Jane Doe"/>
           <Input variant="email" label="Email" placeholder="jane@example.com"/>
         </div>
-        <Input multiline label="Message" placeholder="Write something..."/>
-        <Input label="Department" placeholder="Select department…" options={['Engineering', 'Design', 'Marketing', 'Product', 'Operations']}/>
+        <Input variant="multiline" label="Message" placeholder="Write something..."/>
+        <Input variant="select" label="Department" placeholder="Select department…" options={['Engineering', 'Design', 'Marketing', 'Product', 'Operations']}/>
         <Slider min={0} max={15} bind:value={expirience}>
           {#snippet label()}
             Experience <span class="label-value"><span id="slider-val">{expirience}</span> years</span>

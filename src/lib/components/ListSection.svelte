@@ -1,4 +1,6 @@
 <script>
+    import ListItem from './ListItem.svelte';
+
   let {
     /** @type {null | 'primary' | 'destructive'} */
     variant = null,
@@ -10,6 +12,8 @@
     disabled = false,
     /** @type {import('svelte').Snippet | undefined} */
     children = null,
+    /** @type {Array | null} */
+    items = null,
   } = $props();
 
   const headerId = `label-${Math.floor(Math.random() * 2176782336).toString(36)}`;
@@ -32,6 +36,15 @@
     aria-labelledby={header ? headerId : undefined}
   >
     {@render children?.()}
+    {#each items as item}
+      {#if typeof item == 'string'}
+      <ListItem>{item}</ListItem>
+      {:else if item.type != 'section'}
+      <ListItem {...item}/>
+      {:else}
+      <ListSection header={item.header} footer={item.footer} items={item.children}/>
+      {/if}
+    {/each}
   </div>
   {#if footer}
   <div class="list-section__footer">{footer}</div>

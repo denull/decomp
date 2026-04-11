@@ -12,10 +12,14 @@
     trailing = null,
     /** @type {import('svelte').Snippet | undefined} */
     description = null,
+    /** @type {String | null} */
+    title = null,
     /** @type {import('svelte').Snippet | undefined} */
     children = null,
     /** @type {null | 'chevron' | 'switch' } */
     accessory = null,
+    /** */
+    onclick = null,
   } = $props();
 </script>
 
@@ -26,13 +30,15 @@
     selected && `is-selected`,
   ]}
   role="listitem"
+  tabindex="0"
+  {onclick}
 >
   {#if leading}
     <span class="list-item__leading">{@render leading()}</span>
   {/if}
   <span class="list-item__content">
     {#if children}
-      <span class="list-item__title">{@render children()}</span>
+      <span class="list-item__title">{title}{@render children()}</span>
     {/if}
     {#if description}
       <span class="list-item__description">{@render description()}</span>

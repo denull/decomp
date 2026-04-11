@@ -10,12 +10,12 @@
     ...rest
   } = $props();
 
-  const uid = `--_active-tab-${Math.random().toString(36).slice(2, 8)}`;
+  const uid = $props.id();
 </script>
 
 <div
   class={['tabs']}
-  style="--_active-tab: {uid}"
+  style={`--_active-tab: --_active-tab-${uid}`}
 >
   <div class="tabs__head" role="tablist">
     {#each items as item, i}
@@ -25,7 +25,7 @@
           i == activeTabIndex && 'is-active'
         ]}
         style={
-          i == activeTabIndex ? `anchor-name: ${uid}` : ''
+          i == activeTabIndex ? `anchor-name: --_active-tab-${uid}` : ''
         }
         role="tab"
         tabindex={i}
