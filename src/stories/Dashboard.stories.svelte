@@ -188,6 +188,34 @@
       </Table>
     </section>
 
+    <!-- ---- Overlays & Menus ---- -->
+    <section class="card span-2">
+      <div class="card__title">Overlays &amp; Menus</div>
+      <div class="row">
+        <Button onclick={() => dialog.show()}>Open Dialog</Button>
+
+        <div class="popover-anchor">
+          <Button>
+            Show Popover
+            {#snippet popover()}
+              <strong>Popover Title</strong>
+              This is a contextual popover with additional information. It appears relative to the trigger element and closes on outside click.
+            {/snippet}
+          </Button>
+        </div>
+
+        <div class="dropdown">
+          <Button dropdown={[
+            { label: 'Edit' },
+            { label: 'Duplicate' },
+            { label: 'Archive' },
+            { separator: true },
+            { label: 'Delete', variant: 'destructive' },
+          ]}>Actions</Button>
+        </div>
+      </div>
+    </section>
+
     <!-- ---- List View ---- -->
     <section class="card">
       <div class="card__title">Projects</div>
@@ -249,34 +277,6 @@
           <span class="metric-label">Conversion</span>
           <span class="metric-value">3.2%</span>
           <span class="metric-trend is-down">&darr; 0.5%</span>
-        </div>
-      </div>
-    </section>
-
-    <!-- ---- Overlays & Menus ---- -->
-    <section class="card span-2">
-      <div class="card__title">Overlays &amp; Menus</div>
-      <div class="row">
-        <Button onclick={() => dialog.show()}>Open Dialog</Button>
-
-        <div class="popover-anchor">
-          <Button>
-            Show Popover
-            {#snippet popover()}
-              <strong>Popover Title</strong>
-              This is a contextual popover with additional information. It appears relative to the trigger element and closes on outside click.
-            {/snippet}
-          </Button>
-        </div>
-
-        <div class="dropdown">
-          <Button dropdown={[
-            { label: 'Edit' },
-            { label: 'Duplicate' },
-            { label: 'Archive' },
-            { separator: true },
-            { label: 'Delete', variant: 'destructive' },
-          ]}>Actions</Button>
         </div>
       </div>
     </section>

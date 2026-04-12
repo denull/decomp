@@ -870,6 +870,17 @@
       gap: 10px;
     }
   }
+
+  /**
+  MARK: Other
+  **/
+
+  hr {
+    border: none;
+    height: 1px;
+    background: var(--recess-background);
+    box-shadow: var(--recess-shadow);
+  }
 }
 
 @keyframes spin { to { transform: rotate(360deg); } }
