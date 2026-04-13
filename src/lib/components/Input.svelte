@@ -20,6 +20,8 @@
     placeholder = '',
     /** @type {String | import('svelte').Snippet | null} */
     label = null,
+    /** @type {boolean} */
+    inline = false,
   } = $props();
 
   const uid = $props.id();
@@ -98,7 +100,7 @@
 {#if label === null}
   {@render body()}
 {:else}
-  <div class="field">
+  <div class={['field', inline && `is-inline`]}>
     <label for={uid} class="field__label">
       {#if typeof label === 'function'}{@render label()}{:else}{label}{/if}
     </label>
@@ -109,6 +111,7 @@
 <style>
   .input {
     display: flex;
+    flex: 1;
 
     input, textarea {
       flex: 1;

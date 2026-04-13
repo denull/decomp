@@ -56,6 +56,7 @@
       .tabs__body {
         display: flex;
         flex-direction: column;
+        container-type: inline-size;
       }
     }
   }

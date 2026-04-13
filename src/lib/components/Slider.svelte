@@ -14,6 +14,8 @@
     max = 100,
     /** @type {String | import('svelte').Snippet | null} */
     label = null,
+    /** @type {boolean} */
+    inline = false,
   } = $props();
 </script>
 
@@ -35,7 +37,7 @@
 {#if label === null}
   {@render body()}
 {:else}
-  <div class="field">
+  <div class={['field', inline && `is-inline`]}>
     <label class="field__label">
       {#if typeof label === 'function'}{@render label()}{:else}{label}{/if}
     </label>
@@ -47,6 +49,8 @@
   :global {
     .slider {
       display: flex;
+      flex: 1;
+      
       .slider__bar {
         height: 100%;
       }

@@ -18,6 +18,9 @@
   const { Story } = defineMeta({
     title: 'Dashboard',
     tags: [],
+    parameters: {
+      layout: 'fullscreen',
+    },
   });
 
   let radioGroup = $state(0);
@@ -77,9 +80,13 @@
             Experience <span class="label-value"><span id="slider-val">{expirience}</span> years</span>
           {/snippet}
         </Slider>
-        <div class="row">
-          <Checkbox label="Email notifications" checked disabled/>
-          <Checkbox label="SMS notifications"/>
+        
+        <div class="field">
+          <label class="field__label"></label>
+          <div class="row">
+            <Checkbox label="Email notifications" checked disabled/>
+            <Checkbox label="SMS notifications"/>
+          </div>
         </div>
         <div class="field">
           <label class="field__label">Priority</label>
@@ -101,6 +108,7 @@
         { label: 'Overview', snippet: 'overview' },
         { label: 'Activity', snippet: 'activity' },
         { label: 'Settings', snippet: 'settings' },
+        { label: 'Inline controls', snippet: 'inline' },
       ]}>
         {#snippet overview()}
           <p>The project is currently on track. Sprint velocity has increased by 12% compared to last quarter, with 3 features shipped ahead of schedule. Team capacity remains stable at 85%.</p>
@@ -114,27 +122,45 @@
           <Switch label="Compact view"/>
           <Switch label="Show archived"/>
         {/snippet}
+        {#snippet inline()}
+          <div class="row">
+            <Input label="Full Name" placeholder="Jane Doe" inline/>
+            <Input variant="email" label="Email" placeholder="jane@example.com" inline/>
+          </div>
+          <Input variant="multiline" label="Message" placeholder="Write something..." inline/>
+          <Input variant="select" label="Department" placeholder="Select department…" options={['Engineering', 'Design', 'Marketing', 'Product', 'Operations']} inline/>
+          <Slider min={0} max={15} bind:value={expirience} inline>
+            {#snippet label()}
+              Experience <span class="label-value"><span id="slider-val">{expirience}</span> years</span>
+            {/snippet}
+          </Slider>
+          <div class="field is-inline">
+            <label class="field__label"></label>
+            <div class="row">
+              <Checkbox label="Email notifications" checked disabled/>
+              <Checkbox label="SMS notifications"/>
+            </div>
+          </div>
+          <div class="field is-inline">
+            <label class="field__label">Priority</label>
+            <div class="row">
+              <Checkbox variant="radio" label="Low" bind:group={radioGroup} value={0} disabled/>
+              <Checkbox variant="radio" label="Medium" bind:group={radioGroup} value={1}/>
+              <Checkbox variant="radio" label="High" bind:group={radioGroup} value={2}/>
+            </div>
+          </div>
+          <Switch label="Active status"/>
+          <Button variant="primary">Submit</Button>
+        {/snippet}
       </Tabs>
     </section>
 
     <!-- ---- Progress & Loading ---- -->
     <section class="card">
       <div class="card__title">Progress &amp; Loading</div>
-      <div class="row">
-        <span class="progress-label">Project Alpha</span>
-        <Progress value={67}/>
-        <span class="progress-pct">67%</span>
-      </div>
-      <div class="row">
-        <span class="progress-label">Storage Used</span>
-        <Progress variant="segmented" value={35}/>
-        <span class="progress-pct">35%</span>
-      </div>
-      <div class="row">
-        <span class="progress-label">Upload</span>
-        <Progress value={89}/>
-        <span class="progress-pct">89%</span>
-      </div>
+      <Progress label="Project Alpha" value={67} inline>67%</Progress>
+      <Progress label="Storage Used" variant="segmented" value={35} inline>35%</Progress>
+      <Progress label="Upload" value={89} inline>89%</Progress>
       <Spinner size="lg" label="Loading data&hellip;"/>
     </section>
 
@@ -302,12 +328,11 @@
     align-items: center;
     justify-content: space-between;
   }
-  .header h1 {
-    font-size: 24px;
-    font-weight: 700;
-    letter-spacing: -0.5px;
+  .header p {
+    font-size: 13px;
+    color: var(--text-muted);
+    margin-top: 2px;
   }
-  .header p { font-size: 13px; color: var(--text-muted); margin-top: 2px; }
   
   .dashboard {
     max-width: 1120px;
@@ -324,6 +349,12 @@
 
   .span-2 {
     grid-column: span 2;
+  }
+
+  @media (max-width: 820px) {
+    .dashboard { grid-template-columns: 1fr; }
+    .span-2 { grid-column: span 1; }
+    .header { flex-direction: column; gap: 16px; align-items: flex-start; }
   }
 
   .badge {
@@ -350,16 +381,36 @@
 
   .metric-card {
     flex: 1;
-    padding: 16px;
+    padding: var(--space);
     border-radius: 8px;
     /*background: linear-gradient(0deg, var(--card-start), var(--card-end));*/
     background: var(--input-background);
     box-shadow: var(--input-shadow);
     border: 1px solid var(--card-border);
   }
-  .metric-label { font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; color: var(--text-muted); }
-  .metric-value { display: block; font-size: 24px; font-weight: 700; margin: 6px 0 4px; color: var(--text); letter-spacing: -0.5px; }
-  .metric-trend { font-size: 12px; font-weight: 600; }
-  .metric-trend.is-up { color: var(--badge-success-text); }
-  .metric-trend.is-down { color: oklch(0.55 0.20 25); }
+  .metric-label {
+    font-size: var(--font-size-2xs);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: var(--text-muted);
+  }
+  .metric-value {
+    display: block;
+    font-size: var(--font-size-3xl);
+    font-weight: 700;
+    margin: 6px 0 4px;
+    color: var(--text);
+    letter-spacing: -0.5px;
+  }
+  .metric-trend {
+    font-size: var(--font-size-xs);
+    font-weight: 600;
+  }
+  .metric-trend.is-up {
+    color: var(--badge-success-text);
+  }
+  .metric-trend.is-down {
+    color: oklch(0.55 0.20 25);
+  }
 </style>

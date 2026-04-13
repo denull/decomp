@@ -1,93 +1,111 @@
 /* Based on 98.css */
 
 [data-theme="win98"] {
+  /** Common props (can be safely used in userland code independently from chosen theme **/
+
+  --surface-0: #c0c0c0;
+  --surface-1: #c0c0c0;
+  --surface-2: #ffffff;
+
+  --accent: #000080;
+  --danger: red;
+  
+  --radius-lg: 0px;
+  --radius: 0px;
+  --radius-sm: 0px;
+
+  --space-xl: 12px;
+  --space-lg: 10px;
+  --space: 8px;
+  --space-sm: 6px;
+  --space-xs: 4px;
+
+  --text: #222222;
+  --text-secondary: #959595;
+  --text-muted: #808080;
+  --text-link: #0000ff;
+
+  --font-size-3xl: 20px; /** h1 **/
+  --font-size-2xl: 16px; /** h2 **/
+  --font-size-xl: 14px;
+  --font-size-lg: 12px;
+  --font-size: 11px;
+  --font-size-sm: 10px;
+  --font-size-xs: 10px;
+  --font-size-2xs: 9px;
+  --font-size-3xs: 9px;
+
+  /** Theme-specific props **/
+
   /* Color */
-  --text-color: #222222;
-  --surface: #c0c0c0;
   --button-highlight: #ffffff;
   --button-face: #dfdfdf;
   --button-shadow: #808080;
   --window-frame: #0a0a0a;
-  --dialog-blue: #000080;
   --dialog-blue-light: #1084d0;
   --dialog-gray: #808080;
   --dialog-gray-light: #b5b5b5;
-  --link-blue: #0000ff;
 
-  /* Spacing */
-  --element-spacing: 8px;
-  --grouped-button-spacing: 4px;
-  --grouped-element-spacing: 6px;
-  --radio-width: 12px;
-  --checkbox-width: 13px;
-  --radio-label-spacing: 6px;
+  /* Sizes */
+  --checkbox-size: 13px;
   --range-track-height: 4px;
-  --range-spacing: 10px;
-
-  /* Some detailed computations for radio buttons and checkboxes */
-  --radio-total-width-precalc: var(--radio-width) + var(--radio-label-spacing);
-  --radio-total-width: calc(var(--radio-total-width-precalc));
-  --radio-left: calc(-1 * var(--radio-total-width-precalc));
-  --radio-dot-width: 4px;
-  --radio-dot-top: calc(var(--radio-width) / 2 - var(--radio-dot-width) / 2);
-  --radio-dot-left: calc(
-    -1 * (var(--radio-total-width-precalc)) + var(--radio-width) / 2 - var(
-        --radio-dot-width
-      ) / 2
-  );
-
-  --checkbox-total-width-precalc: var(--checkbox-width) +
-    var(--radio-label-spacing);
-  --checkbox-total-width: calc(var(--checkbox-total-width-precalc));
-  --checkbox-left: calc(-1 * var(--checkbox-total-width-precalc));
-  --checkmark-width: 7px;
-  --checkmark-left: 3px;
 
   /* Borders */
   --border-width: 1px;
-  --border-raised-outer: inset -1px -1px var(--window-frame),
+  --border-raised-outer:
+    inset -1px -1px var(--window-frame),
     inset 1px 1px var(--button-highlight);
-  --border-raised-inner: inset -2px -2px var(--button-shadow),
+  --border-raised-inner:
+    inset -2px -2px var(--button-shadow),
     inset 2px 2px var(--button-face);
-  --border-sunken-outer: inset -1px -1px var(--button-highlight),
+  --border-sunken-outer:
+    inset -1px -1px var(--button-highlight),
     inset 1px 1px var(--window-frame);
-  --border-sunken-inner: inset -2px -2px var(--button-face),
+  --border-sunken-inner:
+    inset -2px -2px var(--button-face),
     inset 2px 2px var(--button-shadow);
-  --default-button-border-raised-outer: inset -2px -2px var(--window-frame), inset 1px 1px var(--window-frame);
-  --default-button-border-raised-inner: inset 2px 2px var(--button-highlight), inset -3px -3px var(--button-shadow), inset 3px 3px var(--button-face);
-  --default-button-border-sunken-outer: inset 2px 2px var(--window-frame), inset -1px -1px var(--window-frame);
-  --default-button-border-sunken-inner: inset -2px -2px var(--button-highlight), inset 3px 3px var(--button-shadow), inset -3px -3px var(--button-face);
-
+  --default-button-border-raised-outer:
+    inset -2px -2px var(--window-frame),
+    inset 1px 1px var(--window-frame);
+  --default-button-border-raised-inner:
+    inset 2px 2px var(--button-highlight),
+    inset -3px -3px var(--button-shadow),
+    inset 3px 3px var(--button-face);
+  --default-button-border-sunken-outer:
+    inset 2px 2px var(--window-frame),
+    inset -1px -1px var(--window-frame);
+  --default-button-border-sunken-inner:
+    inset -2px -2px var(--button-highlight),
+    inset 3px 3px var(--button-shadow),
+    inset -3px -3px var(--button-face);
 
   /* Window borders flip button-face and button-highlight */
-  --border-window-outer: inset -1px -1px var(--window-frame),
+  --border-window-outer:
+    inset -1px -1px var(--window-frame),
     inset 1px 1px var(--button-face);
-  --border-window-inner: inset -2px -2px var(--button-shadow),
+  --border-window-inner:
+    inset -2px -2px var(--button-shadow),
     inset 2px 2px var(--button-highlight);
 
   /* Field borders (checkbox, input, etc) flip window-frame and button-shadow */
-  --border-field: inset -1px -1px var(--button-highlight),
+  --border-field:
+    inset -1px -1px var(--button-highlight),
     inset 1px 1px var(--button-shadow), inset -2px -2px var(--button-face),
     inset 2px 2px var(--window-frame);
-  --border-status-field: inset -1px -1px var(--button-face), inset 1px 1px var(--button-shadow);
+  --border-status-field:
+    inset -1px -1px var(--button-face),
+    inset 1px 1px var(--button-shadow);
 
   /* Tabs */
-  --border-tab: inset -1px 0 var(--window-frame),
+  --border-tab:
+    inset -1px 0 var(--window-frame),
     inset 1px 1px var(--button-face),
     inset -2px 0 var(--button-shadow),
     inset 2px 2px var(--button-highlight);
 
-  --space-lg: 12px;
-  --space: 8px;
-  --space-sm: 4px;
-
-  background: var(--surface);
-  color: #222;
-
   * {
     font-family: "Pixelated MS Sans Serif", Arial;
     -webkit-font-smoothing: none;
-    font-size: 11px;
   }
 
   /**
@@ -97,8 +115,8 @@
   .button {
     border: none;
     color: transparent;
-    text-shadow: 0 0 var(--text-color);
-    background: var(--surface);
+    text-shadow: 0 0 var(--text);
+    background: var(--surface-0);
     box-shadow: var(--border-raised-outer), var(--border-raised-inner);
     border-radius: 0;
 
@@ -115,7 +133,7 @@
     }
 
     &.is-destructive {
-      --text-color: red;
+      --text: red;
     }
 
     &.is-ghost {
@@ -127,7 +145,7 @@
     }
 
     &.is-sm {
-      font-size: 10px;
+      font-size: var(--font-size-xs);
       padding: 0 8px;
       min-width: 54px;
       min-height: 20px;
@@ -135,7 +153,7 @@
 
     &:not(:disabled):active {
       box-shadow: var(--border-sunken-outer), var(--border-sunken-inner);
-      text-shadow: 1px 1px var(--text-color);
+      text-shadow: 1px 1px var(--text);
     }
 
     &:focus {
@@ -175,8 +193,8 @@
       cursor: pointer;
       border: none;
       color: transparent;
-      text-shadow: 0 0 var(--text-color);
-      background: var(--surface);
+      text-shadow: 0 0 var(--text);
+      background: var(--surface-0);
       box-shadow: var(--border-raised-outer), var(--border-raised-inner);
       border-radius: 0;
 
@@ -186,7 +204,7 @@
 
       &.is-active {
         box-shadow: var(--border-sunken-outer), var(--border-sunken-inner);
-        text-shadow: 1px 1px var(--text-color);
+        text-shadow: 1px 1px var(--text);
         background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg width='2' height='2' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath fill-rule='evenodd' clip-rule='evenodd' d='M1 0H0v1h1v1h1V1H1V0z' fill='silver'/%3E%3Cpath fill-rule='evenodd' clip-rule='evenodd' d='M2 0H1v1H0v1h1V1h1V0z' fill='%23fff'/%3E%3C/svg%3E");
       }
     }
@@ -198,7 +216,7 @@
 
   .input {
     display: flex;
-    background-color: #fff;
+    background: var(--surface-2);
     box-shadow: inset -1px -1px #fff, inset 1px 1px grey, inset -2px -2px #dfdfdf, inset 2px 2px #0a0a0a;
     padding: 2px;
 
@@ -223,7 +241,7 @@
     }
 
     &.is-disabled {
-      background-color: var(--surface);
+      background-color: var(--surface-0);
     }
 
     .input__select {
@@ -234,7 +252,7 @@
       text-align: left;
 
       &:focus {
-        background-color: var(--dialog-blue);
+        background-color: var(--accent);
         .input__value {
           color: #fff;
         }
@@ -242,7 +260,7 @@
     }
 
     ::placeholder, .input__placeholder {
-      color: silver;
+      color: var(--text-secondary);
     }
 
 
@@ -267,8 +285,8 @@
 
     .checkbox__box {
       position: relative;
-      width: var(--checkbox-width);
-      height: var(--checkbox-width);
+      width: var(--checkbox-size);
+      height: var(--checkbox-size);
       background: var(--button-highlight);
       box-shadow: var(--border-field);
     }
@@ -319,7 +337,7 @@
     }
 
     &.is-disabled {
-      color: grey;
+      color: var(--text-muted);
       text-shadow: 1px 1px 0 #fff;
       cursor: default;
 
@@ -361,14 +379,14 @@
       width: 10px;
       height: 16px;
       border-radius: 0;
-      background: var(--surface);
+      background: var(--surface-0);
       box-shadow: var(--border-raised-outer), var(--border-raised-inner);
       transition: none;
     }
 
     &.is-checked {
       &::before {
-        background: var(--dialog-blue);
+        background: var(--accent);
       }
       .switch__thumb {
         left: 14px;
@@ -444,24 +462,36 @@
   **/
 
   .progress {
-    flex: 1;
-    height: 32px;
-    box-shadow: var(--border-sunken-inner);
-    padding: 4px 4px;
+    position: relative;
 
     .progress__bar {
-      background-color: var(--dialog-blue);
+      height: 32px;
+      box-shadow: var(--border-sunken-inner);
+      padding: 4px 4px;
+
+      &::before {
+        background-color: var(--accent);
+      }
     }
 
-    &.is-segmented .progress__bar {
+    &.is-segmented .progress__bar::before {
       background-color: transparent;
       background-image: linear-gradient(
         90deg,
-        var(--dialog-blue) 0 16px,
+        var(--accent) 0 16px,
         transparent 0 2px
       );
       background-repeat: repeat;
       background-size: 18px 100%;
+    }
+
+    .progress__value {
+      position: absolute;
+      left: 0;
+      right: 0;
+      text-align: center;
+      mix-blend-mode: difference;
+      color: #fff;
     }
   }
 
@@ -471,6 +501,11 @@
 
   .field {
     gap: 6px;
+
+    .field__label {
+      width: 100px;
+      flex-shrink: 0;
+    }
   }
 
   /**
@@ -482,7 +517,7 @@
     border: 2px groove;
     border-image: url("data:image/svg+xml;charset=utf-8,%3Csvg width='5' height='5' fill='gray' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath fill-rule='evenodd' clip-rule='evenodd' d='M0 0h5v5H0V2h2v1h1V2H0' fill='%23fff'/%3E%3Cpath fill-rule='evenodd' clip-rule='evenodd' d='M0 0h4v4H0V1h1v2h2V1H0'/%3E%3C/svg%3E") 2;
     margin: 0;
-    padding: var(--space-lg);
+    padding: var(--space-xl);
     display: flex;
     flex-direction: column;
     gap: var(--space);
@@ -512,13 +547,13 @@
       position-try-fallbacks: flip-block;
       width: anchor-size(width);
 
-      background-color: #fff;
+      background: var(--surface-2);
       border: 1px solid #000;
       z-index: 50;
 
       .list-item:hover {
         color: #fff;
-        background: var(--dialog-blue);
+        background: var(--accent);
       }
     }
   }
@@ -567,7 +602,7 @@
     position: relative;
     text-align: left;
     white-space: nowrap;
-    background-color: #fff;
+    background: var(--surface-2);
 
     &.is-interactive {
       cursor: pointer;
@@ -593,21 +628,21 @@
         top: 0;
         height: 17px;
         box-shadow: var(--border-raised-outer), var(--border-raised-inner);
-        background: var(--surface);
+        background: var(--surface-0);
         box-sizing: border-box;
         font-weight: normal;
-        padding: 0 var(--grouped-element-spacing);
+        padding: 0 var(--space-sm);
       }
     }
 
     > tbody > tr {
       &.is-active {
         color: #fff;
-        background-color: var(--dialog-blue);
+        background-color: var(--accent);
       }
 
       > * {
-        padding: 0 var(--grouped-element-spacing);
+        padding: 0 var(--space-sm);
         height: 14px;
       }
     }
@@ -643,7 +678,7 @@
       &.is-active {
         padding-bottom: 8px;
         margin-top: -2px;
-        background-color: var(--surface);
+        background-color: var(--surface-0);
         position: relative;
         z-index: 8;
         margin-left: -3px;
@@ -657,7 +692,7 @@
       position: relative;
       z-index: 2;
       box-shadow: var(--border-window-outer), var(--border-window-inner);
-      background: var(--surface);
+      background: var(--surface-0);
       padding: 11px;
       gap: var(--space);
     }
@@ -670,7 +705,7 @@
   .dialog {
     border: none;
     box-shadow: var(--border-window-outer), var(--border-window-inner);
-    background: var(--surface);
+    background: var(--surface-0);
     padding: 3px;
     margin: auto;
 

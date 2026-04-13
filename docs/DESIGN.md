@@ -91,6 +91,26 @@ Structure:
 
 Nesting child components (like `.list-section__header` in `.list-section`) is not strictly required, but is nice for organisation and being able to collapse the whole component section.
 
+### Properties
+
+**Surfaces**
+
+`--surface-0`: Main background.
+`--surface-1`: Background for cards/dialogs.
+`--surface-2`: "Work area" background. Usually reserved just for inputs, but can be used as a container in some cases (see ["Mail" example](https://heroui.com/themes?template=mail) in HeroUI).
+
+`--surface-2` should have strongest contrast with text. This means white in light schemes and almost-black in dark. `--surface-0` and `--surface-1` both should have lower contrast than `--surface-2`, but order between them is not explicitly specified. Currently, both in light and dark schemes `--surface-0` is slightly darker one, and `--surface-1` is slightly lighter.
+
+It should be possible to place controls/text on any of three types of surfaces (best place for controls: --surface-1, best place for non-UI text: --surface-2). Inputs on --surface-2 are possible, but should be generally avoided (becaused they both use --surface-2 background).
+
+Other colors should be defined for various kinds of elements:
+
+* Buttons (default / hover / active / disabled states) - should be raised by default; sunken in active state
+* Controls - should be sunken
+* Inputs - should be sunken, use --surface-2 for background
+* List items (default / hover / active / disabled states)
+* Table rows (alternating colors; default / hover / active / disabled states)
+
 ## Icon Libraries
 
 ## (Potential) Components

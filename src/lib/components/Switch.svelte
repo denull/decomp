@@ -22,7 +22,7 @@
 {#if label === null}
   {@render body()}
 {:else}
-  <div class="field is-row">
+  <div class="field is-inline">
     <div class="field__label">
       {#if typeof label === 'function'}{@render label()}{:else}{label}{/if}
     </div>

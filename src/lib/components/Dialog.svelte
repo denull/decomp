@@ -1,4 +1,6 @@
 <script>
+    import Button from './Button.svelte';
+
   let {
     /** @type {null | 'alert'} */
     variant = null,
@@ -46,6 +48,9 @@
   <div class="dialog__header">
     <div class="dialog__title">{title}</div>
     {@render header?.()}
+    <div class="dialog__header-buttons">
+      <Button variant="ghost" size="sm" round onclick={hide}>×</Button>
+    </div>
   </div>
   <div class="dialog__body">
     {@render children?.()}

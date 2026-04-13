@@ -5,6 +5,8 @@
     /** @type {'sm' | 'md' | 'lg'} */
     size = 'md',
     /** @type {boolean} */
+    round = false,
+    /** @type {boolean} */
     disabled = false,
     /** @type {boolean} */
     grouped = false,
@@ -22,6 +24,7 @@
     'button', 
     variant && `is-${variant}`,
     size != 'md' && `is-${size}`,
+    round && `is-round`,
     grouped && `is-grouped`,
   ]}
   {disabled}
@@ -43,10 +46,11 @@
       cursor: pointer;
       border: none;
       align-self: start;
-    }
-    .button:disabled {
-      cursor: default;
-      pointer-events: none;
+
+      &:disabled {
+        cursor: default;
+        pointer-events: none;
+      }
     }
     .button__back {
       position: absolute;
