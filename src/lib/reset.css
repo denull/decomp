@@ -58,8 +58,21 @@
 }
 
 body {
+  position: relative;
   min-height: 100vh;
   container-type: size;
+}
+
+body::before {
+  /** Ensures overscroll areas on iOS use the same background **/
+  content: '';
+  position: fixed;
+  top: -9999px;
+  left: -9999px;
+  right: -9999px;
+  bottom: -9999px;
+  z-index: -1;
+  background: var(--surface-0);
 }
 
 input, button, textarea, select {

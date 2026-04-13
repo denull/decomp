@@ -27,42 +27,53 @@
   }));
 </script>
 
-<table
+<div
   class={[
     'table',
     interactive && 'is-interactive',
   ]}
 >
-  <thead>
-    <tr>
-      {#each columns as col, j}
-        <th onclick={() => sortedBy = 
-          sortedBy.length == 1 && sortedBy[0].index == j ?
-          [{ index: j, order: -sortedBy[0].order }] :
-          [{ index: j, order: 1 }]}>{col.title}</th>
+  <table>
+    <thead>
+      <tr>
+        {#each columns as col, j}
+          <th onclick={() => sortedBy = 
+            sortedBy.length == 1 && sortedBy[0].index == j ?
+            [{ index: j, order: -sortedBy[0].order }] :
+            [{ index: j, order: 1 }]}>{col.title}</th>
+        {/each}
+      </tr>
+    </thead>
+    <tbody>
+      {#each sortedRows as row, i}
+      <tr class={[activeRowIndex === i && 'is-active']} onclick={() => activeRowIndex = i}>
+        {#each columns as col, j}
+          {#if col.snippet}
+          {@render rest[col.snippet](row, col, i, j, rows)}
+          {:else}
+          <td>{formatCell(row, col)}</td>
+          {/if}
+        {/each}
+      </tr>
       {/each}
-    </tr>
-  </thead>
-  <tbody>
-    {#each sortedRows as row, i}
-    <tr class={[activeRowIndex === i && 'is-active']} onclick={() => activeRowIndex = i}>
-      {#each columns as col, j}
-        {#if col.snippet}
-        {@render rest[col.snippet](row, col, i, j, rows)}
-        {:else}
-        <td>{formatCell(row, col)}</td>
-        {/if}
-      {/each}
-    </tr>
-    {/each}
-  </tbody>
-</table>
+    </tbody>
+  </table>
+</div>
 
 <style>
   :global {
     .table {
-      > thead > tr > th {
-        cursor: pointer;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      overflow-x: auto;
+
+      table {
+        table-layout: fixed;
+      
+        > thead > tr > th {
+          cursor: pointer;
+        }
       }
     }
   }

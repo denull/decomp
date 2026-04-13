@@ -52,6 +52,7 @@
       .tabs__tab {
         cursor: pointer;
         user-select: none;
+        white-space: nowrap;
       }
       .tabs__body {
         display: flex;

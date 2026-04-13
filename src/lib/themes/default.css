@@ -641,11 +641,16 @@
     gap: 6px;
 
     .field__label {
-      width: 120px;
-      flex-shrink: 0;
       font-size: var(--font-size-sm);
       font-weight: 500;
       color: var(--text-secondary);
+    }
+
+    @container (width > 300px) {
+      &.is-inline .field__label {
+        width: 120px;
+        flex-shrink: 0;
+      }
     }
   }
 
@@ -776,7 +781,7 @@
   .table {
     font-size: var(--font-size-sm);
 
-    > thead > tr > * {
+    > table > thead > tr > * {
       text-align: left;
       padding: 10px 14px;
       font-weight: 600;
@@ -791,7 +796,7 @@
       border-bottom: 1px solid var(--divider);
     }
 
-    > tbody > tr {
+    > table > tbody > tr {
       &:nth-child(even) > * {
         background: var(--table-stripe);
       }
@@ -826,6 +831,7 @@
       display: flex;
       border-bottom: 1px solid var(--divider);
       margin-bottom: 16px;
+      overflow-x: auto;
 
       &::after {
         content: '';
@@ -853,8 +859,6 @@
 
       &.is-active {
         color: var(--accent);
-
-        
       }
     }
 
