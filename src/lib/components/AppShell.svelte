@@ -1,15 +1,24 @@
 <script>
   import '../reset.css';
-  import '../themes/default.css';
-  import '../themes/apple.css';
-  import '../themes/win98.css';
-  import '../themes/aqua.css';
+  const themes = import.meta.glob('../themes/*.css', { query: '?inline', eager: false });
 
   let {
     theme = 'default',
     scheme = null,
     children = null,
   } = $props();
+
+  let themeCSS = $state('');
+
+  $effect(() => {
+    const key = `../themes/${theme}.css`;
+    const loader = themes[key];
+    if (!loader) return;
+
+    loader().then((mod) => {
+      themeCSS = /** @type {{ default: string }} */ (mod).default;
+    });
+  });
 
   $effect(() => {
     document.documentElement.dataset.theme = theme;
@@ -20,6 +29,10 @@
     }
   });
 </script>
+
+<svelte:head>
+  {@html `<style>${themeCSS}</style>`}
+</svelte:head>
 
 <div class="app-shell">
   {@render children?.()}
