@@ -2,6 +2,7 @@ export { default as AppShell } from './components/AppShell.svelte';
 
 export { default as Icon } from './components/Icon.svelte';
 
+export { default as Field } from './components/Field.svelte';
 export { default as Button } from './components/Button.svelte';
 export { default as Input } from './components/Input.svelte';
 export { default as Checkbox } from './components/Checkbox.svelte';

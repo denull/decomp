@@ -1,6 +1,7 @@
 <script>
-    import { itemTitle, itemValue } from '../utils.js';
-    import List from './List.svelte';
+  import { itemTitle, itemValue } from '../utils.js';
+  import Field from './Field.svelte';
+  import List from './List.svelte';
 
   let {
     /** @type {null | 'multiline' | 'number' | 'phone' | 'email' | 'select'} */
@@ -43,7 +44,7 @@
   });
 </script>
 
-{#snippet body()}
+<Field {label} {inline} inputId={`input-${uid}`}>
   <div
     bind:this={el}
     class={[
@@ -110,18 +111,7 @@
       {/if}
     {/if}
   </div>
-{/snippet}
-
-{#if label === null}
-  {@render body()}
-{:else}
-  <div class={['field', inline && `is-inline`]}>
-    <label for={uid} class="field__label">
-      {#if typeof label === 'function'}{@render label()}{:else}{label}{/if}
-    </label>
-    {@render body()}
-  </div>
-{/if}
+</Field>
 
 <style>
   .input {

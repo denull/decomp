@@ -1,4 +1,6 @@
 <script>
+    import Field from './Field.svelte';
+
   let {
     /** @type {null | 'primary' | 'destructive' | 'ghost'} */
     variant = null,
@@ -19,7 +21,7 @@
   } = $props();
 </script>
 
-{#snippet body()}
+<Field {label} {inline}>
   <div
     class={[
       'progress', 
@@ -40,18 +42,7 @@
     </div>
     {/if}
   </div>
-{/snippet}
-
-{#if label === null}
-  {@render body()}
-{:else}
-  <div class={['field', inline && `is-inline`]}>
-    <div class="field__label">
-      {#if typeof label === 'function'}{@render label()}{:else}{label}{/if}
-    </div>
-    {@render body()}
-  </div>
-{/if}
+</Field>
 
 <style>
   :global {

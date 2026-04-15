@@ -1,4 +1,6 @@
 <script>
+    import Field from './Field.svelte';
+
   let {
     /** @type {boolean} */
     checked = $bindable(false),
@@ -7,7 +9,7 @@
   } = $props();
 </script>
 
-{#snippet body()}
+<Field {label} inline>
   <div
     class={[
       'switch', 
@@ -20,18 +22,7 @@
   >
     <div class="switch__thumb"></div>
   </div>
-{/snippet}
-
-{#if label === null}
-  {@render body()}
-{:else}
-  <div class="field is-inline">
-    <div class="field__label">
-      {#if typeof label === 'function'}{@render label()}{:else}{label}{/if}
-    </div>
-    {@render body()}
-  </div>
-{/if}
+</Field>
 
 <style>
   :global {

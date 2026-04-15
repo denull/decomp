@@ -1,4 +1,6 @@
 <script>
+    import Field from './Field.svelte';
+
   let {
     /** @type {null | 'vertical'} */
     variant = null,
@@ -19,7 +21,7 @@
   } = $props();
 </script>
 
-{#snippet body()}
+<Field {label} {inline}>
   <div
     class={[
       'slider', 
@@ -32,18 +34,7 @@
     <input type="range" {min} {max} bind:value={value}/>
     {@render children?.()}
   </div>
-{/snippet}
-
-{#if label === null}
-  {@render body()}
-{:else}
-  <div class={['field', inline && `is-inline`]}>
-    <label class="field__label">
-      {#if typeof label === 'function'}{@render label()}{:else}{label}{/if}
-    </label>
-    {@render body()}
-  </div>
-{/if}
+</Field>
 
 <style>
   :global {
