@@ -1,11 +1,13 @@
 <script>
+    import Icon from './Icon.svelte';
+
   let {
     /** @type {null | 'primary' | 'destructive' | 'ghost'} */
     variant = null,
     /** @type {'sm' | 'md' | 'lg'} */
     size = 'md',
-    /** @type {boolean} */
-    round = false,
+    /** @type {String} */
+    icon = null,
     /** @type {boolean} */
     disabled = false,
     /** @type {boolean} */
@@ -24,7 +26,7 @@
     'button', 
     variant && `is-${variant}`,
     size != 'md' && `is-${size}`,
-    round && `is-round`,
+    icon && !children && `is-icon`,
     grouped && `is-grouped`,
   ]}
   {disabled}
@@ -32,6 +34,9 @@
   {onclick}
 >
   <div class="button__back"></div>
+  {#if icon}
+    <Icon {icon}/>
+  {/if}
   {@render children?.()}
   {#if dropdown}
     <svg width="10" height="6" viewBox="0 0 10 6" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M1 1l4 4 4-4"/></svg>
@@ -50,6 +55,13 @@
       &:disabled {
         cursor: default;
         pointer-events: none;
+      }
+
+      &.is-icon {
+        display: inline-flex;
+        padding: 0;
+        align-items: center;
+        justify-items: center;
       }
     }
     .button__back {

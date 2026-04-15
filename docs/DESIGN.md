@@ -1,3 +1,15 @@
+## TLDR: Main Principles
+
+* No Tailwind. Tailwind is cancer, and nobody should be using it.
+* Flexbox and Grid FTW. Most (if not all) containers should have display: (inline-)flex or (inline-)grid.
+* Avoid margins at all costs. Use "gap" and "padding" for spacing.
+* Not everything needs to be a component. Some elements can be simply defined as classes (or even tags - i.e. default typography) to be used in userland markup.
+* Three-stage customization:
+  1. Define sensible default state + useful custom properties in `reset.css` (+ each component can add some defaults in its component file).
+  2. Theme defines values for well-known custom properties (such as `--surface-0`, `--space`, etc), defines its own custom props, styles each component.
+  3. User can use either props from reset.css or well-known props (which should be available in any theme), or apply any of well-known classes.
+  ("well-known" here means "defined in each of available themes")
+
 ## Existing UI Libraries
 
 - [98.css](https://jdan.github.io/98.css) - not really a UI library per se, just a css file
@@ -70,6 +82,11 @@ Some analysis by Perplexity and OpenAI:
 - [Claude report on components](https://claude.ai/chat/ff10bd1d-e128-47c9-8454-9aa3e036ae3c) - also [claude-comp-report.md]
 - [Claude suggested architecture](https://claude.ai/chat/ff10bd1d-e128-47c9-8454-9aa3e036ae3c) - also [claude-architecture.md]
 
+Some other notable projects:
+
+- [Utopia](https://utopia.fyi/) - responsive font sizes and spaces
+- [cu.css](https://cu.harrycresswell.com/) - based on Utopia
+
 ## Philosophy
 
 When deciding whether to make separate components or merge into one (as variants): more components = more code, more imports, need to style all comps for each theme (one comp with variants -> simply fallbacks to default). Each component code contains mostly logic, not visual appearance (it's defined by theme) - if two components behave (almost) identically and have very similar semantics, they probably should be merged.
@@ -113,6 +130,16 @@ Other colors should be defined for various kinds of elements:
 
 ## Icon Libraries
 
+## Icons
+
+Icons are represented with <Icon icon="..."/> component, and can have different types:
+
+* **SVG-path** icons. Those should be strings starting with "M...", which will become a "d" attribute of a single "path" element. Default view box is "0 0 24 24", but can be adjusted with viewBox prop. Width/height attributes will be extracted from last two values of view box. By default icon is stroked; if "filled" prop is set, it will be filled instead. Stroke width is 2px by default, but can be adjusted with strokeWidth prop.
+* **SVG** icons. Any <svg> content (it's recommended to convert them to SVG-path icons for unification though).
+* **Pure CSS** icons. This is a special case: they should start with "css:" (for example, "css:close"). They will have a single <i></i> child and nothing else. This gives ability to fully define them in theme files.
+* **Image** icons. Any valid URL (starting with "http:" or "https:"). Not recommended.
+* Any other arbitrary HTML content. Not recommended.
+
 ## (Potential) Components
 
 - Button
@@ -127,6 +154,8 @@ Special case: for now, if Input has a "label", it produces different markup: <di
   - ListItem
   - ListSection
 TODO: Currently ListItem with accessory="chevron" injects a SVG directly into the DOM, making it harder to control with theme CSS. Need to consider moving it to <theme>.css instead.
+
+Lists include basic lists grouped into sections (think UITableView used everywhere in iOS interfaces), menus (including lists of dropdown options), and navs (i.e. sidebars - this probably need support for collapsible sections). 
 
 - Table
 *Note*: Currently, `Table` is using a different approach from `List`: instead of using some `TableRow` components, it simply accepts all data in `rows` prop, and then uses snippets for custom rendering. Both approaches are valid, we just need to keep in mind them when designing other components (like Menus).

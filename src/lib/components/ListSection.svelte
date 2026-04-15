@@ -1,5 +1,5 @@
 <script>
-    import ListItem from './ListItem.svelte';
+  import ListItem from './ListItem.svelte';
 
   let {
     /** @type {null | 'primary' | 'destructive'} */
@@ -9,14 +9,16 @@
     /** @type {String} */
     footer = null,
     /** @type {boolean} */
-    disabled = false,
+    collapsible = false,
+    /** @type {boolean} */
+    collapsed = false,
     /** @type {import('svelte').Snippet | undefined} */
     children = null,
     /** @type {Array | null} */
     items = null,
   } = $props();
 
-  const headerId = `label-${Math.floor(Math.random() * 2176782336).toString(36)}`;
+  const uid = $props.id();
 </script>
 
 <!-- Using role="listitem" and role="list" instead of (no role) and role="group" (which would be more semantically correct), because apparently ARIA 1.2 no longer allows "group"s directly inside "list"s. -->
@@ -24,25 +26,25 @@
   class={[
     'list-section', 
     variant && `is-${variant}`,
+    collapsible && `is-collapsible`,
+    collapsed && `is-collapsed`,
   ]}
   role="listitem"
 >
   {#if header}
-  <div class="list-section__header" id={headerId}>{header}</div>
+  <div class="list-section__header" id={`section-header-${uid}`}>{header}</div>
   {/if}
   <div
     class="list-section__body"
     role="list"
-    aria-labelledby={header ? headerId : undefined}
+    aria-labelledby={header ? `section-header-${uid}` : undefined}
   >
     {@render children?.()}
     {#each items as item}
       {#if typeof item == 'string'}
       <ListItem>{item}</ListItem>
-      {:else if item.type != 'section'}
-      <ListItem {...item}/>
       {:else}
-      <ListSection header={item.header} footer={item.footer} items={item.children}/>
+      <ListItem {...item}/>
       {/if}
     {/each}
   </div>

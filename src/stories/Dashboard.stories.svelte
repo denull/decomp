@@ -62,7 +62,7 @@
       </div>
       <hr class="separator">
       <div class="card__title">Toggle Group</div>
-      <ToggleGroup items={['Day', 'Week', 'Month']}/>
+      <ToggleGroup options={['Day', 'Week', 'Month']} value="Day"/>
     </section>
 
     <!-- ---- Form Controls ---- -->
@@ -104,12 +104,12 @@
     <!-- ---- Tabs ---- -->
     <section class="card tabs">
       <div class="card__title">Tabs</div>
-      <Tabs items={[
-        { label: 'Overview', snippet: 'overview' },
-        { label: 'Activity', snippet: 'activity' },
-        { label: 'Settings', snippet: 'settings' },
-        { label: 'Inline controls', snippet: 'inline' },
-      ]}>
+      <Tabs tabs={[
+        { title: 'Overview', value: 'overview', snippet: 'overview' },
+        { title: 'Activity', value: 'activity', snippet: 'activity' },
+        { title: 'Settings', value: 'settings', snippet: 'settings' },
+        { title: 'Inline controls', value: 'inline', snippet: 'inline' },
+      ]} value="overview">
         {#snippet overview()}
           <p>The project is currently on track. Sprint velocity has increased by 12% compared to last quarter, with 3 features shipped ahead of schedule. Team capacity remains stable at 85%.</p>
         {/snippet}
@@ -220,7 +220,7 @@
       <div class="row">
         <Button onclick={() => dialog.show()}>Open Dialog</Button>
 
-        <div class="popover-anchor">
+        <!--div class="popover-anchor">
           <Button>
             Show Popover
             {#snippet popover()}
@@ -228,7 +228,7 @@
               This is a contextual popover with additional information. It appears relative to the trigger element and closes on outside click.
             {/snippet}
           </Button>
-        </div>
+        </div-->
 
         <div class="dropdown">
           <Button dropdown={[

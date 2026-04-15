@@ -1,4 +1,5 @@
 <script>
+    import { itemTitle, itemValue } from '$lib/utils.js';
     import List from './List.svelte';
 
   let {
@@ -10,23 +11,36 @@
     disabled = false,
     /** @type {import('svelte').Snippet | null} */
     children = null,
-    /** @type {String} */
+    /** @type {any} */
     value = $bindable(''),
+    /** @type {String} */
+    text = $bindable(''),
     /** @type {Array | null} */
     options = null,
-    /** @type {number | null} */
-    activeOptionIndex = $bindable(null),
     /** @type {String} */
     placeholder = '',
     /** @type {String | import('svelte').Snippet | null} */
     label = null,
     /** @type {boolean} */
     inline = false,
+    onselect = null,
   } = $props();
 
   const uid = $props.id();
   let el = $state(null);
   let open = $state(false);
+
+  const selectedOption = $derived(
+    variant === 'select' &&
+    value !== null &&
+    options &&
+    options.find(option => value === itemValue(option)) || null);
+
+  $effect(() => {
+    if (selectedOption) {
+      text = itemTitle(selectedOption);
+    }
+  });
 </script>
 
 {#snippet body()}
@@ -55,13 +69,9 @@
           open = false;
         }
       }}>
-        {#if activeOptionIndex !== null && options[activeOptionIndex]}
+        {#if value !== null && selectedOption !== null}
           <div class="input__value">
-            {#if typeof options[activeOptionIndex] == 'string'}
-            {options[activeOptionIndex]}
-            {:else}
-            {options[activeOptionIndex].title}
-            {/if}
+            {itemTitle(selectedOption)}
           </div>
         {:else if placeholder}
           <div class="input__placeholder">{placeholder}</div>
@@ -87,8 +97,13 @@
         variant="menu"
         items={options}
         onselect={(item, i) => {
-          console.log('Selecting',item,i)
-          activeOptionIndex = i;
+          onselect?.(item, i);
+          if (typeof item === 'string') {
+            value = item;
+          } else
+          if ('value' in item) {
+            value = item.value;
+          }
           open = false;
         }}
       />
@@ -111,7 +126,7 @@
 <style>
   .input {
     display: flex;
-    flex: 1;
+    width: 100%;
 
     input, textarea {
       flex: 1;

@@ -6,6 +6,9 @@
     theme = 'default',
     scheme = null,
     children = null,
+    header = null,
+    footer = null,
+    sidebar = null,
   } = $props();
 
   let themeCSS = $state('');
@@ -35,16 +38,57 @@
 </svelte:head>
 
 <div class="app-shell">
-  {@render children?.()}
+  {#if header}
+    <header class="header">
+      {@render header()}
+    </header>
+  {/if}
+  {#if sidebar}
+    <nav class="sidebar">
+      {@render sidebar()}
+    </nav>
+  {/if}
+  <main class="main">
+    {@render children?.()}
+  </main>
+  {#if footer}
+    <div class="footer">
+      {@render footer()}
+    </div>
+  {/if}
 </div>
 
 <style>
   :global {
-    [data-scheme="light"] {
-      color-scheme: light;
+    .app-shell {
+      display: grid;
+      grid-template-areas:
+        "header header"
+        "sidebar main"
+        "footer footer";
+      grid-template-columns: auto 1fr;
+      grid-template-rows: auto 1fr auto;
+      min-height: 100vh;
     }
-    [data-scheme="dark"] {
-      color-scheme: dark;
+
+    .app-shell .header {
+      grid-area: header;
+    }
+
+    .app-shell .sidebar {
+      grid-area: sidebar;
+      display: flex;
+      flex-direction: column;
+      gap: var(--space);
+      padding: var(--space);
+    }
+
+    .app-shell .main {
+      grid-area: main;
+    }
+
+    .app-shell .footer {
+      grid-area: footer;
     }
   }
 </style>

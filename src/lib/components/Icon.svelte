@@ -27,14 +27,16 @@
     'icon',
     size != 'md' && `is-${size}`,
     cssIcon && `is-css icon-${cssIcon}`,
-  ]}>
+  ]}
+  style={`--_stroke: ${strokeWidth}px`}
+>
   {#if cssIcon}
   <i></i>
   {:else if pathIcon}
   <svg
     xmlns="http://www.w3.org/2000/svg"
-    width="24"
-    height="24"
+    width={viewBox.split(' ')[2]}
+    height={viewBox.split(' ')[3]}
     {viewBox}
     fill={filled ? 'currentColor' : 'none'}
     stroke={!filled && 'currentColor'}
@@ -53,13 +55,21 @@
 <style>
   :global {
     .icon {
+      --_size: 24px;
       display: inline-flex;
       align-items: center;
+      justify-content: center;
       position: relative;
+      width: var(--_size);
+      height: var(--_size);
 
       > i {
         /** This is an utility markup for CSS-only icons, hidden by default **/
         display: none;
+      }
+
+      &::before, &::after, > i, > i::before, > i::after {
+        position: absolute;
       }
     }
   }

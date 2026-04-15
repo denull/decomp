@@ -10,6 +10,8 @@
   --accent: #38a3f0;
   --danger: #e83030;
 
+  --accent-text: #fff;
+
   --radius-lg: 10px;
   --radius: 6px;
   --radius-sm: 4px;
@@ -59,6 +61,28 @@
 
 * {
   font-family: "Lucida Grande", Geneva, Verdana, sans-serif;
+}
+
+/**
+MARK: Icon
+**/
+.icon {
+
+  &.icon-close {
+    &::before, &::after {
+      content: '';
+      width: calc(var(--_size) * 0.5);
+      height: var(--_stroke);
+      background: currentColor;
+      border-radius: 9999px;
+    }
+    &::before {
+      transform: rotate(45deg);
+    }
+    &::after {
+      transform: rotate(-45deg);
+    }
+  }
 }
 
 /**
@@ -166,7 +190,7 @@ MARK: Button
     padding: 8px 28px 9px;
   }
 
-  &.is-round {
+  &.is-icon {
     aspect-ratio: 1;
     height: 30px;
     border-radius: 9999px;
@@ -215,7 +239,7 @@ MARK: ToggleGroup
       background: linear-gradient(180deg, #fff 0%, #e8e8e8 100%);
     }
 
-    &.is-active {
+    &.is-selected {
       background: linear-gradient(180deg,
         oklch(from var(--accent) calc(l + 0.14) c h) 0%,
         oklch(from var(--accent) calc(l + 0.02) c h) 49%,
@@ -697,7 +721,6 @@ MARK: List
   .list-item__title {
     font-size: var(--font-size);
     font-weight: 500;
-    color: var(--text);
   }
 
   .list-item__description {
@@ -751,7 +774,7 @@ MARK: Table
       background: oklch(from var(--accent) l c h / 0.1);
     }
 
-    &.is-active > * {
+    &.is-selected > * {
       background: var(--accent);
       color: #fff;
     }
@@ -793,12 +816,12 @@ MARK: Tabs
     border-radius: 6px 6px 0 0;
     margin-bottom: -1px;
 
-    &:hover:not(.is-active) {
+    &:hover:not(.is-selected) {
       color: #333;
       background: rgba(0,0,0,0.03);
     }
 
-    &.is-active {
+    &.is-selected {
       color: #000;
       background: #fff;
       border-color: rgba(0,0,0,0.15);

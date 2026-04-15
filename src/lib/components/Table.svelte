@@ -3,7 +3,8 @@
     interactive = false,
     columns = [],
     rows = [],
-    activeRowIndex = $bindable(null),
+    rowKey = 'id',
+    selected = $bindable(null),
     sortedBy = $bindable([]),
     ...rest
   } = $props();
@@ -46,7 +47,7 @@
     </thead>
     <tbody>
       {#each sortedRows as row, i}
-      <tr class={[activeRowIndex === i && 'is-active']} onclick={() => activeRowIndex = i}>
+      <tr class={[selected === row[rowKey] && 'is-selected']} onclick={() => selected = row[rowKey]}>
         {#each columns as col, j}
           {#if col.snippet}
           {@render rest[col.snippet](row, col, i, j, rows)}

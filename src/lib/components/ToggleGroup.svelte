@@ -1,11 +1,13 @@
 <script>
+  import { itemTitle, itemValue } from '$lib/utils.js';
+
   let {
     /** @type {'sm' | 'md' | 'lg'} */
     size = 'md',
     /** @type {Array} */
-    items = [],
+    options = [],
     /** @type {any} */
-    value = null,
+    value = $bindable(null),
   } = $props();
 
   const uid = $props.id();
@@ -16,17 +18,17 @@
     'toggle-group',
     size != 'md' && `is-${size}`,
   ]}
-  style={`--_active-toggle: --_active-toggle-${uid}`}
+  style={`--_selected-toggle: --_selected-toggle-${uid}`}
 >
-  {#each items as item}
+  {#each options as option}
     <div
-      class={['toggle-group__item', value === item && 'is-active']}
+      class={['toggle-group__item', value === itemValue(option) && 'is-selected']}
       style={
-        value === item ? `anchor-name: --_active-toggle-${uid}` : ''
+        value === itemValue(option) ? `anchor-name: --_selected-toggle-${uid}` : ''
       }
-      aria-selected={value === item}
-      onclick={() => value = item}
-    >{item}</div>
+      aria-selected={value === itemValue(option)}
+      onclick={() => value = itemValue(option)}
+    >{itemTitle(option)}</div>
   {/each}
 </div>
 

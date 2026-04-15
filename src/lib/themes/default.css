@@ -7,6 +7,8 @@
 
   --accent: oklch(0.61 0.11 247);
   --danger: oklch(0.55 0.20 25);
+
+  --accent-text: #fff;
   
   --radius-lg: 12px;
   --radius: 8px;
@@ -120,6 +122,28 @@
 }
 
 /**
+MARK: Icon
+**/
+.icon {
+
+  &.icon-close {
+    &::before, &::after {
+      content: '';
+      width: calc(var(--_size) * 0.5);
+      height: var(--_stroke);
+      background: currentColor;
+      border-radius: 9999px;
+    }
+    &::before {
+      transform: rotate(45deg);
+    }
+    &::after {
+      transform: rotate(-45deg);
+    }
+  }
+}
+
+/**
 MARK: Button
 **/
 
@@ -154,7 +178,7 @@ MARK: Button
     transition: box-shadow 0.15s ease;
   }
 
-  &.is-round {
+  &.is-icon {
     aspect-ratio: 1;
     height: 36px;
 
@@ -244,24 +268,29 @@ MARK: Button
 
   &.is-sm {
     font-size: var(--font-size-xs);
-    padding: 5px 12px;
 
-    &.is-round {
-      padding: 5px;
+    &.is-icon {
       height: 26px;
     }
 
-    &:not(.is-round) .button__back {
-      border-radius: calc(5px * var(--brm));
+    &:not(.is-icon) {
+      padding: 5px 12px;
+
+      .button__back {
+        border-radius: calc(5px * var(--brm));
+      }
     }
   }
 
   &.is-lg {
     font-size: var(--font-size-lg);
-    padding: 11px 28px;
 
-    .button__back {
-      border-radius: calc(11px * var(--brm));
+    &:not(.is-icon) {
+      padding: 11px 28px;
+      
+      .button__back {
+        border-radius: calc(11px * var(--brm));
+      }
     }
   }
 }
@@ -282,7 +311,7 @@ MARK: ToggleGroup
   &::after {
     content: '';
     position: absolute;
-    position-anchor: var(--_active-toggle);
+    position-anchor: var(--_selected-toggle);
     left: anchor(left);
     right: anchor(right);
     top: anchor(top);
@@ -310,7 +339,7 @@ MARK: ToggleGroup
       color: var(--text-secondary);
     }
 
-    &.is-active {
+    &.is-selected {
       color: var(--ctrl-text);
       text-shadow: var(--ctrl-text-shadow);
     }
@@ -755,7 +784,6 @@ MARK: List
   .list-item__title {
     font-size: var(--font-size);
     font-weight: 500;
-    color: var(--text);
   }
 
   .list-item__description {
@@ -809,15 +837,14 @@ MARK: Table
       background: oklch(from var(--accent) l c h / 0.04);
     }
 
-    &.is-active {
-      color: var(--text);
+    &.is-selected {
+      color: var(--accent-text);
       background-color: var(--accent);
     }
 
     > * {
       padding: 10px 14px;
       border-bottom: 1px solid var(--divider);
-      color: var(--text);
       vertical-align: middle;
     }
   }
@@ -837,7 +864,7 @@ MARK: Tabs
     &::after {
       content: '';
       position: absolute;
-      position-anchor: var(--_active-tab);
+      position-anchor: var(--_selected-tab);
       left: anchor(left);
       right: anchor(right);
       bottom: anchor(bottom);
@@ -858,7 +885,7 @@ MARK: Tabs
     font-family: inherit;
     transition: color 0.2s;
 
-    &.is-active {
+    &.is-selected {
       color: var(--accent);
     }
   }

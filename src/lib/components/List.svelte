@@ -1,9 +1,10 @@
 <script>
-    import ListItem from './ListItem.svelte';
-import ListSection from './ListSection.svelte';
+  import { itemValue } from '$lib/utils.js';
+  import ListItem from './ListItem.svelte';
+  import ListSection from './ListSection.svelte';
 
   let {
-    /** @type {null | 'menu'} */
+    /** @type {null | 'menu' | 'nav'} */
     variant = null,
     /** @type {import('svelte').Snippet | undefined} */
     children = null,
@@ -11,8 +12,9 @@ import ListSection from './ListSection.svelte';
     items = null,
     /** @type */
     onselect = null,
+    /** @type {any} */
+    value = null,
   } = $props();
-
 </script>
 
 <div
@@ -25,11 +27,11 @@ import ListSection from './ListSection.svelte';
   {@render children?.()}
   {#each items as item, i}
     {#if typeof item == 'string'}
-    <ListItem onclick={() => onselect?.(item, i)}>{item}</ListItem>
+    <ListItem selected={value === itemValue(item)} onclick={() => onselect?.(item, i)}>{item}</ListItem>
     {:else if item.type != 'section'}
-    <ListItem {...item} onclick={() => onselect?.(item, i)}/>
+    <ListItem {...item} selected={value === itemValue(item)} onclick={() => onselect?.(item, i)}/>
     {:else}
-    <ListSection header={item.header} footer={item.footer} items={item.children}/>
+    <ListSection header={item.header} footer={item.footer} items={item.items}/>
     {/if}
   {/each}
 </div>

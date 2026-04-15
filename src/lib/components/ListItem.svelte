@@ -37,8 +37,8 @@
     <span class="list-item__leading">{@render leading()}</span>
   {/if}
   <span class="list-item__content">
-    {#if children}
-      <span class="list-item__title">{title}{@render children()}</span>
+    {#if title || children}
+      <span class="list-item__title">{title}{@render children?.()}</span>
     {/if}
     {#if description}
       <span class="list-item__description">{@render description()}</span>
@@ -62,6 +62,11 @@
   .list-item {
     display: flex;
     align-items: center;
+
+    &.is-selected {
+      color: var(--accent-text);
+      background: var(--accent);
+    }
   }
   .list-item__content {
     display: flex;

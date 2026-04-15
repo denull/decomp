@@ -51,6 +51,13 @@
   color: var(--text);
 }
 
+[data-scheme="light"] {
+  color-scheme: light;
+}
+[data-scheme="dark"] {
+  color-scheme: dark;
+}
+
 @media (prefers-reduced-motion: no-preference) {
   :root {
     interpolate-size: allow-keywords;

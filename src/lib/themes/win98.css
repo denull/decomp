@@ -9,6 +9,8 @@
 
   --accent: #000080;
   --danger: red;
+
+  --accent-text: #fff;
   
   --radius-lg: 0px;
   --radius: 0px;
@@ -110,6 +112,19 @@
 }
 
 /**
+MARK: Icon
+**/
+.icon {
+  --_size: 12px;
+
+  &.icon-close {
+    background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg width='8' height='7' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath fill-rule='evenodd' clip-rule='evenodd' d='M0 0h2v1h1v1h2V1h1V0h2v1H7v1H6v1H5v1h1v1h1v1h1v1H6V6H5V5H3v1H2v1H0V6h1V5h1V4h1V3H2V2H1V1H0V0z' fill='%23000'/%3E%3C/svg%3E");
+    background-position: top 2px left 4px;
+    background-repeat: no-repeat;
+  }
+}
+
+/**
 MARK: Button
 **/
 
@@ -121,9 +136,17 @@ MARK: Button
   box-shadow: var(--border-raised-outer), var(--border-raised-inner);
   border-radius: 0;
 
-  min-width: 75px;
-  min-height: 23px;
-  padding: 0 12px;
+  
+  &:not(.is-icon) {
+    min-width: 75px;
+    min-height: 23px;
+    padding: 0 12px;
+
+    &:focus {
+      outline: 1px dotted #000000;
+      outline-offset: -4px;
+    }
+  }
 
   &.is-primary {
     box-shadow: var(--default-button-border-raised-outer), var(--default-button-border-raised-inner);
@@ -147,19 +170,20 @@ MARK: Button
 
   &.is-sm {
     font-size: var(--font-size-xs);
-    padding: 0 8px;
-    min-width: 54px;
-    min-height: 20px;
+    &:not(.is-icon) {
+      min-width: 54px;
+      min-height: 20px;
+      padding: 0 8px;
+    }
+    &.is-icon {
+      width: 16px;
+      height: 14px;
+    }
   }
 
   &:not(:disabled):active {
     box-shadow: var(--border-sunken-outer), var(--border-sunken-inner);
     text-shadow: 1px 1px var(--text);
-  }
-
-  &:focus {
-    outline: 1px dotted #000000;
-    outline-offset: -4px;
   }
 
   &::-moz-focus-inner {
@@ -203,7 +227,7 @@ MARK: ToggleGroup
     min-height: 23px;
     padding: 0 12px;
 
-    &.is-active {
+    &.is-selected {
       box-shadow: var(--border-sunken-outer), var(--border-sunken-inner);
       text-shadow: 1px 1px var(--text);
       background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg width='2' height='2' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath fill-rule='evenodd' clip-rule='evenodd' d='M1 0H0v1h1v1h1V1H1V0z' fill='silver'/%3E%3Cpath fill-rule='evenodd' clip-rule='evenodd' d='M2 0H1v1H0v1h1V1h1V0z' fill='%23fff'/%3E%3C/svg%3E");
@@ -625,8 +649,8 @@ MARK: Table
     }
 
     > tbody > tr {
-      &.is-active {
-        color: #fff;
+      &.is-selected {
+        color: var(--accent-text);
         background-color: var(--accent);
       }
 
@@ -665,7 +689,7 @@ MARK: Tabs
       outline: 1px dotted #222;
       outline-offset: -5px;
     }
-    &.is-active {
+    &.is-selected {
       padding-bottom: 8px;
       margin-top: -2px;
       background-color: var(--surface-0);

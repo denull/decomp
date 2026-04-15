@@ -1,46 +1,53 @@
 <script>
+  import { itemTitle, itemValue } from '$lib/utils.js';
+
   let {
-    /** @type {number} */
-    activeTabIndex = $bindable(0),
+    /** @type {any} */
+    value = $bindable(null),
 
     /** @type {Array} */
-    items = [],
+    tabs = [],
     /** @type {import('svelte').Snippet | undefined} */
     children = null,
     ...rest
   } = $props();
 
   const uid = $props.id();
+
+  const selectedTab = $derived(
+    value !== null &&
+    tabs.find(tab => value === itemValue(tab)) || null);
 </script>
 
 <div
   class={['tabs']}
-  style={`--_active-tab: --_active-tab-${uid}`}
+  style={`--_selected-tab: --_selected-tab-${uid}`}
 >
   <div class="tabs__head" role="tablist">
-    {#each items as item, i}
+    {#each tabs as tab, i}
+      {@const isSelected = value === itemValue(tab)}
       <div
         class={[
           'tabs__tab',
-          i == activeTabIndex && 'is-active'
+          isSelected && 'is-selected'
         ]}
         style={
-          i == activeTabIndex ? `anchor-name: --_active-tab-${uid}` : ''
+          isSelected ? `anchor-name: --_selected-tab-${uid}` : ''
         }
         role="tab"
         tabindex={i}
-        aria-selected={activeTabIndex == i}
-        onclick={() => activeTabIndex = i}>
-        {item.label}
+        aria-selected={isSelected}
+        onclick={() => value = itemValue(tab)}>
+        {itemTitle(tab)}
       </div>
     {/each}
   </div>
   <div class="tabs__body">
-    {#if items[activeTabIndex]?.component}
-    {@const Component = items[activeTabIndex].component}
+    {#if selectedTab?.component}
+    {@const Component = selectedTab.component}
     <Component/>
-    {:else if items[activeTabIndex]?.snippet}
-    {@render rest[items[activeTabIndex]?.snippet](items[activeTabIndex], activeTabIndex, items)}
+    {:else if selectedTab?.snippet}
+    {@render rest[selectedTab.snippet](selectedTab)}
     {/if}
     {@render children?.()}
   </div>

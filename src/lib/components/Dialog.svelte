@@ -49,7 +49,7 @@
     <div class="dialog__title">{title}</div>
     {@render header?.()}
     <div class="dialog__header-buttons">
-      <Button variant="ghost" size="sm" round onclick={hide}>×</Button>
+      <Button size="sm" icon="css:close" onclick={hide}/>
     </div>
   </div>
   <div class="dialog__body">
