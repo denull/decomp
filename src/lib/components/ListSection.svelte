@@ -52,7 +52,3 @@
   <div class="list-section__footer">{footer}</div>
   {/if}
 </div>
-
-<style>
-  
-</style>

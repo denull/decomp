@@ -34,25 +34,3 @@
   <span class="checkbox__label">{label}</span>
   {@render children?.()}
 </label>
-
-<style>
-  :global {
-    .checkbox {
-      display: flex;
-      align-items: center;
-      cursor: pointer;
-      user-select: none;
-
-      > input {
-        appearance: none;
-        -webkit-appearance: none;
-        -moz-appearance: none;
-        background: 0;
-        border: none;
-        margin: 0;
-        opacity: 0;
-        position: fixed;
-      }
-    }
-  }
-</style>

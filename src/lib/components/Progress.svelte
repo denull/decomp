@@ -43,25 +43,3 @@
     {/if}
   </div>
 </Field>
-
-<style>
-  :global {
-    .progress {
-      display: flex;
-      align-items: center;
-      gap: var(--space);
-      flex: 1;
-    }
-    .progress__bar {
-      display: flex;
-      overflow: hidden;
-      flex: 1;
-
-      &::before {
-        content: '';
-        width: calc(var(--_progress) * 1%);
-        height: 100%;
-      }
-    }
-  }
-</style>

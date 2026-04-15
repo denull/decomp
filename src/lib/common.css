@@ -41,6 +41,8 @@
   color: var(--text);
 }
 
+@keyframes spin { to { transform: rotate(360deg); } }
+
 [data-scheme="light"] {
   color-scheme: light;
 }
@@ -58,35 +60,6 @@ body::before {
   bottom: -9999px;
   z-index: -1;
   background: var(--surface-0);
-}
-
-/** Global utilities (theme-independent) **/
-.card {
-  container-type: inline-size;
-}
-
-.row {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: var(--space);
-
-  > .field {
-    flex: 1;
-  }
-}
-
-.field {
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-sm);
-
-  @container (width > 320px) {
-    &.is-inline {
-      flex-direction: row;
-      align-items: center;
-    }
-  }
 }
 
 h1 {
@@ -114,4 +87,328 @@ a {
   color: var(--text-link);
 }
 
-@keyframes spin { to { transform: rotate(360deg); } }
+/**
+MARK: AppShell
+**/
+
+.app-shell {
+  display: grid;
+  grid-template-areas:
+    "header header"
+    "sidebar main"
+    "footer footer";
+  grid-template-columns: auto 1fr;
+  grid-template-rows: auto 1fr auto;
+  min-height: 100vh;
+
+  .header {
+    grid-area: header;
+  }
+
+  .sidebar {
+    grid-area: sidebar;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space);
+    padding: var(--space);
+  }
+
+  .main {
+    grid-area: main;
+  }
+
+  .footer {
+    grid-area: footer;
+  }
+}
+
+/**
+MARK: Row
+**/
+
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space);
+
+  > .field {
+    flex: 1;
+  }
+}
+
+/**
+MARK: Icon
+**/
+
+.icon {
+  --_size: 24px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  width: var(--_size);
+  height: var(--_size);
+
+  > i {
+    /** This is an utility markup for CSS-only icons, hidden by default **/
+    display: none;
+  }
+
+  &::before, &::after, > i, > i::before, > i::after {
+    position: absolute;
+  }
+}
+
+/**
+MARK: Button
+**/
+
+.button {
+  position: relative;
+  isolation: isolate;
+  cursor: pointer;
+  border: none;
+  align-self: start;
+
+  &:disabled {
+    cursor: default;
+    pointer-events: none;
+  }
+
+  &.is-icon {
+    display: inline-flex;
+    padding: 0;
+    align-items: center;
+    justify-items: center;
+  }
+
+  .button__back {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: -1;
+    pointer-events: none;
+  }
+}
+
+/**
+MARK: ToggleGroup
+**/
+
+.toggle-group {
+  display: flex;
+}
+
+/**
+MARK: Field
+**/
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+
+  @container (width > 320px) {
+    &.is-inline {
+      flex-direction: row;
+      align-items: center;
+    }
+  }
+}
+
+/**
+MARK: Input
+**/
+
+.input {
+  position: relative;
+  display: flex;
+  width: 100%;
+
+  input, textarea {
+    flex: 1;
+  }
+}
+
+/**
+MARK: Checkbox
+**/
+
+.checkbox {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  user-select: none;
+
+  > input {
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    background: 0;
+    border: none;
+    margin: 0;
+    opacity: 0;
+    position: fixed;
+  }
+}
+
+/**
+MARK: Switch
+**/
+
+.switch {
+  display: flex;
+}
+
+/**
+MARK: Slider
+**/
+
+.slider {
+  display: flex;
+  flex: 1;
+  
+  .slider__bar {
+    height: 100%;
+  }
+  > input {
+    flex: 1;
+  }
+}
+
+/**
+MARK: Progress
+**/
+
+.progress {
+  display: flex;
+  align-items: center;
+  gap: var(--space);
+  flex: 1;
+
+  .progress__bar {
+    display: flex;
+    overflow: hidden;
+    flex: 1;
+
+    &::before {
+      content: '';
+      width: calc(var(--_progress) * 1%);
+      height: 100%;
+    }
+  }
+}
+
+/**
+MARK: Spinner
+**/
+
+.spinner {
+}
+
+/**
+MARK: Card
+**/
+
+.card {
+  container-type: inline-size;
+}
+
+/**
+MARK: List
+**/
+
+.list {
+  display: flex;
+  flex-direction: column;
+
+  &.is-menu {
+    position: absolute;
+    left: 0;
+    right: 0;
+  }
+}
+
+.list-section {
+  display: flex;
+  flex-direction: column;
+}
+
+.list-item {
+  display: flex;
+
+  > button {
+    display: flex;
+    align-items: center;
+    flex: 1;
+    border: none;
+    text-align: inherit;
+    cursor: inherit;
+    color: inherit;
+  }
+
+  &.is-selected {
+    color: var(--accent-text);
+    background: var(--accent);
+  }
+
+  .list-item__content {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+  }
+}
+
+/**
+MARK: Table
+**/
+
+.table {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  overflow-x: auto;
+
+  table {
+    table-layout: fixed;
+  
+    > thead > tr > th {
+      cursor: pointer;
+    }
+  }
+}
+
+/**
+MARK: Tabs
+**/
+
+.tabs {
+  .tabs__tab {
+    cursor: pointer;
+    user-select: none;
+    white-space: nowrap;
+  }
+  .tabs__body {
+    display: flex;
+    flex-direction: column;
+    container-type: inline-size;
+  }
+}
+
+/**
+MARK: Dialog
+**/
+
+.dialog {
+  &[open] {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .dialog__title {
+    user-select: none;
+  }
+}

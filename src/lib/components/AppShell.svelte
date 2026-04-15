@@ -58,38 +58,3 @@
     </div>
   {/if}
 </div>
-
-<style>
-  :global {
-    .app-shell {
-      display: grid;
-      grid-template-areas:
-        "header header"
-        "sidebar main"
-        "footer footer";
-      grid-template-columns: auto 1fr;
-      grid-template-rows: auto 1fr auto;
-      min-height: 100vh;
-    }
-
-    .app-shell .header {
-      grid-area: header;
-    }
-
-    .app-shell .sidebar {
-      grid-area: sidebar;
-      display: flex;
-      flex-direction: column;
-      gap: var(--space);
-      padding: var(--space);
-    }
-
-    .app-shell .main {
-      grid-area: main;
-    }
-
-    .app-shell .footer {
-      grid-area: footer;
-    }
-  }
-</style>

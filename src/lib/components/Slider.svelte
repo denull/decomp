@@ -35,19 +35,3 @@
     {@render children?.()}
   </div>
 </Field>
-
-<style>
-  :global {
-    .slider {
-      display: flex;
-      flex: 1;
-      
-      .slider__bar {
-        height: 100%;
-      }
-      > input {
-        flex: 1;
-      }
-    }
-  }
-</style>

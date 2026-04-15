@@ -112,14 +112,3 @@
     {/if}
   </div>
 </Field>
-
-<style>
-  .input {
-    display: flex;
-    width: 100%;
-
-    input, textarea {
-      flex: 1;
-    }
-  }
-</style>

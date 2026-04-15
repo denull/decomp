@@ -9,6 +9,7 @@
   2. Theme defines values for well-known custom properties (such as `--surface-0`, `--space`, etc), defines its own custom props, styles each component.
   3. User can use either props from reset.css or well-known props (which should be available in any theme), or apply any of well-known classes.
   ("well-known" here means "defined in each of available themes")
+* Less is more. All components and properties should have short, simple names. No component or a CSS class should use some namespace-like prefix. This library is opinionated, and it should be used as a core, like an extension of the default HTML tags.
 
 ## Existing UI Libraries
 

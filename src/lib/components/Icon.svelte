@@ -51,26 +51,3 @@
   {/if}
   {@render children?.()}
 </div>
-
-<style>
-  :global {
-    .icon {
-      --_size: 24px;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      position: relative;
-      width: var(--_size);
-      height: var(--_size);
-
-      > i {
-        /** This is an utility markup for CSS-only icons, hidden by default **/
-        display: none;
-      }
-
-      &::before, &::after, > i, > i::before, > i::after {
-        position: absolute;
-      }
-    }
-  }
-</style>

@@ -56,29 +56,3 @@
     {/if}
   </button>
 </div>
-
-<style>
-  .list-item {
-    display: flex;
-
-    > button {
-      display: flex;
-      align-items: center;
-      flex: 1;
-      border: none;
-      text-align: inherit;
-      cursor: inherit;
-      color: inherit;
-    }
-
-    &.is-selected {
-      color: var(--accent-text);
-      background: var(--accent);
-    }
-  }
-  .list-item__content {
-    display: flex;
-    flex-direction: column;
-    flex: 1;
-  }
-</style>

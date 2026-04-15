@@ -23,11 +23,3 @@
     <div class="switch__thumb"></div>
   </div>
 </Field>
-
-<style>
-  :global {
-    .switch {
-      display: flex;
-    }
-  }
-</style>

@@ -52,20 +52,3 @@
     {@render children?.()}
   </div>
 </div>
-
-<style>
-  :global {
-    .tabs {
-      .tabs__tab {
-        cursor: pointer;
-        user-select: none;
-        white-space: nowrap;
-      }
-      .tabs__body {
-        display: flex;
-        flex-direction: column;
-        container-type: inline-size;
-      }
-    }
-  }
-</style>

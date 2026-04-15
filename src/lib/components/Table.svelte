@@ -60,22 +60,3 @@
     </tbody>
   </table>
 </div>
-
-<style>
-  :global {
-    .table {
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-      overflow-x: auto;
-
-      table {
-        table-layout: fixed;
-      
-        > thead > tr > th {
-          cursor: pointer;
-        }
-      }
-    }
-  }
-</style>

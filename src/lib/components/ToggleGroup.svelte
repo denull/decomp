@@ -34,11 +34,3 @@
     >{itemTitle(option)}</div>
   {/each}
 </div>
-
-<style>
-  :global {
-    .toggle-group {
-      display: flex;
-    }
-  }
-</style>

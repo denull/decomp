@@ -61,15 +61,3 @@
     </div>
   {/if}
 </dialog>
-
-<style>
-  :global {
-    .dialog[open] {
-      display: flex;
-      flex-direction: column;
-    }
-    .dialog__title {
-      user-select: none;
-    }
-  }
-</style>

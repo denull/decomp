@@ -14,6 +14,8 @@
     onselect = null,
     /** @type {any} */
     value = null,
+    /** @type {String | null} */
+    class: className = null,
   } = $props();
 </script>
 
@@ -21,6 +23,7 @@
   class={[
     'list', 
     variant && `is-${variant}`,
+    className,
   ]}
   role={variant === 'menu' ? 'menu' : 'list'}
 >
