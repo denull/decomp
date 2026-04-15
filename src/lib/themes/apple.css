@@ -578,8 +578,11 @@ MARK: List
     transition: opacity 0.15s, transform 0.15s;
 
     .list-item {
-      padding: 10px 14px;
       border-radius: 10px;
+
+      > button {
+        padding: 10px 14px;
+      }
 
       &::after {
         display: none;
@@ -614,8 +617,6 @@ MARK: List
   }
 }
 .list-item {
-  padding: 14px 16px;
-  justify-content: space-between;
   position: relative;
   cursor: pointer;
   transition: background 0.1s;
@@ -632,6 +633,11 @@ MARK: List
 
   &:active {
     background: light-dark(rgba(0,0,0,0.04), rgba(255,255,255,0.04));
+  }
+
+  > button {
+    padding: 14px 16px;
+    justify-content: space-between;
   }
 
   .list-item__content {

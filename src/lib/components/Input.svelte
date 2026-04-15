@@ -91,7 +91,7 @@
       <button class="input__menu-button" tabindex="-1" onclick={(ev) => {
         open = true;
         ev.preventDefault();
-      }}></button>
+      }} aria-label="Show options"></button>
       {#if open}
       <List
         variant="menu"

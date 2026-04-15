@@ -595,9 +595,12 @@ MARK: List
 
 }
 .list-item {
-  justify-content: space-between;
   cursor: pointer;
-  padding: 3px 5px;
+
+  > button {
+    justify-content: space-between;
+    padding: 3px 5px;
+  }
   
   .list-item__content {
   }

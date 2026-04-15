@@ -732,13 +732,23 @@ MARK: List
 
     .list-item {
       border-bottom: none;
-      padding: 8px 12px;
       border-radius: 5px;
+
+      > button {
+        padding: 8px 12px;
+      }
 
       .list-item__title {
         font-size: var(--font-size-sm);
         font-weight: 400;
       }
+    }
+  }
+
+  &.is-nav {
+    .list-item {
+      border-bottom: none;
+      border-radius: 5px;
     }
   }
 }
@@ -764,10 +774,9 @@ MARK: List
 
 }
 .list-item {
-  padding: 12px 14px;
+  cursor: pointer;
   justify-content: space-between;
   border-bottom: 1px solid var(--divider);
-  cursor: pointer;
   transition: background 0.1s;
 
   &:last-child {
@@ -775,6 +784,10 @@ MARK: List
   }
   &:hover {
     background: oklch(from var(--accent) l c h / 0.04);
+  }
+
+  > button {
+    padding: 12px 14px;
   }
   
   .list-item__content {

@@ -650,9 +650,12 @@ MARK: List
     z-index: 50;
 
     .list-item {
-      padding: 5px 12px;
       border-radius: 4px;
       border-bottom: none;
+
+      > button {
+        padding: 5px 12px;
+      }
 
       .list-item__title {
         font-size: var(--font-size);
@@ -700,8 +703,6 @@ MARK: List
   }
 }
 .list-item {
-  padding: 8px 12px;
-  justify-content: space-between;
   border-bottom: 1px solid rgba(0,0,0,0.06);
   cursor: pointer;
   transition: background 0.1s;
@@ -712,6 +713,11 @@ MARK: List
 
   &:hover {
     background: oklch(from var(--accent) l c h / 0.06);
+  }
+
+  > button {
+    padding: 8px 12px;
+    justify-content: space-between;
   }
 
   .list-item__content {
