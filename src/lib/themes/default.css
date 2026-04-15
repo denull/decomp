@@ -293,26 +293,7 @@ MARK: ToggleGroup
   background: var(--recess-background);
   box-shadow: var(--recess-shadow), var(--recess-border);
 
-  &::after {
-    content: '';
-    position: absolute;
-    position-anchor: var(--_selected-toggle);
-    left: anchor(left);
-    right: anchor(right);
-    top: anchor(top);
-    bottom: anchor(bottom);
-
-    border-radius: 6px;
-    background: linear-gradient(180deg,
-      oklch(from var(--ctrl-surface) calc(l + 0.06) c h),
-      oklch(from var(--ctrl-surface) calc(l + 0.04) c h));
-    box-shadow:
-      var(--ctrl-shadow-outer),
-      inset 0 1px 0 var(--ctrl-highlight);
-    transition: left 300ms, right 300ms;
-  }
-
-  .toggle-group__item {
+  .toggle-group__option {
     font-size: var(--font-size-sm);
     font-weight: 500;
     color: var(--text-muted);
@@ -327,6 +308,16 @@ MARK: ToggleGroup
     &.is-selected {
       color: var(--ctrl-text);
       text-shadow: var(--ctrl-text-shadow);
+    }
+
+    .toggle-group__indicator {
+      border-radius: 6px;
+      background: linear-gradient(180deg,
+        oklch(from var(--ctrl-surface) calc(l + 0.06) c h),
+        oklch(from var(--ctrl-surface) calc(l + 0.04) c h));
+      box-shadow:
+        var(--ctrl-shadow-outer),
+        inset 0 1px 0 var(--ctrl-highlight);
     }
   }
 }
@@ -823,23 +814,20 @@ MARK: Tabs
 **/
 
 .tabs {
+  gap: var(--space);
+  
   .tabs__head {
-    border-bottom: 1px solid var(--divider);
-    margin-bottom: 16px;
     overflow-x: auto;
+    box-shadow: inset 0px -1px var(--divider);
 
-    &::after {
-      content: '';
-      position: absolute;
-      position-anchor: var(--_selected-tab);
-      left: anchor(left);
-      right: anchor(right);
-      bottom: anchor(bottom);
-      margin-bottom: -1px;
+    .tabs__indicator {
+      left: 0;
+      right: 0;
+      bottom: 0px;
       height: 3px;
       background: var(--accent);
       border-radius: 2px 2px 0 0;
-      transition: left 300ms, right 300ms;
+      z-index: 1;
     }
   }
 

@@ -14,6 +14,7 @@
   import Slider from '$lib/components/Slider.svelte';
   import Spinner from '$lib/components/Spinner.svelte';
   import Dialog from '$lib/components/Dialog.svelte';
+    import Field from '$lib/components/Field.svelte';
 
   const { Story } = defineMeta({
     title: 'Dashboard',
@@ -80,22 +81,19 @@
             Experience <span class="label-value"><span id="slider-val">{expirience}</span> years</span>
           {/snippet}
         </Slider>
-        
-        <div class="field">
-          <label class="field__label"></label>
+        <Field>
           <div class="row">
             <Checkbox label="Email notifications" checked disabled/>
             <Checkbox label="SMS notifications"/>
           </div>
-        </div>
-        <div class="field">
-          <label class="field__label">Priority</label>
+        </Field>
+        <Field label="Priority">
           <div class="row">
             <Checkbox variant="radio" label="Low" bind:group={radioGroup} value={0} disabled/>
             <Checkbox variant="radio" label="Medium" bind:group={radioGroup} value={1}/>
             <Checkbox variant="radio" label="High" bind:group={radioGroup} value={2}/>
           </div>
-        </div>
+        </Field>
         <Switch label="Active status"/>
         <Button variant="primary">Submit</Button>
       </form>
@@ -134,21 +132,19 @@
               Experience <span class="label-value"><span id="slider-val">{expirience}</span> years</span>
             {/snippet}
           </Slider>
-          <div class="field is-inline">
-            <label class="field__label"></label>
+          <Field inline>
             <div class="row">
               <Checkbox label="Email notifications" checked disabled/>
               <Checkbox label="SMS notifications"/>
             </div>
-          </div>
-          <div class="field is-inline">
-            <label class="field__label">Priority</label>
+          </Field>
+          <Field label="Priority" inline>
             <div class="row">
               <Checkbox variant="radio" label="Low" bind:group={radioGroup} value={0} disabled/>
               <Checkbox variant="radio" label="Medium" bind:group={radioGroup} value={1}/>
               <Checkbox variant="radio" label="High" bind:group={radioGroup} value={2}/>
             </div>
-          </div>
+          </Field>
           <Switch label="Active status"/>
           <Button variant="primary">Submit</Button>
         {/snippet}
@@ -161,7 +157,7 @@
       <Progress label="Project Alpha" value={67} inline>67%</Progress>
       <Progress label="Storage Used" variant="segmented" value={35} inline>35%</Progress>
       <Progress label="Upload" value={89} inline>89%</Progress>
-      <Spinner size="lg" label="Loading data&hellip;"/>
+      <Spinner size="lg" label="Loading data…"/>
     </section>
 
     <!-- ---- Table ---- -->
@@ -198,7 +194,7 @@
         role: 'Product Manager',
         department: 'Product',
         status: 'Active',
-      }]}>
+      }]} rowKey="name">
         {#snippet name(row)}
           <td class="cell-name">{row.name}</td>
         {/snippet}

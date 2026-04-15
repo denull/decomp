@@ -207,7 +207,7 @@ MARK: ToggleGroup
   overflow: hidden;
   box-shadow: 0 1px 2px rgba(0,0,0,0.06);
 
-  .toggle-group__item {
+  .toggle-group__option {
     font-size: var(--font-size);
     font-weight: 500;
     color: #333;
@@ -760,8 +760,7 @@ MARK: Tabs
 
 .tabs {
   .tabs__head {
-    border-bottom: 1px solid rgba(0,0,0,0.15);
-    margin-bottom: 0;
+    box-shadow: inset 0px -1px rgba(0,0,0,0.15);
   }
 
   .tabs__tab {

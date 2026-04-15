@@ -209,7 +209,7 @@ MARK: ToggleGroup
 .toggle-group {
   border-radius: 8px;
 
-  .toggle-group__item {
+  .toggle-group__option {
     display: flex;
     align-items: center;
     justify-content: center;

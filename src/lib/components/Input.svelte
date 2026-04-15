@@ -54,7 +54,6 @@
       disabled && `is-disabled`,
       open && `is-open`,
     ]}
-    style={`--_menu-anchor: --_input-${uid}; anchor-name: --_input-${uid}`}
     {@attach open && viewportAware}
   >
     {#if variant == 'multiline'}

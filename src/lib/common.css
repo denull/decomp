@@ -223,6 +223,16 @@ MARK: Button
 }
 
 /**
+MARK: SelectionIndicator
+**/
+
+.selection-indicator {
+  position: absolute;
+  pointer-events: none;
+  z-index: -1;
+}
+
+/**
 MARK: ToggleGroup
 **/
 
@@ -230,6 +240,16 @@ MARK: ToggleGroup
   display: inline-flex;
   width: fit-content;
   user-select: none;
+
+  .toggle-group__option {
+    position: relative;
+  }
+  .toggle-group__indicator {
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+  }
 }
 
 /**
@@ -460,10 +480,14 @@ MARK: Tabs
 **/
 
 .tabs {
+  display: flex;
+  flex-direction: column;
+
   .tabs__tab {
     cursor: pointer;
     user-select: none;
     white-space: nowrap;
+    position: relative;
   }
   .tabs__head {
     display: flex;

@@ -1,5 +1,7 @@
 <script>
+  import { crossfade } from 'svelte/transition';
   import { itemTitle, itemValue } from '../utils.js';
+  import SelectionIndicator from './SelectionIndicator.svelte';
 
   let {
     /** @type {any} */
@@ -17,11 +19,11 @@
   const selectedTab = $derived(
     value !== null &&
     tabs.find(tab => value === itemValue(tab)) || null);
+  const [send, receive] = crossfade({ duration: (d) => Math.sqrt(d * 200) });
 </script>
 
 <div
   class={['tabs']}
-  style={`--_selected-tab: --_selected-tab-${uid}`}
 >
   <div class="tabs__head" role="tablist">
     {#each tabs as tab, i}
@@ -31,13 +33,15 @@
           'tabs__tab',
           isSelected && 'is-selected'
         ]}
-        style={
-          isSelected ? `anchor-name: --_selected-tab-${uid}` : ''
-        }
         role="tab"
         tabindex={isSelected ? 0 : -1}
         aria-selected={isSelected}
         onclick={() => value = itemValue(tab)}>
+        <SelectionIndicator
+          class="tabs__indicator"
+          key={`selection-${uid}`}
+          {send} {receive}
+          visible={isSelected}/>
         {itemTitle(tab)}
       </div>
     {/each}
