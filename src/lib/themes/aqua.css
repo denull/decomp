@@ -92,17 +92,8 @@ MARK: Button
 .button {
   --_surface: #38a3f0;
 
-  position: relative;
   overflow: hidden;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 6px;
-  cursor: pointer;
-  font-family: inherit;
-  font-size: var(--font-size);
   font-weight: 700;
-  outline: none;
   padding: 5px 20px 6px;
   color: #fff;
   text-shadow: 0 -1px 0 oklch(from var(--_surface) calc(l - 0.14) c h);
@@ -181,7 +172,6 @@ MARK: Button
   }
 
   &.is-sm {
-    font-size: var(--font-size-xs);
     padding: 3px 12px 4px;
   }
 
@@ -191,7 +181,6 @@ MARK: Button
   }
 
   &.is-icon {
-    aspect-ratio: 1;
     height: 30px;
     border-radius: 9999px;
     padding: 0;
@@ -213,9 +202,6 @@ MARK: ToggleGroup
 **/
 
 .toggle-group {
-  display: inline-flex;
-  width: fit-content;
-  user-select: none;
   border: 1px solid rgba(0,0,0,0.25);
   border-radius: 6px;
   overflow: hidden;
@@ -285,9 +271,7 @@ MARK: Input
   }
 
   textarea {
-    resize: vertical;
     min-height: 80px;
-    line-height: 1.5;
   }
 
   .input__select {
@@ -394,13 +378,7 @@ MARK: Switch
 **/
 
 .switch {
-  position: relative;
-  display: inline-flex;
-  align-items: center;
-  cursor: pointer;
-
   &::before {
-    content: '';
     width: 38px;
     height: 22px;
     border-radius: 11px;
@@ -411,7 +389,6 @@ MARK: Switch
   }
 
   .switch__thumb {
-    position: absolute;
     top: 2px;
     left: 2px;
     width: 18px;
@@ -448,9 +425,6 @@ MARK: Slider
 
 .slider {
   > input {
-    -webkit-appearance: none;
-    appearance: none;
-    width: 100%;
     height: 6px;
     border-radius: 3px;
     background: linear-gradient(90deg,
@@ -462,7 +436,6 @@ MARK: Slider
     margin: 10px 0;
 
     &::-webkit-slider-thumb {
-      -webkit-appearance: none;
       width: 16px;
       height: 22px;
       border-radius: 4px;
@@ -609,9 +582,6 @@ MARK: Card
 **/
 
 .card {
-  display: flex;
-  flex-direction: column;
-  gap: var(--space);
   padding: 18px;
   border-radius: var(--radius-lg);
   background: var(--card-background);
@@ -676,10 +646,6 @@ MARK: List
   }
 }
 .list-section {
-  &:not(:last-child) {
-    margin-bottom: var(--space);
-  }
-
   .list-section__header {
     font-size: var(--font-size-2xs);
     text-transform: uppercase;
@@ -780,11 +746,6 @@ MARK: Table
       background: oklch(from var(--accent) l c h / 0.1);
     }
 
-    &.is-selected > * {
-      background: var(--accent);
-      color: #fff;
-    }
-
     > * {
       padding: 5px 12px;
       border-bottom: 1px solid rgba(0,0,0,0.06);
@@ -804,7 +765,6 @@ MARK: Tabs
 
 .tabs {
   .tabs__head {
-    display: flex;
     border-bottom: 1px solid rgba(0,0,0,0.15);
     margin-bottom: 0;
   }
@@ -836,7 +796,6 @@ MARK: Tabs
   }
 
   .tabs__body {
-    gap: var(--space);
     border: 1px solid rgba(0,0,0,0.15);
     border-top: none;
     background: #fff;
@@ -861,7 +820,6 @@ MARK: Dialog
     0 4px 16px rgba(0,0,0,0.1);
   color: var(--text);
   overflow: hidden;
-  margin: auto;
 
   &::backdrop {
     background: rgba(0,0,0,0.35);
@@ -873,9 +831,6 @@ MARK: Dialog
 
   .dialog__header {
     padding: 10px 14px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
     background: linear-gradient(180deg, #f4f4f4 0%, #ddd 100%);
     border-bottom: 1px solid rgba(0,0,0,0.15);
   }
@@ -894,8 +849,6 @@ MARK: Dialog
   }
   .dialog__footer {
     padding: 0 16px 16px;
-    display: flex;
-    justify-content: flex-end;
     gap: 8px;
   }
 }

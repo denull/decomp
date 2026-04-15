@@ -95,16 +95,7 @@ MARK: Button
 **/
 
 .button {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 6px;
-  cursor: pointer;
-  border: none;
-  font-family: inherit;
-  font-size: var(--font-size);
   font-weight: 600;
-  outline: none;
   color: var(--accent);
   background: var(--fill-tertiary);
   border-radius: var(--radius);
@@ -147,11 +138,8 @@ MARK: Button
     }
   }
 
-  &.is-sm {
-    font-size: var(--font-size-xs);
-    &:not(.is-icon) {
-      padding: 7px 14px;
-    }
+  &.is-sm:not(.is-icon) {
+    padding: 7px 14px;
   }
 
   &.is-lg {
@@ -162,7 +150,6 @@ MARK: Button
   }
 
   &.is-icon {
-    aspect-ratio: 1;
     height: 36px;
     border-radius: 9999px;
   }
@@ -183,12 +170,9 @@ MARK: ToggleGroup
 **/
 
 .toggle-group {
-  display: inline-flex;
   border-radius: 9px;
   padding: 2px;
   background: var(--fill-tertiary);
-  user-select: none;
-  width: fit-content;
 
   &::after {
     content: '';
@@ -260,9 +244,7 @@ MARK: Input
   }
 
   textarea {
-    resize: vertical;
     min-height: 80px;
-    line-height: 1.5;
   }
 
   .input__select {
@@ -361,13 +343,7 @@ MARK: Switch
 **/
 
 .switch {
-  position: relative;
-  display: inline-flex;
-  align-items: center;
-  cursor: pointer;
-
   &::before {
-    content: '';
     width: 51px;
     height: 31px;
     border-radius: 16px;
@@ -376,7 +352,6 @@ MARK: Switch
   }
 
   .switch__thumb {
-    position: absolute;
     top: 2px;
     left: 2px;
     width: 27px;
@@ -409,9 +384,6 @@ MARK: Slider
 
 .slider {
   > input {
-    -webkit-appearance: none;
-    appearance: none;
-    width: 100%;
     height: 4px;
     border-radius: 2px;
     background: linear-gradient(90deg,
@@ -422,7 +394,6 @@ MARK: Slider
     margin: 12px 0;
 
     &::-webkit-slider-thumb {
-      -webkit-appearance: none;
       width: 28px;
       height: 28px;
       border-radius: 50%;
@@ -537,9 +508,6 @@ MARK: Card
 **/
 
 .card {
-  display: flex;
-  flex-direction: column;
-  gap: var(--space);
   padding: 20px;
   corner-shape: squircle;
   border-radius: calc(var(--radius-lg) * var(--brm));
@@ -596,10 +564,6 @@ MARK: List
   }
 }
 .list-section {
-  &:not(:last-child) {
-    margin-bottom: var(--space);
-  }
-
   .list-section__header {
     font-size: var(--font-size-xs);
     text-transform: uppercase;
@@ -693,11 +657,6 @@ MARK: Table
       background: var(--fill-quaternary);
     }
 
-    &.is-selected {
-      color: var(--accent-text);
-      background-color: var(--accent);
-    }
-
     > * {
       padding: 12px 16px;
       border-bottom: 0.5px solid var(--divider);
@@ -712,7 +671,6 @@ MARK: Tabs
 
 .tabs {
   .tabs__head {
-    display: flex;
     border-bottom: 0.5px solid var(--divider);
     margin-bottom: 16px;
     overflow-x: auto;
@@ -746,10 +704,6 @@ MARK: Tabs
       color: var(--accent);
     }
   }
-
-  .tabs__body {
-    gap: var(--space);
-  }
 }
 
 /**
@@ -767,7 +721,6 @@ MARK: Dialog
   box-shadow: 0 24px 80px rgba(0,0,0,0.25);
   color: var(--text);
   overflow: visible;
-  margin: auto;
 
   &::backdrop {
     background: rgba(0,0,0,0.4);
@@ -781,9 +734,6 @@ MARK: Dialog
 
   .dialog__header {
     padding: 20px 20px 0;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
   }
   .dialog__title {
     font-size: var(--font-size-lg);
@@ -797,8 +747,6 @@ MARK: Dialog
   }
   .dialog__footer {
     padding: 0 20px 20px;
-    display: flex;
-    justify-content: flex-end;
     gap: 10px;
   }
 }

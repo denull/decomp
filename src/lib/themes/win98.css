@@ -129,13 +129,11 @@ MARK: Button
 **/
 
 .button {
-  border: none;
   color: transparent;
   text-shadow: 0 0 var(--text);
   background: var(--surface-0);
   box-shadow: var(--border-raised-outer), var(--border-raised-inner);
   border-radius: 0;
-
   
   &:not(.is-icon) {
     min-width: 75px;
@@ -169,7 +167,6 @@ MARK: Button
   }
 
   &.is-sm {
-    font-size: var(--font-size-xs);
     &:not(.is-icon) {
       min-width: 54px;
       min-height: 20px;
@@ -206,10 +203,7 @@ MARK: ToggleGroup
 **/
 
 .toggle-group {
-  display: inline-flex;
   border-radius: 8px;
-  width: fit-content;
-  user-select: none;
 
   .toggle-group__item {
     display: flex;
@@ -380,14 +374,9 @@ MARK: Switch
 **/
 
 .switch {
-  position: relative;
-  display: inline-flex;
-  align-items: center;
-  cursor: pointer;
   height: 16px;
 
   &::before {
-    content: '';
     width: 24px;
     height: 12px;
     background: var(--button-highlight);
@@ -398,7 +387,6 @@ MARK: Switch
   }
 
   .switch__thumb {
-    position: absolute;
     top: 0px;
     left: 0px;
     width: 10px;
@@ -430,14 +418,10 @@ MARK: Slider
 
 .slider {
   > input {
-    -webkit-appearance: none;
-    appearance: none;
-    width: 100%;
     height: 15px;
     background: transparent;
 
     &::-webkit-slider-thumb {
-      -webkit-appearance: none;
       transform: translateY(-8px);
       box-shadow: none;
       
@@ -543,9 +527,6 @@ MARK: Card
   border-image: url("data:image/svg+xml;charset=utf-8,%3Csvg width='5' height='5' fill='gray' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath fill-rule='evenodd' clip-rule='evenodd' d='M0 0h5v5H0V2h2v1h1V2H0' fill='%23fff'/%3E%3Cpath fill-rule='evenodd' clip-rule='evenodd' d='M0 0h4v4H0V1h1v2h2V1H0'/%3E%3C/svg%3E") 2;
   margin: 0;
   padding: var(--space-xl);
-  display: flex;
-  flex-direction: column;
-  gap: var(--space);
 
   .card__title {
     background: silver;
@@ -583,10 +564,6 @@ MARK: List
   }
 }
 .list-section {
-  &:not(:last-child) {
-    margin-bottom: var(--space);
-  }
-
   .list-section__header {
   }
 
@@ -651,16 +628,9 @@ MARK: Table
       }
     }
 
-    > tbody > tr {
-      &.is-selected {
-        color: var(--accent-text);
-        background-color: var(--accent);
-      }
-
-      > * {
-        padding: 0 var(--space-sm);
-        height: 14px;
-      }
+    > tbody > tr > * {
+      padding: 0 var(--space-sm);
+      height: 14px;
     }
   }
 }
@@ -675,7 +645,6 @@ MARK: Tabs
     margin: 0 0 -2px 0;
     text-indent: 0;
     list-style-type: none;
-    display: flex;
     padding-left: 3px;
   }
 
@@ -711,7 +680,6 @@ MARK: Tabs
     box-shadow: var(--border-window-outer), var(--border-window-inner);
     background: var(--surface-0);
     padding: 11px;
-    gap: var(--space);
   }
 }
 
@@ -724,17 +692,13 @@ MARK: Dialog
   box-shadow: var(--border-window-outer), var(--border-window-inner);
   background: var(--surface-0);
   padding: 3px;
-  margin: auto;
 
   &.is-alert {
     max-width: 400px;
   }
 
   .dialog__header {
-    align-items: center;
     background: linear-gradient(90deg, navy, #1084d0);
-    display: flex;
-    justify-content: space-between;
     padding: 3px 2px 3px 3px;
   }
   .dialog__title {
@@ -748,8 +712,6 @@ MARK: Dialog
     padding: 8px;
   }
   .dialog__footer {
-    display: flex;
-    justify-content: flex-end;
     gap: var(--space);
     padding: var(--space);
   }

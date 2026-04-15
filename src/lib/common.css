@@ -170,13 +170,25 @@ MARK: Button
   cursor: pointer;
   border: none;
   align-self: start;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-sm);
+  font-family: inherit;
+  font-size: var(--font-size);
+  outline: none;
 
   &:disabled {
     cursor: default;
     pointer-events: none;
   }
 
+  &.is-sm {
+    font-size: var(--font-size-xs);
+  }
+
   &.is-icon {
+    aspect-ratio: 1;
     display: inline-flex;
     padding: 0;
     align-items: center;
@@ -199,7 +211,9 @@ MARK: ToggleGroup
 **/
 
 .toggle-group {
-  display: flex;
+  display: inline-flex;
+  width: fit-content;
+  user-select: none;
 }
 
 /**
@@ -231,6 +245,11 @@ MARK: Input
   input, textarea {
     flex: 1;
   }
+
+  textarea {
+    resize: vertical;
+    line-height: 1.5;
+  }
 }
 
 /**
@@ -260,7 +279,18 @@ MARK: Switch
 **/
 
 .switch {
-  display: flex;
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  cursor: pointer;
+
+  &::before {
+    content: '';
+  }
+
+  .switch__thumb {
+    position: absolute;
+  }
 }
 
 /**
@@ -276,6 +306,13 @@ MARK: Slider
   }
   > input {
     flex: 1;
+    -webkit-appearance: none;
+    appearance: none;
+    width: 100%;
+
+    &::-webkit-slider-thumb {
+      -webkit-appearance: none;
+    }
   }
 }
 
@@ -315,6 +352,9 @@ MARK: Card
 
 .card {
   container-type: inline-size;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space);
 }
 
 /**
@@ -335,6 +375,10 @@ MARK: List
 .list-section {
   display: flex;
   flex-direction: column;
+  
+  &:not(:last-child) {
+    margin-bottom: var(--space);
+  }
 }
 
 .list-item {
@@ -378,6 +422,11 @@ MARK: Table
     > thead > tr > th {
       cursor: pointer;
     }
+
+    > tbody > tr.is-selected {
+      color: var(--accent-text);
+      background-color: var(--accent);
+    }
   }
 }
 
@@ -391,10 +440,14 @@ MARK: Tabs
     user-select: none;
     white-space: nowrap;
   }
+  .tabs__head {
+    display: flex;
+  }
   .tabs__body {
     display: flex;
     flex-direction: column;
     container-type: inline-size;
+    gap: var(--space);
   }
 }
 
@@ -403,12 +456,25 @@ MARK: Dialog
 **/
 
 .dialog {
+  margin: auto;
+
   &[open] {
     display: flex;
     flex-direction: column;
   }
 
+  .dialog__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
   .dialog__title {
     user-select: none;
+  }
+
+  .dialog__footer {
+    display: flex;
+    justify-content: flex-end;
   }
 }
