@@ -19,6 +19,7 @@
     size != 'md' && `is-${size}`,
   ]}
   style={`--_selected-toggle: --_selected-toggle-${uid}`}
+  role="radiogroup"
 >
   {#each options as option}
     <div
@@ -26,7 +27,9 @@
       style={
         value === itemValue(option) ? `anchor-name: --_selected-toggle-${uid}` : ''
       }
-      aria-selected={value === itemValue(option)}
+      role="radio"
+      tabindex={value === itemValue(option) ? 0 : -1}
+      aria-checked={value === itemValue(option)}
       onclick={() => value = itemValue(option)}
     >{itemTitle(option)}</div>
   {/each}

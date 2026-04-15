@@ -13,7 +13,10 @@
       'switch', 
       checked && `is-checked`,
     ]}
+    role="switch"
+    tabindex="0"
     onclick={() => checked = !checked}
+    aria-checked={checked}
   >
     <div class="switch__thumb"></div>
   </div>

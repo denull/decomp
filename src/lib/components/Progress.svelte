@@ -28,6 +28,10 @@
       size != 'md' && `is-${size}`,
     ]}
     style={`--_progress: ${100 * (value - min) / (max - min)}`}
+    role="progressbar"
+    aria-valuenow={value}
+    aria-valuemin={min}
+    aria-valuemax={max}
   >
     <div class="progress__bar"></div>
     {#if children}

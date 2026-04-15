@@ -22,7 +22,7 @@
     'list', 
     variant && `is-${variant}`,
   ]}
-  role="list"
+  role={variant === 'menu' ? 'menu' : 'list'}
 >
   {@render children?.()}
   {#each items as item, i}

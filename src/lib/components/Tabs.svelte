@@ -35,14 +35,14 @@
           isSelected ? `anchor-name: --_selected-tab-${uid}` : ''
         }
         role="tab"
-        tabindex={i}
+        tabindex={isSelected ? 0 : -1}
         aria-selected={isSelected}
         onclick={() => value = itemValue(tab)}>
         {itemTitle(tab)}
       </div>
     {/each}
   </div>
-  <div class="tabs__body">
+  <div class="tabs__body" role="tabpanel">
     {#if selectedTab?.component}
     {@const Component = selectedTab.component}
     <Component/>
