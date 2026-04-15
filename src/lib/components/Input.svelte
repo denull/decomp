@@ -1,4 +1,5 @@
 <script>
+  import { viewportAware } from '../attachments/viewportAware.svelte.js';
   import { itemTitle, itemValue } from '../utils.js';
   import Field from './Field.svelte';
   import List from './List.svelte';
@@ -54,6 +55,7 @@
       open && `is-open`,
     ]}
     style={`--_menu-anchor: --_input-${uid}; anchor-name: --_input-${uid}`}
+    {@attach open && viewportAware}
   >
     {#if variant == 'multiline'}
       <textarea
@@ -63,7 +65,7 @@
         {placeholder}></textarea>
     {:else if variant == 'select'}
       <button class="input__select" onclick={(ev) => {
-        open = true;
+        open = !open;
         ev.preventDefault();
       }} onblur={(ev) => {
         if (!el.contains(ev.relatedTarget)) {
@@ -90,11 +92,12 @@
 
     {#if options}
       <button class="input__menu-button" tabindex="-1" onclick={(ev) => {
-        open = true;
+        open = !open;
         ev.preventDefault();
       }} aria-label="Show options"></button>
       {#if open}
       <List
+        class="input__menu"
         variant="menu"
         items={options}
         onselect={(item, i) => {

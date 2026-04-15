@@ -73,21 +73,7 @@ MARK: Icon
 **/
 .icon {
 
-  &.icon-close {
-    &::before, &::after {
-      content: '';
-      width: calc(var(--_size) * 0.5);
-      height: var(--_stroke);
-      background: currentColor;
-      border-radius: 9999px;
-    }
-    &::before {
-      transform: rotate(45deg);
-    }
-    &::after {
-      transform: rotate(-45deg);
-    }
-  }
+  
 }
 
 /**
@@ -530,11 +516,6 @@ MARK: List
 
 .list {
   &.is-menu {
-    position: fixed;
-    position-anchor: var(--_menu-anchor);
-    position-area: bottom;
-    position-try-fallbacks: flip-block;
-    width: anchor-size(width);
     margin: 6px 0;
 
     background: var(--menu-background);

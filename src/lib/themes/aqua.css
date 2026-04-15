@@ -605,11 +605,6 @@ MARK: List
 
 .list {
   &.is-menu {
-    position: fixed;
-    position-anchor: var(--_menu-anchor);
-    position-area: bottom;
-    position-try-fallbacks: flip-block;
-    width: anchor-size(width);
     margin: 4px 0;
 
     background: var(--menu-background);

@@ -158,6 +158,22 @@ MARK: Icon
   &::before, &::after, > i, > i::before, > i::after {
     position: absolute;
   }
+
+  &.icon-close {
+    &::before, &::after {
+      content: '';
+      width: calc(var(--_size) * 0.5);
+      height: var(--_stroke);
+      background: currentColor;
+      border-radius: 9999px;
+    }
+    &::before {
+      transform: rotate(45deg);
+    }
+    &::after {
+      transform: rotate(-45deg);
+    }
+  }
 }
 
 /**
@@ -249,6 +265,17 @@ MARK: Input
   textarea {
     resize: vertical;
     line-height: 1.5;
+  }
+
+  .input__menu {
+    left: 0;
+    right: 0;
+    top: 100%;
+  }
+
+  &.is-closer-to-bottom .input__menu {
+    top: auto;
+    bottom: 100%;
   }
 }
 
@@ -367,8 +394,6 @@ MARK: List
 
   &.is-menu {
     position: absolute;
-    left: 0;
-    right: 0;
   }
 }
 
