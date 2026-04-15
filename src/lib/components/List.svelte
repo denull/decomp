@@ -1,5 +1,5 @@
 <script>
-  import { itemValue } from '$lib/utils.js';
+  import { itemValue } from '../utils.js';
   import ListItem from './ListItem.svelte';
   import ListSection from './ListSection.svelte';
 

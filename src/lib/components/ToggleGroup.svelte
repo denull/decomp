@@ -1,5 +1,5 @@
 <script>
-  import { itemTitle, itemValue } from '$lib/utils.js';
+  import { itemTitle, itemValue } from '../utils.js';
 
   let {
     /** @type {'sm' | 'md' | 'lg'} */
