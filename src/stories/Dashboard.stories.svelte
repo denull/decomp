@@ -66,6 +66,7 @@
         <Button icon="css:plus"/>
         <Button icon="css:minus"/>
         <Button icon="css:sidebar"/>
+        <Button icon="css:heart"/>
       </div>
       <hr class="separator">
       <div class="card__title">Toggle Group</div>

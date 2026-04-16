@@ -135,22 +135,6 @@ MARK: AppShell
 MARK: Icon
 **/
 .icon {
-
-  &.icon-close {
-    &::before, &::after {
-      content: '';
-      width: calc(var(--_size) * 0.5);
-      height: var(--_stroke);
-      background: currentColor;
-      border-radius: 9999px;
-    }
-    &::before {
-      transform: rotate(45deg);
-    }
-    &::after {
-      transform: rotate(-45deg);
-    }
-  }
 }
 
 /**

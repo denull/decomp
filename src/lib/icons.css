@@ -5,7 +5,7 @@
 .icon-close {
   &::before, &::after {
     content: '';
-    width: calc(var(--_size) * 0.5);
+    width: calc(var(--_size) * 0.7);
     height: var(--_stroke);
     background: currentColor;
     border-radius: 9999px;
@@ -21,7 +21,7 @@
 .icon-plus {
   &::before, &::after {
     content: '';
-    width: calc(var(--_size) * 0.5);
+    width: calc(var(--_size) * 0.65);
     height: var(--_stroke);
     background: currentColor;
     border-radius: 9999px;
@@ -34,7 +34,7 @@
 .icon-minus {
   &::before {
     content: '';
-    width: calc(var(--_size) * 0.5);
+    width: calc(var(--_size) * 0.65);
     height: var(--_stroke);
     background: currentColor;
     border-radius: 9999px;
@@ -45,7 +45,7 @@
   border: var(--_stroke) solid currentColor;
   border-radius: calc(var(--_size) * 0.2);
   width: calc(var(--_size) * 0.9);
-  height: calc(var(--_size) * 0.8);
+  height: calc(var(--_size) * 0.75);
   &::before {
     content: '';
     top: 0px;
@@ -62,5 +62,28 @@
     height: var(--_stroke);
     background: currentColor;
     box-shadow: 0px calc(var(--_stroke) * 2) currentColor;
+  }
+}
+
+.icon-heart {
+  width: calc(var(--_size) * 0.5);
+  height: calc(var(--_size) * 0.5);
+  transform: translateY(calc(var(--_size) * 0.12)) rotate(45deg);
+  border-right: var(--_stroke) solid currentColor;
+  border-bottom: var(--_stroke) solid currentColor;
+  border-bottom-right-radius: calc(var(--_size) * 0.12);
+  &::before, &::after {
+    content: '';
+    width: calc(var(--_size) * 0.5);
+    height: calc(var(--_size) * 0.35);
+    border-top: var(--_stroke) solid currentColor;
+    border-left: var(--_stroke) solid currentColor;
+    border-right: var(--_stroke) solid currentColor;
+    border-top-left-radius: 9999px;
+    border-top-right-radius: 9999px;
+    transform: translate(calc(var(--_size) * 0.04), calc(var(--_size) * -0.3));
+  }
+  &::after {
+    transform: translate(calc(var(--_size) * -0.3), calc(var(--_size) * 0.04)) rotate(-90deg);
   }
 }
