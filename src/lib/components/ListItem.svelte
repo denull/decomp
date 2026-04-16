@@ -18,7 +18,7 @@
     children = null,
     /** @type {null | 'chevron' | 'switch' } */
     accessory = null,
-    /** */
+    /** @type {Function | null} */
     onclick = null,
   } = $props();
 </script>

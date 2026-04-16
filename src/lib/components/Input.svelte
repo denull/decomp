@@ -25,6 +25,7 @@
     label = null,
     /** @type {boolean} */
     inline = false,
+    /** @type {Function | null} */
     onselect = null,
   } = $props();
 

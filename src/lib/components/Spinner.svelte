@@ -4,7 +4,7 @@
     variant = null,
     /** @type {'sm' | 'md' | 'lg'} */
     size = 'md',
-    /** @type {String | null} */
+    /** @type {String | import('svelte').Snippet | null} */
     label = null,
   } = $props();
 </script>

@@ -4,8 +4,11 @@
   const themes = import.meta.glob('../themes/*.css', { query: '?inline', eager: false });
 
   let {
+    /** @type {String} */
     theme = 'default',
+    /** @type {null | 'light' | 'dark'} */
     scheme = null,
+    /** @type {import('svelte').Snippet | null} */
     children = null,
   } = $props();
 

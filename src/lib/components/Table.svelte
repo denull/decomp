@@ -1,10 +1,16 @@
 <script>
   let {
+    /** @type {boolean} */
     interactive = false,
+    /** @type {Array} */
     columns = [],
+    /** @type {Array} */
     rows = [],
+    /** @type {String} */
     rowKey = 'id',
+    /** @type {any} */
     selected = $bindable(null),
+    /** @type {Array<{index: number, order: number}>} */
     sortedBy = $bindable([]),
     ...rest
   } = $props();

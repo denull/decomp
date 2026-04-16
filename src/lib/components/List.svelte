@@ -10,7 +10,7 @@
     children = null,
     /** @type {Array | null} */
     items = null,
-    /** @type */
+    /** @type {Function | null} */
     onselect = null,
     /** @type {any} */
     value = null,

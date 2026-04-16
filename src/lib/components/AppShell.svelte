@@ -3,14 +3,23 @@
     import Button from './Button.svelte';
 
   let {
+    /** @type {String} */
     theme = 'default',
+    /** @type {null | 'light' | 'dark'} */
     scheme = null,
+    /** @type {import('svelte').Snippet | null} */
     children = null,
+    /** @type {String | null} */
     title = null,
+    /** @type {import('svelte').Snippet | null} */
     header = null,
+    /** @type {import('svelte').Snippet | null} */
     footer = null,
+    /** @type {import('svelte').Snippet | null} */
     sidebar = null,
+    /** @type {boolean} */
     sidebarOpen = $bindable(false),
+    /** @type {boolean} */
     fullwidth = false,
   } = $props();
 </script>
