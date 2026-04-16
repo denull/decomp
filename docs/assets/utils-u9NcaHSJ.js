@@ -1,0 +1,1 @@
+import{n as e}from"./chunk-BneVvdWh.js";function t(e){return typeof e==`string`?e:e.value}function n(e){return typeof e==`string`?e:e.title}var r=e((()=>{}));export{n,t as r,r as t};
