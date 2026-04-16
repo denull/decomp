@@ -1,0 +1,2 @@
+import{n as e}from"./chunk-BneVvdWh.js";import{r as t,t as n}from"./react-BDPtTVWB.js";import{a as r}from"./chunk-YKABRMAI-C4Q7gT-w.js";import{a as i,o as a}from"./blocks-fJ2XSsbK.js";var o=e((()=>{n()}));function s(e){let n={p:`p`,...t(),...e.components};return(0,l.jsxs)(l.Fragment,{children:[(0,l.jsx)(i,{title:`Introduction`}),`
+`,(0,l.jsx)(n.p,{children:`Hello world`})]})}function c(e={}){let{wrapper:n}={...t(),...e.components};return n?(0,l.jsx)(n,{...e,children:(0,l.jsx)(s,{...e})}):s(e)}var l;e((()=>{l=r(),o(),a()}))();export{c as default};

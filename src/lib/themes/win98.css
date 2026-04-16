@@ -196,12 +196,6 @@ MARK: Button
   }
 }
 
-@media (not(hover)) {
-  .button:not(:disabled):hover {
-    box-shadow: var(--border-sunken-outer), var(--border-sunken-inner);
-  }
-}
-
 /**
 MARK: ToggleGroup
 **/
