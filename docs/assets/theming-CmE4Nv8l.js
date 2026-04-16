@@ -1,1 +1,0 @@
-import{c as e,h as t}from"./theming-Dha-b0nX.js";e();export{t as color};
