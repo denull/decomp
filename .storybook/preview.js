@@ -18,7 +18,7 @@ const preview = {
   globalTypes: {
     theme: {
       name: 'Theme',
-      defaultValue: 'semiflat',
+      defaultValue: 'default',
       toolbar: {
         icon: 'paintbrush',
         title: 'Theme',
@@ -46,8 +46,8 @@ const preview = {
           { value: null, title: 'Default' },
           { value: 'light', title: 'Light' },
           { value: 'dark', title: 'Dark' },
-          { value: 'hc-light', title: 'HC Light' },
-          { value: 'hc-dark', title: 'HC Dark' },
+          /*{ value: 'hc-light', title: 'HC Light' },
+          { value: 'hc-dark', title: 'HC Dark' },*/
         ],
         dynamicTitle: true,
       },

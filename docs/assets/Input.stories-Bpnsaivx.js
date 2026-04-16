@@ -1,4 +1,4 @@
-import{n as e}from"./chunk-BneVvdWh.js";import{$ as t,A as n,H as r,O as i,Q as a,U as o,W as s,a as c,it as l,j as u,ot as d,st as f,t as p}from"./client-BYAvDGw8.js";import{a as m,i as h,n as g,r as _,t as v}from"./create-runtime-stories-Dtkm0wpn.js";import{n as y,t as b}from"./Input-BBnGvw_C.js";function x(e,n){t(n,!1),c();var u=D(),f=o(u);C(f,{name:`Text Input`,args:{label:`Name`,placeholder:`Enter your name`},parameters:{__svelteCsf:{rawCode:`<Input {...args}>
+import{n as e}from"./chunk-BneVvdWh.js";import{$ as t,A as n,H as r,O as i,Q as a,U as o,W as s,a as c,it as l,j as u,ot as d,st as f,t as p}from"./client-BYAvDGw8.js";import{a as m,i as h,n as g,r as _,t as v}from"./create-runtime-stories-DATh2M70.js";import{n as y,t as b}from"./Input-BBnGvw_C.js";function x(e,n){t(n,!1),c();var u=D(),f=o(u);C(f,{name:`Text Input`,args:{label:`Name`,placeholder:`Enter your name`},parameters:{__svelteCsf:{rawCode:`<Input {...args}>
   
 </Input>`}}});var p=s(f,2);C(p,{name:`With Error`,args:{label:`Email`,type:`email`,placeholder:`user@example.com`,error:`Please enter a valid email address`},parameters:{__svelteCsf:{rawCode:`<Input {...args}>
   
