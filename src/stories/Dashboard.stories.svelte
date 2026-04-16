@@ -317,8 +317,6 @@
 </Story>
 <style>
   .header {
-    max-width: 1120px;
-    margin: 0 auto;
     padding: 32px 20px 24px;
     display: flex;
     align-items: center;
@@ -331,8 +329,6 @@
   }
   
   .dashboard {
-    max-width: 1120px;
-    margin: 0 auto;
     padding: 0 20px 48px;
     display: grid;
     grid-template-columns: 1fr 1fr;

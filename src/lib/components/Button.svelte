@@ -1,5 +1,5 @@
 <script>
-    import Icon from './Icon.svelte';
+  import Icon from './Icon.svelte';
 
   let {
     /** @type {null | 'primary' | 'destructive' | 'ghost'} */
@@ -18,6 +18,8 @@
     onclick = null,
     /** @type {Array | null} */
     dropdown = null,
+    /** @type {String | null} */
+    class: className = null,
   } = $props();
 </script>
 
@@ -28,6 +30,7 @@
     size != 'md' && `is-${size}`,
     icon && !children && `is-icon`,
     grouped && `is-grouped`,
+    className,
   ]}
   {disabled}
   ontouchstart={() => {}}

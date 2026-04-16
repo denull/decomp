@@ -121,6 +121,16 @@
   --badge-neutral-text: light-dark(oklch(0.45 0 0), oklch(0.75 0 0));
 }
 
+
+/**
+MARK: AppShell
+**/
+
+.app-shell {
+  --_sidebar-overlay-border: 1px solid var(--divider);
+  --_sidebar-overlay-shadow: var(--menu-shadow);
+}
+
 /**
 MARK: Icon
 **/
@@ -733,7 +743,7 @@ MARK: List
   &:last-child {
     border-bottom: none;
   }
-  &:hover {
+  &:not(.is-selected):hover {
     background: oklch(from var(--accent) l c h / 0.04);
   }
 
@@ -815,7 +825,7 @@ MARK: Tabs
 
 .tabs {
   gap: var(--space);
-  
+
   .tabs__head {
     overflow-x: auto;
     box-shadow: inset 0px -1px var(--divider);
