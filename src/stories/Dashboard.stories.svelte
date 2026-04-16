@@ -61,6 +61,12 @@
         <Button variant="destructive" size="sm">Destructive</Button>
         <Button variant="ghost" size="sm">Ghost</Button>
       </div>
+      <div class="row">
+        <Button icon="css:close"/>
+        <Button icon="css:plus"/>
+        <Button icon="css:minus"/>
+        <Button icon="css:sidebar"/>
+      </div>
       <hr class="separator">
       <div class="card__title">Toggle Group</div>
       <ToggleGroup options={['Day', 'Week', 'Month']} value="Day"/>

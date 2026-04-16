@@ -1,0 +1,66 @@
+/** CSS Icons **/
+/** For convenience, each (CSS) Icon component adds a <i></i> child and sets position: absolute on it, and all ::before and ::after pseudoelements **/
+/** see https://cssicon.space/ **/
+
+.icon-close {
+  &::before, &::after {
+    content: '';
+    width: calc(var(--_size) * 0.5);
+    height: var(--_stroke);
+    background: currentColor;
+    border-radius: 9999px;
+  }
+  &::before {
+    transform: rotate(45deg);
+  }
+  &::after {
+    transform: rotate(-45deg);
+  }
+}
+
+.icon-plus {
+  &::before, &::after {
+    content: '';
+    width: calc(var(--_size) * 0.5);
+    height: var(--_stroke);
+    background: currentColor;
+    border-radius: 9999px;
+  }
+  &::after {
+    transform: rotate(90deg);
+  }
+}
+
+.icon-minus {
+  &::before {
+    content: '';
+    width: calc(var(--_size) * 0.5);
+    height: var(--_stroke);
+    background: currentColor;
+    border-radius: 9999px;
+  }
+}
+
+.icon-sidebar {
+  border: var(--_stroke) solid currentColor;
+  border-radius: calc(var(--_size) * 0.2);
+  width: calc(var(--_size) * 0.9);
+  height: calc(var(--_size) * 0.8);
+  &::before {
+    content: '';
+    top: 0px;
+    bottom: 0px;
+    left: calc(var(--_stroke) * 3);
+    width: var(--_stroke);
+    background: currentColor;
+  }
+  &::after {
+    content: '';
+    top: var(--_stroke);
+    left: var(--_stroke);
+    width: calc(var(--_stroke) * 1);
+    height: var(--_stroke);
+    background: currentColor;
+    box-shadow: 0px calc(var(--_stroke) * 2) currentColor;
+  }
+}

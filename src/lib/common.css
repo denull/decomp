@@ -41,8 +41,6 @@
   color: var(--text);
 }
 
-@keyframes spin { to { transform: rotate(360deg); } }
-
 [data-scheme="light"] {
   color-scheme: light;
 }
@@ -203,22 +201,6 @@ MARK: Icon
 
   &::before, &::after, > i, > i::before, > i::after {
     position: absolute;
-  }
-
-  &.icon-close {
-    &::before, &::after {
-      content: '';
-      width: calc(var(--_size) * 0.5);
-      height: var(--_stroke);
-      background: currentColor;
-      border-radius: 9999px;
-    }
-    &::before {
-      transform: rotate(45deg);
-    }
-    &::after {
-      transform: rotate(-45deg);
-    }
   }
 }
 
@@ -571,5 +553,72 @@ MARK: Dialog
   .dialog__footer {
     display: flex;
     justify-content: flex-end;
+  }
+}
+
+/**
+MARK: Animations
+**/
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes ping {
+  75%, 100% {
+    transform: scale(2);
+    opacity: 0;
+  }
+}
+
+@keyframes pulse {
+  50% {
+    opacity: 0.5;
+  }
+}
+
+@keyframes bounce {
+  0%, 100% {
+    transform: translateY(-25%);
+    animation-timing-function: cubic-bezier(0.8, 0, 1, 1);
+  }
+  50% {
+    transform: none;
+    animation-timing-function: cubic-bezier(0, 0, 0.2, 1);
+  }
+}
+
+@keyframes shake {
+  0% {
+    transform: translateX(0);
+  }
+
+  6.5% {
+    transform: translateX(-6px) rotateY(-9deg);
+  }
+
+  18.5% {
+    transform: translateX(5px) rotateY(7deg);
+  }
+
+  31.5% {
+    transform: translateX(-3px) rotateY(-5deg);
+  }
+
+  43.5% {
+    transform: translateX(2px) rotateY(3deg);
+  }
+
+  50% {
+    transform: translateX(0);
+  }
+}
+
+@keyframes dialog-in {
+  from {
+    opacity: 0;
+    transform: scale(0.96) translateY(8px);
   }
 }

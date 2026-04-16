@@ -1,6 +1,7 @@
 <script>
   import '../reset.css';
   import '../common.css';
+  import '../icons.css';
   const themes = import.meta.glob('../themes/*.css', { query: '?inline', eager: false });
 
   let {
