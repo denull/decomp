@@ -363,7 +363,14 @@ MARK: Switch
   }
 
   .switch__thumb {
+    --_position: var(--_off-position);
     position: absolute;
+    transform: translateX(calc(clamp(var(--_off-position), var(--_position) + var(--_drag-x, 0px), var(--_on-position))));
+    user-select: none;
+  }
+
+  &.is-checked .switch__thumb {
+    --_position: var(--_on-position);
   }
 }
 
@@ -534,6 +541,10 @@ MARK: Dialog
 
 .dialog {
   margin: auto;
+  transform: translate(
+    calc(var(--_offset-x) + var(--_drag-x, 0px)),
+    calc(var(--_offset-y) + var(--_drag-y, 0px))
+  );
 
   &[open] {
     display: flex;

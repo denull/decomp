@@ -386,6 +386,8 @@ MARK: Switch
   }
 
   .switch__thumb {
+    --_off-position: 0px;
+    --_on-position: 14px;
     top: 0px;
     left: 0px;
     width: 10px;
@@ -399,9 +401,6 @@ MARK: Switch
   &.is-checked {
     &::before {
       background: var(--accent);
-    }
-    .switch__thumb {
-      left: 14px;
     }
   }
 

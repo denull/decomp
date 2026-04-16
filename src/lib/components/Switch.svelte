@@ -1,5 +1,6 @@
 <script>
-    import Field from './Field.svelte';
+  import { drag } from '../attachments/drag.svelte.js';
+  import Field from './Field.svelte';
 
   let {
     /** @type {boolean} */
@@ -20,6 +21,6 @@
     onclick={() => checked = !checked}
     aria-checked={checked}
   >
-    <div class="switch__thumb"></div>
+    <div class="switch__thumb" {@attach drag()}></div>
   </div>
 </Field>

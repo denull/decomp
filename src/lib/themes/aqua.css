@@ -389,15 +389,20 @@ MARK: Switch
   }
 
   .switch__thumb {
+    --_off-position: 2px;
+    --_on-position: 18px;
     top: 2px;
-    left: 2px;
+    left: 0px;
     width: 18px;
     height: 18px;
     border-radius: 9999px;
     background: linear-gradient(180deg, #fff 0%, #e8e8e8 100%);
     border: 1px solid rgba(0,0,0,0.2);
     box-shadow: 0 1px 3px rgba(0,0,0,0.15);
-    transition: left 0.2s ease;
+
+    &:not(.is-dragged) {
+      transition: transform 0.2s ease;
+    }
   }
 
   &.is-checked {
@@ -406,9 +411,6 @@ MARK: Switch
         oklch(from var(--accent) calc(l - 0.02) c h),
         oklch(from var(--accent) calc(l + 0.04) c h));
       border-color: oklch(from var(--accent) calc(l - 0.11) c h);
-    }
-    .switch__thumb {
-      left: 18px;
     }
   }
 

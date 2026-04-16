@@ -328,22 +328,24 @@ MARK: Switch
   }
 
   .switch__thumb {
+    --_off-position: 2px;
+    --_on-position: 22px;
     top: 2px;
-    left: 2px;
+    left: 0px;
     width: 27px;
     height: 27px;
     border-radius: 9999px;
     background: #fff;
     box-shadow: 0 1px 3px rgba(0,0,0,0.15), 0 1px 1px rgba(0,0,0,0.06);
-    transition: left 0.25s cubic-bezier(0.33, 1, 0.68, 1);
+
+    &:not(.is-dragged) {
+      transition: transform 0.25s cubic-bezier(0.33, 1, 0.68, 1);
+    }
   }
 
   &.is-checked {
     &::before {
       background: light-dark(#34C759, #30D158);
-    }
-    .switch__thumb {
-      left: 22px;
     }
   }
 
