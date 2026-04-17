@@ -16,6 +16,7 @@
   import Dialog from '$lib/components/Dialog.svelte';
   import Field from '$lib/components/Field.svelte';
   import AppShell from '$lib/components/AppShell.svelte';
+  import { getContext } from 'svelte';
 
   const { Story } = defineMeta({
     title: 'Mobile',
@@ -25,18 +26,36 @@
     },
   });
 
+  let shell = $state();
+
+  function gotoX() {
+    shell.push({
+      title: 'Child',
+      content: tasks,
+      props: { id: 1 },
+    });
+  }
 </script>
 
-
-<Story name="Mobile">
+{#snippet tasks()}
   <List>
     <ListSection header="Section 1">
-      <ListItem accessory="chevron">X</ListItem>
+      <ListItem accessory="chevron" onclick={gotoX}>X</ListItem>
       <ListItem>Y</ListItem>
       <ListItem accessory="switch">Z</ListItem>
     </ListSection>
   </List>
+{/snippet}
 
+<Story name="Mobile">
+  <AppShell bind:this={shell} sections={[{
+    id: 'tasks',
+    title: 'Tasks',
+    content: tasks,
+  }, {
+    id: 1,
+    title: 'Tab 2',
+  }]} selected="tasks"/>
 </Story>
 <style>
   

@@ -110,10 +110,10 @@
     <section class="card tabs">
       <div class="card__title">Tabs</div>
       <Tabs tabs={[
-        { title: 'Overview', value: 'overview', snippet: 'overview' },
-        { title: 'Activity', value: 'activity', snippet: 'activity' },
-        { title: 'Settings', value: 'settings', snippet: 'settings' },
-        { title: 'Inline controls', value: 'inline', snippet: 'inline' },
+        { title: 'Overview', value: 'overview', content: 'overview' },
+        { title: 'Activity', value: 'activity', content: 'activity' },
+        { title: 'Settings', value: 'settings', content: 'settings' },
+        { title: 'Inline controls', value: 'inline', content: 'inline' },
       ]} value="overview">
         {#snippet overview()}
           <p>The project is currently on track. Sprint velocity has increased by 12% compared to last quarter, with 3 features shipped ahead of schedule. Team capacity remains stable at 85%.</p>

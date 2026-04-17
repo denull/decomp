@@ -1,11 +1,13 @@
 <script>
   import { crossfade } from 'svelte/transition';
-  import { itemTitle, itemValue } from '../utils.js';
+  import { isSnippet, itemTitle, itemValue } from '../utils.js';
   import SelectionIndicator from './SelectionIndicator.svelte';
 
   let {
     /** @type {any} */
-    value = $bindable(null),
+    selected = $bindable(null),
+    /** @type {String} */
+    tabKey = 'id',
 
     /** @type {Array} */
     tabs = [],
@@ -17,8 +19,8 @@
   const uid = $props.id();
 
   const selectedTab = $derived(
-    value !== null &&
-    tabs.find(tab => value === itemValue(tab)) || null);
+    selected !== null &&
+    tabs.find(tab => selected === tab[tabKey]) || null);
   const [send, receive] = crossfade({ duration: (d) => Math.sqrt(d * 200) });
 </script>
 
@@ -27,7 +29,7 @@
 >
   <div class="tabs__head" role="tablist">
     {#each tabs as tab, i}
-      {@const isSelected = value === itemValue(tab)}
+      {@const isSelected = selected === tab[tabKey]}
       <div
         class={[
           'tabs__tab',
@@ -36,7 +38,7 @@
         role="tab"
         tabindex={isSelected ? 0 : -1}
         aria-selected={isSelected}
-        onclick={() => value = itemValue(tab)}>
+        onclick={() => selected = tab[tabKey]}>
         <SelectionIndicator
           class="tabs__indicator"
           key={`selection-${uid}`}
@@ -47,12 +49,16 @@
     {/each}
   </div>
   <div class="tabs__body" role="tabpanel">
-    {#if selectedTab?.component}
-    {@const Component = selectedTab.component}
-    <Component/>
-    {:else if selectedTab?.snippet}
-    {@render rest[selectedTab.snippet](selectedTab)}
+    {#if selectedTab?.content}
+      {#if typeof selectedTab.content === 'string'}
+        {@render rest[selectedTab.content](selectedTab)}
+      {:else if isSnippet(selectedTab.content)}
+        {@render selectedTab.content(selectedTab)}
+      {:else}
+        {@const Component = selectedTab.content}
+        <Component/>
+      {/if}
     {/if}
-    {@render children?.()}
+    {@render children?.(selectedTab)}
   </div>
 </div>
