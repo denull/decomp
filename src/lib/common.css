@@ -377,6 +377,7 @@ MARK: Switch
   .switch__thumb {
     --_position: var(--_off-position);
     position: absolute;
+    touch-action: none;
     transform: translateX(calc(1px * var(--_position)));
 
     &.is-dragged {
@@ -575,10 +576,11 @@ MARK: Dialog
     display: flex;
     align-items: center;
     justify-content: space-between;
+    touch-action: none;
+    user-select: none;
   }
 
   .dialog__title {
-    user-select: none;
   }
 
   .dialog__footer {

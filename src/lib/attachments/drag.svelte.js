@@ -7,9 +7,10 @@ export function drag(callback) {
       if (ev.button !== 0) {
         return;
       }
-      offPointerMove = on(document, 'pointermove', onPointerMove);
-      offPointerUp = on(document, 'pointerup', onPointerUp);
+      offPointerMove = on(el, 'pointermove', onPointerMove);
+      offPointerUp = on(el, 'pointerup', onPointerUp);
       first = last = [ev.clientX, ev.clientY];
+      el.setPointerCapture(ev.pointerId);
       el.classList.add('is-dragged');
       el.style.setProperty('--_drag-x', 0);
       el.style.setProperty('--_drag-y', 0);
