@@ -73,7 +73,7 @@ This is the largest category across all libraries — virtually every library sh
 | Component | Count | Naming variations | Description | Merging patterns | Svelte 5 recommendation |
 |-----------|-------|-------------------|-------------|-----------------|------------------------|
 | **Toggle / Toggle Button** | 15 | Toggle (Radix, Bits UI, Melt UI, shadcn, base-ui), ToggleButton (HeroUI, React Aria, PrimeReact), Button Toggle (Flowbite, Quasar) | Pressable on/off button | Distinct from Switch — this is a button that stays pressed | ✅ Ship as `Toggle`. |
-| **Toggle Group** | 12 | ToggleGroup (Radix, Bits UI, shadcn, base-ui, Skeleton), SegmentedControl (Radix Themes, Mantine, Chakra, Skeleton, Blueprint, SMUI), ButtonToggle (Quasar) | Mutually exclusive or multi-select button group | **Major naming split**: "Toggle Group" vs "Segmented Control" — same concept | ✅ Ship as `ToggleGroup`. "Segmented Control" is a variant/style of the same primitive. |
+| **Toggle Group** | 12 | Selector (Radix, Bits UI, shadcn, base-ui, Skeleton), SegmentedControl (Radix Themes, Mantine, Chakra, Skeleton, Blueprint, SMUI), ButtonToggle (Quasar) | Mutually exclusive or multi-select button group | **Major naming split**: "Toggle Group" vs "Segmented Control" — same concept | ✅ Ship as `Selector`. "Segmented Control" is a variant/style of the same primitive. |
 | **Rating** | 10 | Rating (daisyUI, Flowbite, Mantine, Quasar, PrimeReact), Rate (Ant Design), RatingGroup (Bits UI, Skeleton) | Star/icon-based rating input | Consistent concept across libraries | ✅ Ship as `RatingGroup` (Bits UI naming) — multiple items compose the rating. |
 
 ### Form structure
@@ -273,7 +273,7 @@ These 30 components form the absolute core. Every modern UI library includes the
 
 These 25 components round out a competitive library:
 
-- **PinInput**, **PasswordField**, **SearchField**, **TagsInput**, **RatingGroup**, **Toggle**, **ToggleGroup**, **ColorPicker** (with ColorArea, ColorSlider, ColorSwatch, ColorField)
+- **PinInput**, **PasswordField**, **SearchField**, **TagsInput**, **RatingGroup**, **Toggle**, **Selector**, **ColorPicker** (with ColorArea, ColorSlider, ColorSwatch, ColorField)
 - **DatePicker**, **DateField**, **DateRangePicker**, **TimeField**, **Calendar**, **RangeCalendar**
 - **Command** (⌘K palette), **NavigationMenu**, **Menubar**, **Sidebar**, **Stepper**, **TreeView**, **ScrollArea**, **Resizable**
 - **EmptyState**, **Meter**, **ProgressCircle**, **DataList**, **CopyButton**, **ListBox**

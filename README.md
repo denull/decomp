@@ -48,7 +48,7 @@ Wrap your app in `AppShell`, which handles theme loading and layout:
 - **Button** — Variants: `primary`, `destructive`, `ghost`. Sizes: `sm`/`md`/`lg`. Supports `icon`, `grouped`, `dropdown`.
 - **Checkbox** — Checkbox or radio (`variant="radio"`). Supports `group` binding for radio groups, `checked` binding for checkboxes.
 - **Switch** — Toggle switch with optional `label`.
-- **ToggleGroup** — Segmented control. Takes `options` array (strings or `{title, value}`), binds `value`.
+- **Selector** — Segmented control. Takes `options` array (strings or `{title, value}`), binds `value`.
 - **Icon** — Renders SVG-path (`"M..."`), CSS-only (`"css:name"`), raw SVG, or URL icons.
 
 ### Input
@@ -91,7 +91,7 @@ is-variant, is-selected     → state modifier (applied as class)
 Components use `variant` prop mapped to `is-<variant>` classes. Sizes use `is-sm`/`is-lg` (md is default, no class added).
 
 ### Shared Utilities
-- `itemTitle(item)` / `itemValue(item)` — normalize `string | {title, value}` items used across List, Tabs, ToggleGroup, Input select.
+- `itemTitle(item)` / `itemValue(item)` — normalize `string | {title, value}` items used across List, Tabs, Selector, Input select.
 - `.field` / `.field__label` — reusable label+control layout (used by Input, Slider, Progress, Switch).
 
 ## Development

@@ -11,7 +11,6 @@ export function drag(callback) {
       offPointerUp = on(el, 'pointerup', onPointerUp);
       first = last = [ev.clientX, ev.clientY];
       el.setPointerCapture(ev.pointerId);
-      el.classList.add('is-dragged');
       el.style.setProperty('--_drag-x', 0);
       el.style.setProperty('--_drag-y', 0);
       callback?.(0, 0, false);
@@ -28,7 +27,6 @@ export function drag(callback) {
         ev.preventDefault();
         callback?.(last[0] - first[0], last[1] - first[1], true);
       }
-      el.classList.remove('is-dragged');
       el.style.removeProperty('--_drag-x');
       el.style.removeProperty('--_drag-y');
       offPointerMove?.();

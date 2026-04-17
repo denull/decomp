@@ -152,15 +152,15 @@ MARK: Button
 }
 
 /**
-MARK: ToggleGroup
+MARK: Selector
 **/
 
-.toggle-group {
+.selector {
   border-radius: 9px;
   padding: 2px;
   background: var(--fill-tertiary);
 
-  .toggle-group__option {
+  .selector__option {
     font-size: var(--font-size-xs);
     font-weight: 600;
     color: var(--text);
@@ -169,7 +169,7 @@ MARK: ToggleGroup
     z-index: 1;
     transition: color 0.2s;
 
-    .toggle-group__indicator {
+    .selector__indicator {
       border-radius: 7px;
       background: light-dark(#fff, rgba(120,120,128,0.33));
       box-shadow:
@@ -338,10 +338,10 @@ MARK: Switch
     border-radius: 9999px;
     background: #fff;
     box-shadow: 0 1px 3px rgba(0,0,0,0.15), 0 1px 1px rgba(0,0,0,0.06);
+  }
 
-    &:not(.is-dragged) {
-      transition: transform 0.25s cubic-bezier(0.33, 1, 0.68, 1);
-    }
+  &:not(.is-dragged) .switch__thumb {
+    transition: transform 0.25s cubic-bezier(0.33, 1, 0.68, 1);
   }
 
   &.is-checked {

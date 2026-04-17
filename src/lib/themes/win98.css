@@ -197,13 +197,13 @@ MARK: Button
 }
 
 /**
-MARK: ToggleGroup
+MARK: Selector
 **/
 
-.toggle-group {
+.selector {
   border-radius: 8px;
 
-  .toggle-group__option {
+  .selector__option {
     display: flex;
     align-items: center;
     justify-content: center;

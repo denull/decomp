@@ -1,4 +1,4 @@
-import AppShell from '../src/lib/components/AppShell.svelte';
+import Appearance from '../src/lib/components/Appearance.svelte';
 
 /** @type { import('@storybook/svelte-vite').Preview } */
 const preview = {
@@ -56,7 +56,7 @@ const preview = {
 
   decorators: [
     (storyFn, context) => ({
-      Component: AppShell,
+      Component: Appearance,
       props: {
         theme: context.globals.theme,
         scheme: context.globals.scheme,

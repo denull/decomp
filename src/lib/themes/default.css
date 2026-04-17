@@ -278,16 +278,16 @@ MARK: Button
 }
 
 /**
-MARK: ToggleGroup
+MARK: Selector
 **/
 
-.toggle-group {
+.selector {
   border-radius: 8px;
   padding: 2px;
   background: var(--recess-background);
   box-shadow: var(--recess-shadow), var(--recess-border);
 
-  .toggle-group__option {
+  .selector__option {
     font-size: var(--font-size-sm);
     font-weight: 500;
     color: var(--text-muted);
@@ -304,7 +304,7 @@ MARK: ToggleGroup
       text-shadow: var(--ctrl-text-shadow);
     }
 
-    .toggle-group__indicator {
+    .selector__indicator {
       border-radius: 6px;
       background: linear-gradient(180deg,
         oklch(from var(--ctrl-surface) calc(l + 0.06) c h),
@@ -482,10 +482,10 @@ MARK: Switch
     border-radius: 9999px;
     background: var(--thumb-background);
     box-shadow: var(--thumb-shadow);
+  }
 
-    &:not(.is-dragged) {
-      transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1);
-    }
+  &:not(.is-dragged) .switch__thumb {
+    transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1);
   }
 
   &.is-checked {

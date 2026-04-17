@@ -1,10 +1,10 @@
 <script module>
   import { defineMeta } from '@storybook/addon-svelte-csf';
-  import ToggleGroup from '$lib/components/ToggleGroup.svelte';
+  import Selector from '$lib/components/Selector.svelte';
 
   const { Story } = defineMeta({
-    title: 'Primitives/ToggleGroup',
-    component: ToggleGroup,
+    title: 'Primitives/Selector',
+    component: Selector,
     tags: ['autodocs'],
     argTypes: {
       size: {
@@ -29,9 +29,9 @@
 <Story name="Sizes">
   {#snippet template()}
     <div style="display: flex; flex-direction: column; gap: 12px; align-items: flex-start;">
-      <ToggleGroup size="sm" options={['One', 'Two', 'Three']} value="One" />
-      <ToggleGroup size="md" options={['One', 'Two', 'Three']} value="Two" />
-      <ToggleGroup size="lg" options={['One', 'Two', 'Three']} value="Three" />
+      <Selector size="sm" options={['One', 'Two', 'Three']} value="One" />
+      <Selector size="md" options={['One', 'Two', 'Three']} value="Two" />
+      <Selector size="lg" options={['One', 'Two', 'Three']} value="Three" />
     </div>
   {/snippet}
 </Story>

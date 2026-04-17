@@ -18,7 +18,7 @@
 
 <div
   class={[
-    'toggle-group',
+    'selector',
     size != 'md' && `is-${size}`,
   ]}
   role="radiogroup"
@@ -26,14 +26,14 @@
   {#each options as option (itemValue(option))}
     {@const isSelected = value === itemValue(option)}
     <div
-      class={['toggle-group__option', value === itemValue(option) && 'is-selected']}
+      class={['selector__option', value === itemValue(option) && 'is-selected']}
       role="radio"
       tabindex={isSelected ? 0 : -1}
       aria-checked={isSelected}
       onclick={() => value = itemValue(option)}
     >
       <SelectionIndicator
-        class="toggle-group__indicator"
+        class="selector__indicator"
         key={`selection-${uid}`}
         {send} {receive}
         visible={isSelected}/>

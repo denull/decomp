@@ -54,11 +54,12 @@
     {/if}
     <main class="app-shell__main">
       {@render children?.()}
+    
+      {#if footer}
+        <div class="app-shell__footer">
+          {@render footer()}
+        </div>
+      {/if}
     </main>
   </div>
-  {#if footer}
-    <div class="app-shell__footer">
-      {@render footer()}
-    </div>
-  {/if}
 </div>

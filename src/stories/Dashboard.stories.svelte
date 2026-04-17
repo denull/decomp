@@ -9,12 +9,12 @@
   import Table from '$lib/components/Table.svelte';
   import Checkbox from '$lib/components/Checkbox.svelte';
   import Progress from '$lib/components/Progress.svelte';
-  import ToggleGroup from '$lib/components/ToggleGroup.svelte';
+  import Selector from '$lib/components/Selector.svelte';
   import Switch from '$lib/components/Switch.svelte';
   import Slider from '$lib/components/Slider.svelte';
   import Spinner from '$lib/components/Spinner.svelte';
   import Dialog from '$lib/components/Dialog.svelte';
-    import Field from '$lib/components/Field.svelte';
+  import Field from '$lib/components/Field.svelte';
 
   const { Story } = defineMeta({
     title: 'Dashboard',
@@ -70,7 +70,7 @@
       </div>
       <hr class="separator">
       <div class="card__title">Toggle Group</div>
-      <ToggleGroup options={['Day', 'Week', 'Month']} value="Day"/>
+      <Selector options={['Day', 'Week', 'Month']} value="Day"/>
     </section>
 
     <!-- ---- Form Controls ---- -->

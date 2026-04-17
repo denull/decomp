@@ -26,11 +26,11 @@ Decomp is a themable Svelte 5 component library. Components provide minimal stru
 
 ## Conventions
 
-- Items (in List, Tabs, ToggleGroup, Input select) use a unified `string | {title, value}` format, normalized via `itemTitle()`/`itemValue()`.
+- Items (in List, Tabs, Selector, Input select) use a unified `string | {title, value}` format, normalized via `itemTitle()`/`itemValue()`.
 - The `.field` + `.field__label` pattern is reused by Input, Slider, Progress, Switch for labeled controls. Check `inline` prop for horizontal layout.
 - Themes use `light-dark()` CSS function for light/dark scheme support.
 - Component-private CSS custom properties use `--_` prefix (e.g., `--_progress`, `--_selected-tab`).
-- CSS anchor positioning is used for animated selection indicators (Tabs, ToggleGroup).
+- CSS anchor positioning is used for animated selection indicators (Tabs, Selector).
 
 ## Commands
 

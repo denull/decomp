@@ -7,7 +7,7 @@ export { default as Button } from './components/Button.svelte';
 export { default as Input } from './components/Input.svelte';
 export { default as Checkbox } from './components/Checkbox.svelte';
 export { default as Switch } from './components/Switch.svelte';
-export { default as ToggleGroup } from './components/ToggleGroup.svelte';
+export { default as Selector } from './components/Selector.svelte';
 
 export { default as Slider } from './components/Slider.svelte';
 export { default as Progress } from './components/Progress.svelte';

@@ -74,19 +74,19 @@ This library follows these principles:
 
 #### 2. SegmentedControl
 
-**Merges:** ToggleGroup, SegmentedControl, ButtonToggle
+**Merges:** Selector, SegmentedControl, ButtonToggle
 
 **Implementation across libraries:** 12/28
 
 **What it does:** A group of mutually exclusive (or multi-select) options presented as connected buttons. Used for view switchers, filter modes, format toggles.
 
 **Naming in other libraries:**
-- ToggleGroup (Radix, Bits UI, shadcn, base-ui, Skeleton)
+- Selector (Radix, Bits UI, shadcn, base-ui, Skeleton)
 - SegmentedControl (Radix Themes, Mantine, Chakra, Blueprint, SMUI)
 - ButtonToggle (Quasar)
 - Tabs (when used for non-panel-switching selection)
 
-**Merging patterns observed:** Some libraries treat this as ToggleGroup (multiple selection allowed) vs SegmentedControl (single selection). The distinction is a prop, not separate components.
+**Merging patterns observed:** Some libraries treat this as Selector (multiple selection allowed) vs SegmentedControl (single selection). The distinction is a prop, not separate components.
 
 **Recommended API:**
 

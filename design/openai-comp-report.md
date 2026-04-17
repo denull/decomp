@@ -8,7 +8,7 @@ Below is a **merged, canonical list of UI components** drawn from the surveyed l
 
 - **IconButton / CloseButton** (many libs).  Variants of Button with only an icon (often for toggling or closing). Chakra has “Close Button”【31†L36-L44】 and an `IconButton`. HeroUI has “CloseButton”【27†L13-L19】.  Include as a special `<IconButton>` (or allow `iconOnly` prop on Button) and `<CloseButton>`.  Props: `on:click`, `aria-label`, etc.  
 
-- **Button Group / Toggle Group** (10+ libs).  Group of related buttons (e.g. toggle buttons). Called “ButtonGroup” or “ToggleGroup” in Shadcn【7†L135-L144】, Base UI【19†L37-L40】, Chakra (“SegmentedControl”)【31†L36-L44】.  Use component like `<ButtonGroup>` or `<ToggleGroup>` with child `<Button>`s.  API: accept an array of options or slots; manage exclusive vs. multiple selection.  
+- **Button Group / Toggle Group** (10+ libs).  Group of related buttons (e.g. toggle buttons). Called “ButtonGroup” or “Selector” in Shadcn【7†L135-L144】, Base UI【19†L37-L40】, Chakra (“SegmentedControl”)【31†L36-L44】.  Use component like `<ButtonGroup>` or `<Selector>` with child `<Button>`s.  API: accept an array of options or slots; manage exclusive vs. multiple selection.  
 
 - **Badge / Chip / Tag** (≈10 libs).  Small labels for status or categories. Called “Badge” in Shadcn【7†L135-L144】, Chakra【31†L78-L84】; “Tag” or “Chip” in others (Mantine has “Badge” and “Chip”; HeroUI has “TagGroup” for group of chips【27†L13-L19】).  Should include as `<Badge>` (alias `<Tag>`), with props for color/variant.  Often used within content or on buttons.  
 
@@ -136,7 +136,7 @@ Below is a **merged, canonical list of UI components** drawn from the surveyed l
 
 - Many components are **common across almost all libraries**. For example, **Button**, **Checkbox**, **Radio**, **Input**, **Select**, **Tabs**, **Dialog**, **Tooltip**, **Popover**, **Menu**, **Alert**, **Avatar**, **Badge**, and **Card** appear in 15–20+ of the libraries we checked【7†L135-L144】【19†L37-L40】. These are essential and should be included. Naming is fairly consistent: e.g. always “Button”, “Checkbox”, “Select”. In cases of variance (e.g. some call a radio group an “OptionButton” or “Toggle” for a switch), we recommend the common name (Button, Checkbox, Switch/Toggle). For instance, 98.css calls a radio button “OptionButton”【1†L15-L19】, but most modern libs call it “Radio” or “RadioGroup” – use **RadioGroup** with **<Radio>** children.
 
-- **Merged concepts:** Some libraries combine concepts (e.g. a combined `InputGroup` that holds multiple inputs, or `ToggleGroup` merging multiple toggles). We prefer breaking these into atomic components (e.g. separate `<ToggleGroup>` and `<ButtonGroup>` as wrappers rather than monolithic ones), so each component does one job and can be composed as needed.
+- **Merged concepts:** Some libraries combine concepts (e.g. a combined `InputGroup` that holds multiple inputs, or `Selector` merging multiple toggles). We prefer breaking these into atomic components (e.g. separate `<Selector>` and `<ButtonGroup>` as wrappers rather than monolithic ones), so each component does one job and can be composed as needed.
 
 - **Semantic grouping:** The above groups (Forms, Navigation, Feedback, Data) reflect typical organization. In a Svelte component library, we’d likely structure folders or docs similarly.
 

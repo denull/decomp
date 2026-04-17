@@ -88,6 +88,11 @@ Some other notable projects:
 - [Utopia](https://utopia.fyi/) - responsive font sizes and spaces
 - [cu.css](https://cu.harrycresswell.com/) - based on Utopia
 
+Mobile-first frameworks:
+- [Ionic Framework](https://ionicframework.com/)
+- [Framework7](https://framework7.io/)
+- [Onsen UI](https://onsen.io/)
+
 ## Philosophy
 
 When deciding whether to make separate components or merge into one (as variants): more components = more code, more imports, need to style all comps for each theme (one comp with variants -> simply fallbacks to default). Each component code contains mostly logic, not visual appearance (it's defined by theme) - if two components behave (almost) identically and have very similar semantics, they probably should be merged.
