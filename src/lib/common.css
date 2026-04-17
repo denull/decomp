@@ -355,7 +355,7 @@ MARK: Switch
 .switch {
   /** Switch MUST define --_off-position and --_on-position values and they MUST be in pixels (without `px`) **/
   /** Otherwise thumb dragging will break **/
-  
+
   position: relative;
   display: inline-flex;
   align-items: center;
@@ -489,6 +489,10 @@ MARK: List
     display: flex;
     flex-direction: column;
     flex: 1;
+  }
+
+  .list-item__accessory {
+    display: flex;
   }
 }
 

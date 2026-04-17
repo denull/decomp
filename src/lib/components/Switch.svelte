@@ -7,6 +7,8 @@
     checked = $bindable(false),
     /** @type {String | null} */
     label = null,
+    /** @type {boolean} */
+    disabled = $bindable(false),
   } = $props();
 
   let maxDist = 0;
@@ -25,6 +27,7 @@
     class={[
       'switch', 
       checked && `is-checked`,
+      disabled && `is-disabled`,
     ]}
     style:--_initial-position={initialPosition !== null && initialPosition}
     role="switch"

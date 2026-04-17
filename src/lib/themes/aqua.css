@@ -364,7 +364,7 @@ MARK: Switch
 .switch {
   --_off-position: 2;
   --_on-position: 18;
-  
+
   &::before {
     width: 38px;
     height: 22px;
@@ -688,7 +688,6 @@ MARK: List
 
   .list-item__accessory {
     color: #999;
-    opacity: 0.5;
     flex-shrink: 0;
     padding-left: 10px;
   }

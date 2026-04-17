@@ -463,7 +463,7 @@ MARK: Switch
 .switch {
   --_off-position: 1;
   --_on-position: 23;
-  
+
   &::before {
     width: 54px;
     height: 22px;
@@ -484,7 +484,7 @@ MARK: Switch
     box-shadow: var(--thumb-shadow);
 
     &:not(.is-dragged) {
-      transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+      transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1);
     }
   }
 
@@ -757,7 +757,6 @@ MARK: List
 
   .list-item__accessory {
     color: var(--text-muted);
-    opacity: 0.5;
     flex-shrink: 0;
     padding-left: 12px;
   }

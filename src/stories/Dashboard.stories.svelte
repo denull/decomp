@@ -254,34 +254,34 @@
           <ListItem accessory="chevron">
             Dashboard Redesign
             {#snippet description()}
-              Frontend team &middot; Due Mar 15
+              Frontend team · Due Mar 15
             {/snippet}
           </ListItem>
           <ListItem accessory="chevron">
             API Migration
             {#snippet description()}
-              Backend team &middot; Due Apr 1
+              Backend team · Due Apr 1
             {/snippet}
           </ListItem>
           <ListItem accessory="chevron">
             Mobile App v2
             {#snippet description()}
-              Mobile team &middot; Due Apr 20
+              Mobile team · Due Apr 20
             {/snippet}
           </ListItem>
         </ListSection>
 
         <ListSection header="Completed">
-          <ListItem accessory="chevron">
+          <ListItem accessory="switch">
             Brand Guidelines
             {#snippet description()}
-              Design team &middot; Feb 28
+              Design team · Feb 28
             {/snippet}
           </ListItem>
-          <ListItem accessory="chevron">
+          <ListItem accessory="switch">
             Security Audit
             {#snippet description()}
-              DevOps team &middot; Mar 1
+              DevOps team · Mar 1
             {/snippet}
           </ListItem>
         </ListSection>

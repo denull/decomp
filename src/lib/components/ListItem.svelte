@@ -1,9 +1,13 @@
 <script>
+    import Switch from './Switch.svelte';
+
   let {
     /** @type {null | 'primary' | 'destructive'} */
     variant = null,
     /** @type {boolean} */
     selected = false,
+    /** @type {any} */
+    value = $bindable(null),
     /** @type {boolean} */
     disabled = false,
     /** @type {import('svelte').Snippet | undefined} */
@@ -49,8 +53,8 @@
       <div class="list-item__accessory">
         {#if accessory == 'chevron'}
           <svg class="list-chevron" width="7" height="12" viewBox="0 0 7 12" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M1 1l5 5-5 5"></path></svg>
-        {:else if accessory == 'toggle'}
-          <!-- bind:value={value} bind:this={toggleRef} {disabled} {oninput}/-->
+        {:else if accessory == 'switch'}
+          <Switch bind:checked={value} {disabled}/>
         {/if}
       </div>
     {/if}
