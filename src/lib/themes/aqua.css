@@ -67,22 +67,6 @@
 MARK: Icon
 **/
 .icon {
-
-  &.icon-close {
-    &::before, &::after {
-      content: '';
-      width: calc(var(--_size) * 0.5);
-      height: var(--_stroke);
-      background: currentColor;
-      border-radius: 9999px;
-    }
-    &::before {
-      transform: rotate(45deg);
-    }
-    &::after {
-      transform: rotate(-45deg);
-    }
-  }
 }
 
 /**
@@ -378,6 +362,9 @@ MARK: Switch
 **/
 
 .switch {
+  --_off-position: 2;
+  --_on-position: 18;
+  
   &::before {
     width: 38px;
     height: 22px;
@@ -389,8 +376,6 @@ MARK: Switch
   }
 
   .switch__thumb {
-    --_off-position: 2px;
-    --_on-position: 18px;
     top: 2px;
     left: 0px;
     width: 18px;

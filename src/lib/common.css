@@ -353,10 +353,14 @@ MARK: Switch
 **/
 
 .switch {
+  /** Switch MUST define --_off-position and --_on-position values and they MUST be in pixels (without `px`) **/
+  /** Otherwise thumb dragging will break **/
+  
   position: relative;
   display: inline-flex;
   align-items: center;
   cursor: pointer;
+  user-select: none;
 
   &::before {
     content: '';
@@ -365,8 +369,11 @@ MARK: Switch
   .switch__thumb {
     --_position: var(--_off-position);
     position: absolute;
-    transform: translateX(calc(clamp(var(--_off-position), var(--_position) + var(--_drag-x, 0px), var(--_on-position))));
-    user-select: none;
+    transform: translateX(calc(1px * var(--_position)));
+
+    &.is-dragged {
+      transform: translateX(calc(1px * clamp(var(--_off-position), var(--_initial-position) + var(--_drag-x), var(--_on-position))));
+    }
   }
 
   &.is-checked .switch__thumb {
@@ -542,8 +549,8 @@ MARK: Dialog
 .dialog {
   margin: auto;
   transform: translate(
-    calc(var(--_offset-x) + var(--_drag-x, 0px)),
-    calc(var(--_offset-y) + var(--_drag-y, 0px))
+    calc(1px * (var(--_offset-x) + var(--_drag-x, 0))),
+    calc(1px * (var(--_offset-y) + var(--_drag-y, 0)))
   );
 
   &[open] {

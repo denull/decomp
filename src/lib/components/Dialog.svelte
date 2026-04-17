@@ -47,10 +47,10 @@
     variant && `is-${variant}`,
     draggable && `is-draggable`,
   ]}
-  style={`
-    --_offset-x: ${offset[0]}px; --_offset-y: ${offset[1]}px;
-    ${dragging && `--_drag-x: ${dragging[0]}px; --_drag-y: ${dragging[1]}px`}
-  `}
+  style:--_offset-x={offset[0]}
+  style:--_offset-y={offset[1]}
+  style:--_drag-x={dragging && dragging[0]}
+  style:--_drag-y={dragging && dragging[1]}
 >
   <div class="dialog__header"
     {@attach draggable && drag((dx, dy, final) => {

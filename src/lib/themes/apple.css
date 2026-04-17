@@ -319,6 +319,9 @@ MARK: Switch
 **/
 
 .switch {
+  --_off-position: 2;
+  --_on-position: 22;
+  
   &::before {
     width: 51px;
     height: 31px;
@@ -328,8 +331,6 @@ MARK: Switch
   }
 
   .switch__thumb {
-    --_off-position: 2px;
-    --_on-position: 22px;
     top: 2px;
     left: 0px;
     width: 27px;
