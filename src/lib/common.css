@@ -221,6 +221,7 @@ MARK: Button
   font-family: inherit;
   font-size: var(--font-size);
   outline: none;
+  -webkit-tap-highlight-color: transparent;
 
   &:disabled {
     cursor: default;
@@ -267,6 +268,7 @@ MARK: ToggleGroup
   display: inline-flex;
   width: fit-content;
   user-select: none;
+  -webkit-tap-highlight-color: transparent;
 
   .toggle-group__option {
     position: relative;
@@ -335,6 +337,7 @@ MARK: Checkbox
   align-items: center;
   cursor: pointer;
   user-select: none;
+  -webkit-tap-highlight-color: transparent;
 
   > input {
     appearance: none;
@@ -364,6 +367,11 @@ MARK: Switch
 
   &::before {
     content: '';
+  }
+
+  &.is-disabled {
+    opacity: 0.5;
+    pointer-events: none;
   }
 
   .switch__thumb {
@@ -478,6 +486,7 @@ MARK: List
     text-align: inherit;
     cursor: inherit;
     color: inherit;
+    -webkit-tap-highlight-color: transparent;
   }
 
   &.is-selected {

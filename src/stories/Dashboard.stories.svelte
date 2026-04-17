@@ -125,7 +125,7 @@
         {/snippet}
         {#snippet settings()}
           <Switch label="Compact view"/>
-          <Switch label="Show archived"/>
+          <Switch label="Show archived" checked disabled/>
         {/snippet}
         {#snippet inline()}
           <div class="row">

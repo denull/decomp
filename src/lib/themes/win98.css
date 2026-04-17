@@ -387,6 +387,18 @@ MARK: Switch
     flex-shrink: 0;
   }
 
+  &.is-disabled {
+    opacity: 1;
+
+    &::before {
+      background: silver;
+    }
+
+    &.is-checked::before {
+      background: #888;
+    }
+  }
+
   .switch__thumb {
     top: 0px;
     left: 0px;
