@@ -18,7 +18,7 @@
 
   const uid = $props.id();
 
-  const selectedTab = $derived(
+  const tab = $derived(
     selected !== null &&
     tabs.find(tab => selected === tab[tabKey]) || null);
   const [send, receive] = crossfade({ duration: (d) => Math.sqrt(d * 200) });
@@ -49,16 +49,16 @@
     {/each}
   </div>
   <div class="tabs__body" role="tabpanel">
-    {#if selectedTab?.content}
-      {#if typeof selectedTab.content === 'string'}
-        {@render rest[selectedTab.content](selectedTab)}
-      {:else if isSnippet(selectedTab.content)}
-        {@render selectedTab.content(selectedTab)}
+    {#if tab?.content}
+      {#if typeof tab.content === 'string'}
+        {@render rest[tab.content](tab.props)}
+      {:else if isSnippet(tab.content)}
+        {@render tab.content(tab.props)}
       {:else}
-        {@const Component = selectedTab.content}
-        <Component/>
+        {@const Component = tab.content}
+        <Component ...tab.props/>
       {/if}
     {/if}
-    {@render children?.(selectedTab)}
+    {@render children?.(tab)}
   </div>
 </div>

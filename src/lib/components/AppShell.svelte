@@ -1,9 +1,10 @@
 <script>
-    import { setContext } from 'svelte';
+  import { setContext } from 'svelte';
   import Appearance from './Appearance.svelte';
   import Button from './Button.svelte';
-    import { isSnippet } from '$lib/utils.js';
-    import { SvelteMap } from 'svelte/reactivity';
+  import { isSnippet } from '$lib/utils.js';
+  import { SvelteMap } from 'svelte/reactivity';
+    import { fly } from 'svelte/transition';
 
   let {
     /** @type {String} */
@@ -16,6 +17,8 @@
     title = null,
     /** @type {import('svelte').Snippet | null} */
     header = null,
+    /** @type {Boolean} */
+    withHeader = null,
     /** @type {import('svelte').Snippet | null} */
     footer = null,
     /** @type {import('svelte').Snippet | null} */
@@ -35,8 +38,23 @@
 
   let stacks = new SvelteMap();
 
+  let shouldDisplayHeader = $derived(
+    header ||
+    title ||
+    withHeader
+  );
+
+  let page = $derived(stacks.get(selected) &&
+    stacks.get(selected)[stacks.get(selected).length - 1]);
+
   $effect(() => {
-    if (!sections) return;
+    if (!sections) {
+      stacks.set(null, [{
+        title,
+        content: children,
+      }]);
+      return;
+    }
     for (const section of sections) {
       if (!stacks.has(section[sectionKey])) {
         // TODO: for now, simply storing section itself as a root page
@@ -44,7 +62,6 @@
         stacks.set(section[sectionKey], [section]);
       }
     }
-    console.log(sections, stacks);
   });
 
   export function push(page) {
@@ -52,8 +69,14 @@
     stacks.set(selected, [...stacks.get(selected), page]);
   }
 
+  export function pop() {
+    if (!selected || !stacks.has(selected)) return;
+    const stack = stacks.get(selected);
+    stacks.set(selected, stack.slice(0, stack.length - 1));
+  }
+
   setContext('nav', {
-    push,
+    push, pop,
     section: selected,
   });
 </script>
@@ -67,49 +90,60 @@
     sidebarOpen && `is-sidebar-open`,
   ]}
 >
-  {#if header || sidebar || title}
+  {#if shouldDisplayHeader}
     <header class="app-shell__header">
+      {#if stacks.has(selected) && stacks.get(selected).length > 1}
+      <Button
+        class="app-shell__back-button"
+        variant="ghost"
+        onclick={pop}
+      >&lt; {stacks.get(selected)[stacks.get(selected).length - 2].title || 'Back'}</Button>
+      {/if}
       <Button
         class="app-shell__sidebar-toggle"
         icon="css:sidebar"
         onclick={() => sidebarOpen = !sidebarOpen}
       />
-      {#if title}
-        <div class="app-shell__title">{title}</div>
+      {#if page?.title}
+        <div class="app-shell__title">{page.title}</div>
       {/if}
       {@render header?.()}
     </header>
+    <!-- this is another potential location for dock (below/inside header) -->
   {/if}
   <div class="app-shell__body">
+    <!-- this is another potential location for dock (to the left of sidebar) -->
     {#if sidebar}
       <nav class="app-shell__sidebar">
         {@render sidebar()}
       </nav>
     {/if}
     <main class="app-shell__main">
-      {#if sections}
-        {#if stacks.has(selected)}
-          {#each stacks.get(selected) as page}
-            <div class="app-shell__page">
-              {#if typeof page.content === 'string'}
-                {@render rest[page.content](page)}
-              {:else if isSnippet(page.content)}
-                {@render page.content(page)}
-              {:else}
-                {@const Component = page.content}
-                <Component/>
-              {/if}
-            </div>
-          {/each}
-        {/if}
-      {:else}
-        {@render children?.()}
-      
-        {#if footer}
-          <div class="app-shell__footer">
-            {@render footer()}
+      {#if stacks.has(selected)}
+        {#each stacks.get(selected) as page, i}
+          <div
+            class={[
+              'app-shell__page',
+              i < stacks.get(selected).length - 1 && 'is-covered',
+            ]}
+            transition:fly={{ x: 200, duration: 320 }}
+          >
+            {#if typeof page.content === 'string'}
+              {@render rest[page.content](page.props)}
+            {:else if isSnippet(page.content)}
+              {@render page.content(page.props)}
+            {:else}
+              {@const Component = page.content}
+              <Component ...page.props/>
+            {/if}
+
+            {#if footer}
+              <div class="app-shell__footer">
+                {@render footer()}
+              </div>
+            {/if}
           </div>
-        {/if}
+        {/each}
       {/if}
     </main>
   </div>

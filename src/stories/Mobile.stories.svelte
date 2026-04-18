@@ -28,19 +28,19 @@
 
   let shell = $state();
 
-  function gotoX() {
+  function gotoX(depth) {
     shell.push({
-      title: 'Child',
+      title: `Child at depth ${depth}`,
       content: tasks,
-      props: { id: 1 },
+      props: { depth },
     });
   }
 </script>
 
-{#snippet tasks()}
+{#snippet tasks({ depth })}
   <List>
     <ListSection header="Section 1">
-      <ListItem accessory="chevron" onclick={gotoX}>X</ListItem>
+      <ListItem accessory="chevron" onclick={() => gotoX(depth + 1)}>Go deeper!</ListItem>
       <ListItem>Y</ListItem>
       <ListItem accessory="switch">Z</ListItem>
     </ListSection>
@@ -52,10 +52,11 @@
     id: 'tasks',
     title: 'Tasks',
     content: tasks,
+    props: { depth: 0 },
   }, {
     id: 1,
     title: 'Tab 2',
-  }]} selected="tasks"/>
+  }]} selected="tasks" withHeader/>
 </Story>
 <style>
   
