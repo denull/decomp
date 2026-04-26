@@ -34,8 +34,14 @@
 
   /** Other props like --surface-{0-2}, --text, --space, --radius should be defined by theme **/
 
-  font-family: var(--font-system-ui);
-  font-size: var(--font-size);
+  --font-family: var(--font-system-ui);
+  --font: var(--font-size) var(--font-family);
+  --font-lg: var(--font-size-lg) var(--font-family);
+  --font-xl: var(--font-size-xl) var(--font-family);
+  --font-2xl: var(--font-size-2xl) var(--font-family);
+  --font-3xl: var(--font-size-3xl) var(--font-family);
+
+  font: var(--font);
   color-scheme: light dark;
   background: var(--surface-0);
   color: var(--text);
@@ -100,12 +106,21 @@ MARK: AppShell
   }
 
   .app-shell__header {
+    position: sticky;
+    top: 0;
+    height: var(--_header-height);
     display: flex;
     align-items: center;
-    padding: var(--space);
+    padding: 0 var(--space);
     gap: var(--space);
     z-index: 30;
     background: var(--surface-0);
+  }
+
+  &.is-static-header {
+    .app-shell__header {
+      position: static;
+    }
   }
 
   .app-shell__sidebar-toggle {
@@ -128,21 +143,26 @@ MARK: AppShell
     display: flex;
     flex-direction: column;
     gap: var(--space);
+    position: sticky;
+    top: calc(var(--_header-height));
+    height: calc(100vh - var(--_header-height));
+    padding-left: var(--space);
   }
 
   .app-shell__main {
     flex: 1;
     position: relative;
-    overflow: hidden;
+    max-width: 100%;
   }
 
   .app-shell__page {
-    position: absolute;
     background: var(--surface-0);
+    /*position: absolute;
     top: 0;
     left: 0;
     right: 0;
     bottom: 0;
+    overflow: auto;*/
     padding-inline: var(--space);
     
     display: flex;
@@ -183,9 +203,9 @@ MARK: AppShell
     }
 
     .app-shell__sidebar {
-      position: absolute;
+      position: fixed;
       left: 0;
-      top: 0;
+      top: var(--_header-height);
       bottom: 0;
       z-index: 20;
       background: var(--surface-0);
@@ -244,7 +264,6 @@ MARK: Button
   isolation: isolate;
   cursor: pointer;
   border: none;
-  align-self: start;
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -268,6 +287,10 @@ MARK: Button
     padding: 0;
     align-items: center;
     justify-items: center;
+  }
+
+  &.is-fullwidth {
+    flex: 1;
   }
 
   .button__back {
@@ -546,11 +569,12 @@ MARK: Table
   display: flex;
   flex-direction: column;
   overflow-x: auto;
+  cursor: default;
 
   table {
     table-layout: fixed;
   
-    > thead > tr > th {
+    > thead > tr > th.is-sortable {
       cursor: pointer;
     }
 

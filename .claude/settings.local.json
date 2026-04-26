@@ -1,0 +1,10 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(nslookup vk.com)",
+      "Bash(nslookup mail.ru)",
+      "Bash(nslookup wildberries.ru)",
+      "Bash(nslookup lamoda.ru)"
+    ]
+  }
+}

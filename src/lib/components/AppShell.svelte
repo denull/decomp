@@ -2,9 +2,9 @@
   import { setContext } from 'svelte';
   import Appearance from './Appearance.svelte';
   import Button from './Button.svelte';
-  import { isSnippet } from '$lib/utils.js';
   import { SvelteMap } from 'svelte/reactivity';
-    import { fly } from 'svelte/transition';
+  import { fly } from 'svelte/transition';
+  import ViewRenderer from './ViewRenderer.svelte';
 
   let {
     /** @type {String} */
@@ -31,8 +31,6 @@
     sections = null,
     /** @type {any} */
     selected = $bindable(null),
-    /** @type {String} */
-    sectionKey = 'id',
     ...rest
   } = $props();
 
@@ -50,16 +48,16 @@
   $effect(() => {
     if (!sections) {
       stacks.set(null, [{
+        id: null,
         title,
-        content: children,
       }]);
       return;
     }
     for (const section of sections) {
-      if (!stacks.has(section[sectionKey])) {
+      if (!stacks.has(section.id)) {
         // TODO: for now, simply storing section itself as a root page
         // This may not always work
-        stacks.set(section[sectionKey], [section]);
+        stacks.set(section.id, [section]);
       }
     }
   });
@@ -128,15 +126,7 @@
             ]}
             transition:fly={{ x: 200, duration: 320 }}
           >
-            {#if typeof page.content === 'string'}
-              {@render rest[page.content](page.props)}
-            {:else if isSnippet(page.content)}
-              {@render page.content(page.props)}
-            {:else}
-              {@const Component = page.content}
-              <Component ...page.props/>
-            {/if}
-
+            <ViewRenderer view={page.view} fallback={children} data={page.data} {...rest}/>
             {#if footer}
               <div class="app-shell__footer">
                 {@render footer()}
@@ -147,7 +137,7 @@
       {/if}
     </main>
   </div>
-  <div class="app-shell__dock">
+  <!--div class="app-shell__dock">
     {JSON.stringify(sections)}
-  </div>
+  </div-->
 </div>

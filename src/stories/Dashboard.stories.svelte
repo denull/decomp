@@ -35,7 +35,7 @@
   <header class="header">
     <div>
       <h1>UI Components</h1>
-      <p>Dashboard Showcase</p>
+      <p>Dashboard Showcase Демо</p>
     </div>
   </header>
 
@@ -45,6 +45,7 @@
     <!-- ---- Buttons ---- -->
     <section class="card">
       <div class="card__title">Buttons</div>
+      
       <div class="row">
         <Button>Default</Button>
         <Button variant="primary">Primary</Button>
@@ -110,11 +111,11 @@
     <section class="card tabs">
       <div class="card__title">Tabs</div>
       <Tabs tabs={[
-        { title: 'Overview', value: 'overview', content: 'overview' },
-        { title: 'Activity', value: 'activity', content: 'activity' },
-        { title: 'Settings', value: 'settings', content: 'settings' },
-        { title: 'Inline controls', value: 'inline', content: 'inline' },
-      ]} value="overview">
+        { id: 'overview', title: 'Overview', view: 'overview' },
+        { id: 'activity', title: 'Activity', view: 'activity' },
+        { id: 'settings', title: 'Settings', view: 'settings' },
+        { id: 'inline', title: 'Inline controls', view: 'inline' },
+      ]} selected="overview">
         {#snippet overview()}
           <p>The project is currently on track. Sprint velocity has increased by 12% compared to last quarter, with 3 features shipped ahead of schedule. Team capacity remains stable at 85%.</p>
         {/snippet}
@@ -171,11 +172,11 @@
     <section class="card span-2">
       <div class="card__title">Team Members</div>
       <Table columns={[
-        { title: 'Name', snippet: 'name' },
+        { title: 'Name', value: 'name', view: 'name' },
         { title: 'Role', value: 'role' },
         { title: 'Department', value: 'department' },
-        { title: 'Status', snippet: 'status' },
-        { title: '', snippet: 'actions' },
+        { title: 'Status', value: 'status', view: 'status' },
+        { title: '', view: 'actions' },
       ]} rows={[{
         name: 'Alice Chen',
         role: 'Frontend Developer',
@@ -396,7 +397,7 @@
   }
   .metric-value {
     display: block;
-    font-size: var(--font-size-3xl);
+    font: var(--font-3xl);
     font-weight: 700;
     margin: 6px 0 4px;
     color: var(--text);

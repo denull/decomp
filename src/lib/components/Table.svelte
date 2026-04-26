@@ -44,10 +44,13 @@
     <thead>
       <tr>
         {#each columns as col, j}
-          <th onclick={() => sortedBy = 
+          {@const sortable = 'value' in col}
+          <th class={[
+            sortable && 'is-sortable',
+          ]} onclick={sortable && (() => sortedBy = 
             sortedBy.length == 1 && sortedBy[0].index == j ?
             [{ index: j, order: -sortedBy[0].order }] :
-            [{ index: j, order: 1 }]}>{col.title}</th>
+            [{ index: j, order: 1 }]) || null}>{col.title}</th>
         {/each}
       </tr>
     </thead>
@@ -55,8 +58,8 @@
       {#each sortedRows as row, i}
       <tr class={[selected === row[rowKey] && 'is-selected']} onclick={() => selected = row[rowKey]}>
         {#each columns as col, j}
-          {#if col.snippet}
-          {@render rest[col.snippet](row, col, i, j, rows)}
+          {#if col.view}
+          {@render rest[col.view](row, col, i, j, rows)}
           {:else}
           <td>{formatCell(row, col)}</td>
           {/if}

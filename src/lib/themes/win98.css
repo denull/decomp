@@ -1,6 +1,8 @@
 /* Based on 98.css */
 
 [data-theme="win98"] {
+  color-scheme: light;
+
   /** Common props (can be safely used in userland code independently from chosen theme **/
 
   --surface-0: #c0c0c0;
@@ -37,6 +39,9 @@
   --font-size-2xs: 9px;
   --font-size-3xs: 9px;
 
+  --font: var(--font-size) "Pixelated MS Sans Serif @8pt", Arial;
+  --font-3xl: var(--font-size-3xl) "Pixelated MS Sans Serif @10pt", Arial;
+
   /** Theme-specific props **/
 
   /* Color */
@@ -54,12 +59,18 @@
 
   /* Borders */
   --border-width: 1px;
+  --border-slightly-raised:
+    inset -1px -1px var(--button-shadow),
+    inset 1px 1px var(--button-highlight);
   --border-raised-outer:
     inset -1px -1px var(--window-frame),
     inset 1px 1px var(--button-highlight);
   --border-raised-inner:
     inset -2px -2px var(--button-shadow),
     inset 2px 2px var(--button-face);
+  --border-slightly-sunken:
+    inset -1px -1px var(--button-highlight),
+    inset 1px 1px var(--button-shadow);
   --border-sunken-outer:
     inset -1px -1px var(--button-highlight),
     inset 1px 1px var(--window-frame);
@@ -107,8 +118,12 @@
 }
 
 * {
-  font-family: "Pixelated MS Sans Serif", Arial;
+  font: var(--font);
   -webkit-font-smoothing: none;
+}
+
+h1, h2, h3 {
+  font-family: "Pixelated MS Sans Serif @10pt", Arial;
 }
 
 /**
@@ -166,7 +181,10 @@ MARK: Button
     box-shadow: none;
 
     &:hover {
-      box-shadow: var(--border-raised-outer), var(--border-raised-inner);
+      box-shadow: var(--border-slightly-raised);
+    }
+    &:not(:disabled):active {
+      box-shadow: var(--border-slightly-sunken);
     }
   }
 
@@ -219,9 +237,12 @@ MARK: Selector
     min-height: 23px;
     padding: 0 12px;
 
-    &.is-selected {
+    &:active, &.is-selected {
       box-shadow: var(--border-sunken-outer), var(--border-sunken-inner);
       text-shadow: 1px 1px var(--text);
+    }
+
+    &.is-selected {
       background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg width='2' height='2' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath fill-rule='evenodd' clip-rule='evenodd' d='M1 0H0v1h1v1h1V1H1V0z' fill='silver'/%3E%3Cpath fill-rule='evenodd' clip-rule='evenodd' d='M2 0H1v1H0v1h1V1h1V0z' fill='%23fff'/%3E%3C/svg%3E");
     }
   }
@@ -625,10 +646,32 @@ MARK: Table
         position: sticky;
         top: 0;
         height: 17px;
-        box-shadow: var(--border-raised-outer), var(--border-raised-inner);
-        background: var(--surface-0);
         font-weight: normal;
         padding: 0 var(--space-sm);
+        z-index: 0;
+
+        &::before {
+          content: '';
+          position: absolute;
+          top: 0;
+          left: 0;
+          right: 0;
+          bottom: 0;
+          z-index: -1;
+          box-shadow: var(--border-raised-outer), var(--border-raised-inner);
+          background: var(--surface-0);
+        }
+
+        &.is-sortable:active {
+          transform: translate(1px, 1px);
+
+          &::before {
+            transform: translate(-1px, -1px);
+            box-shadow:
+              inset 1px 1px var(--button-shadow),
+              inset -1px -1px var(--button-shadow);
+          }
+        }
       }
     }
 
@@ -773,17 +816,37 @@ MARK: Fonts
 **/
 
 @font-face {
-  font-family: 'Pixelated MS Sans Serif';
-  src: url('../fonts/ms_sans_serif.woff') format('woff');
-  src: url('../fonts/ms_sans_serif.woff2') format('woff2');
+  font-family: 'Pixelated MS Sans Serif @8pt';
+  src: url('../fonts/MSSansSerif-8pt.ttf') format('truetype');
+  src: url('../fonts/MSSansSerif-8pt.woff') format('woff');
+  src: url('../fonts/MSSansSerif-8pt.woff2') format('woff2');
   font-weight: normal;
   font-style: normal;
 }
 
 @font-face {
-  font-family: "Pixelated MS Sans Serif";
-  src: url('../fonts/ms_sans_serif_bold.woff') format('woff');
-  src: url('../fonts/ms_sans_serif_bold.woff2') format('woff2');
+  font-family: 'Pixelated MS Sans Serif @8pt';
+  src: url('../fonts/MSSansSerifBold-8pt.ttf') format('truetype');
+  src: url('../fonts/MSSansSerifBold-8pt.woff') format('woff');
+  src: url('../fonts/MSSansSerifBold-8pt.woff2') format('woff2');
+  font-weight: bold;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Pixelated MS Sans Serif @10pt';
+  src: url('../fonts/MSSansSerif-10pt.ttf') format('truetype');
+  src: url('../fonts/MSSansSerif-10pt.woff') format('woff');
+  src: url('../fonts/MSSansSerif-10pt.woff2') format('woff2');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Pixelated MS Sans Serif @10pt';
+  src: url('../fonts/MSSansSerifBold-10pt.ttf') format('truetype');
+  src: url('../fonts/MSSansSerifBold-10pt.woff') format('woff');
+  src: url('../fonts/MSSansSerifBold-10pt.woff2') format('woff2');
   font-weight: bold;
   font-style: normal;
 }

@@ -1,4 +1,7 @@
 [data-theme="default"] {
+  /** This is already defined in common.css, but is needed because Vite uses Lightning CSS and it's not smart enough to not break my light-dark functions without explicitly re-defining this prop in each theme **/
+  color-scheme: light dark;
+
   /** Common props (can be safely used in userland code independently from chosen theme **/
 
   --surface-0: light-dark(#eaeaea, oklch(0.25 0.015 260));
@@ -129,6 +132,7 @@ MARK: AppShell
 .app-shell {
   --_sidebar-overlay-border: 1px solid var(--divider);
   --_sidebar-overlay-shadow: var(--menu-shadow);
+  --_header-height: 56px;
 }
 
 /**

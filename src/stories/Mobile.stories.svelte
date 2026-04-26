@@ -16,7 +16,7 @@
   import Dialog from '$lib/components/Dialog.svelte';
   import Field from '$lib/components/Field.svelte';
   import AppShell from '$lib/components/AppShell.svelte';
-  import { getContext } from 'svelte';
+  import MobileChildPage1 from './components/MobileChildPage1.svelte';
 
   const { Story } = defineMeta({
     title: 'Mobile',
@@ -31,32 +31,37 @@
   function gotoX(depth) {
     shell.push({
       title: `Child at depth ${depth}`,
-      content: tasks,
-      props: { depth },
+      view: 'tasks',
+      data: { depth },
     });
   }
 </script>
-
-{#snippet tasks({ depth })}
-  <List>
-    <ListSection header="Section 1">
-      <ListItem accessory="chevron" onclick={() => gotoX(depth + 1)}>Go deeper!</ListItem>
-      <ListItem>Y</ListItem>
-      <ListItem accessory="switch">Z</ListItem>
-    </ListSection>
-  </List>
-{/snippet}
 
 <Story name="Mobile">
   <AppShell bind:this={shell} sections={[{
     id: 'tasks',
     title: 'Tasks',
-    content: tasks,
-    props: { depth: 0 },
+    view: 'tasks',
+    data: { depth: 0 },
   }, {
-    id: 1,
-    title: 'Tab 2',
-  }]} selected="tasks" withHeader/>
+    id: 'settings',
+    title: 'Settings',
+  }]} selected="tasks" withHeader>
+    {#snippet tasks({ depth })}
+      <List>
+        <ListSection header="Section 1">
+          <ListItem accessory="chevron" onclick={() => gotoX(depth + 1)}>Go deeper!</ListItem>
+          <ListItem accessory="chevron" onclick={() => {
+            shell.push({
+              title: 'Child 1',
+              view: MobileChildPage1,
+            });
+          }}>To ChildPage1</ListItem>
+          <ListItem accessory="switch">Toggle</ListItem>
+        </ListSection>
+      </List>
+    {/snippet}
+  </AppShell>
 </Story>
 <style>
   

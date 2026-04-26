@@ -9,6 +9,8 @@
     /** @type {String} */
     icon = null,
     /** @type {boolean} */
+    fullwidth = false,
+    /** @type {boolean} */
     disabled = false,
     /** @type {boolean} */
     grouped = false,
@@ -30,6 +32,7 @@
     size != 'md' && `is-${size}`,
     icon && !children && `is-icon`,
     grouped && `is-grouped`,
+    fullwidth && `is-fullwidth`,
     className,
   ]}
   {disabled}
