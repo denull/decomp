@@ -8,6 +8,7 @@
   const shell = getContext('shell');
 </script>
 
+<div style="background: #008000; width: 200px; height: 400px;"></div>
 <List>
   <ListSection>
     <ListItem accessory="chevron" onclick={() => {
@@ -18,3 +19,5 @@
     }}>Child Page 2</ListItem>
   </ListSection>
 </List>
+
+<div style="background: #008000; width: 200px; height: 1000px;"></div>

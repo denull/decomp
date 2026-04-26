@@ -1,5 +1,5 @@
 <script module>
-  import { DurationLong2 } from '../constants.js';
+  import { DurationGentle1, DurationLong2 } from '../constants.js';
   let toast = $state({ view: null, visible: false });
   let toastTimer = null;
 
@@ -109,11 +109,13 @@
         onclick={popPage}
       >&lt; {stacks.get(section)[stacks.get(section).length - 2].title || 'Back'}</Button>
       {/if}
+      {#if sidebar}
       <Button
         class="app-shell__sidebar-toggle"
         icon="css:sidebar"
         onclick={() => sidebarOpen = !sidebarOpen}
       />
+      {/if}
       {#if page?.title}
         <div class="app-shell__title">{page.title}</div>
       {/if}
@@ -134,11 +136,13 @@
           <div
             class={[
               'app-shell__page',
-              i < stacks.get(section).length - 1 && 'is-covered',
             ]}
-            transition:fly={{ x: 200, duration: 320 }}
+            transition:fly={{ x: 200, duration: DurationGentle1 }}
           >
-            <ViewRenderer view={page.view} fallback={children} data={page.data} {...rest}/>
+            <div class="app-shell__page-header"></div>
+            <div class="app-shell__page-body">
+              <ViewRenderer view={page.view} fallback={children} data={page.data} {...rest}/>
+            </div>
             {#if footer}
               <div class="app-shell__footer">
                 {@render footer()}
