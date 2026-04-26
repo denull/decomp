@@ -54,6 +54,11 @@
   color-scheme: dark;
 }
 
+body {
+  /** Horizontal scroll should appear only on app-shell__page **/
+  overflow-x: hidden;
+}
+
 body::before {
   /** Ensures overscroll areas on iOS use the same background **/
   content: '';
@@ -153,6 +158,8 @@ MARK: AppShell
     flex: 1;
     position: relative;
     max-width: 100%;
+    display: flex;
+    flex-direction: column;
   }
 
   .app-shell__page {
@@ -164,6 +171,7 @@ MARK: AppShell
     bottom: 0;
     overflow: auto;*/
     padding-inline: var(--space);
+    flex: 1;
     
     display: flex;
     flex-direction: column;
@@ -175,16 +183,25 @@ MARK: AppShell
       top: 0;
       left: 0;
       right: 0;
-      bottom: 0;
+      /*bottom: 0;*/
       background: rgb(0 0 0 / 20%);
       opacity: 0;
       transition: opacity var(--duration-gentle-1);
       pointer-events: none;
     }
 
-    &.is-covered:after {
-      opacity: 1;
-      pointer-events: all;
+    &:not(:last-child) {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      z-index: -1;
+
+      &:after {
+        opacity: 1;
+        pointer-events: all;
+      }
     }
   }
 
