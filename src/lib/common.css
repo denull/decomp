@@ -48,10 +48,10 @@
 }
 
 [data-scheme="light"] {
-  color-scheme: light;
+  color-scheme: light !important;
 }
 [data-scheme="dark"] {
-  color-scheme: dark;
+  color-scheme: dark !important;
 }
 
 body {
@@ -101,16 +101,56 @@ MARK: AppShell
 **/
 
 .app-shell {
-  display: flex;
-  flex-direction: column;
+  /** App shell is the main layout of the app, centered on desktop by default **/
+  display: grid;
+  grid-template-columns: 280px 1fr;
+  grid-template-rows: auto 1fr;
+  grid-template-areas: "header header" "sidebar main";
+  height: 100dvh;
   min-height: 100vh;
+  min-height: 100dvh;
 
   &:not(.is-fullwidth) {
     max-width: 1280px;
     margin-inline: auto;
   }
+  &:not(:has(> .app-shell__sidebar)) {
+    grid-template-columns: 1fr;
+    grid-template-areas: "header" "main";
+  }
+
+  .app-shell__sidebar {
+    /** Sidebar sits in the left column on desktop, and can be toggled on mobile **/
+    grid-area: sidebar;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space);
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    height: 100dvh;
+    padding-left: var(--space);
+  }
+
+  .app-shell__body {
+    /** Deprecated: remove **/
+    flex: 1;
+    display: flex;
+    position: relative;
+    gap: var(--space);
+  }
+
+  .app-shell__main {
+    /** Main contains everything except sidebar (header/pages/footer), and other modals (bottom sheets, toasts) **/
+    display: contents;
+    grid-area: main;
+    position: relative;
+    max-width: 100%;
+  }
 
   .app-shell__header {
+    /** Global header, independent of pages pushed **/
+    grid-area: header;
     position: sticky;
     top: 0;
     height: var(--_header-height);
@@ -137,32 +177,9 @@ MARK: AppShell
     font-weight: 500;
   }
 
-  .app-shell__body {
-    flex: 1;
-    display: flex;
-    position: relative;
-    gap: var(--space);
-  }
-
-  .app-shell__sidebar {
-    display: flex;
-    flex-direction: column;
-    gap: var(--space);
-    position: sticky;
-    top: calc(var(--_header-height));
-    height: calc(100vh - var(--_header-height));
-    padding-left: var(--space);
-  }
-
-  .app-shell__main {
-    flex: 1;
-    position: relative;
-    max-width: 100%;
-    display: flex;
-    flex-direction: column;
-  }
-
   .app-shell__page {
+    /** Single screen that can be pushed to the AppShell; contains its own header and footer **/
+    grid-area: main;
     background: var(--surface-0);
     /*position: absolute;
     top: 0;
@@ -190,7 +207,7 @@ MARK: AppShell
       pointer-events: none;
     }
 
-    &:not(:last-child) {
+    &:not(:last-of-type) {
       position: absolute;
       top: 0;
       left: 0;
@@ -206,7 +223,21 @@ MARK: AppShell
     }
   }
 
+  .app-shell__page-header {
+    position: sticky;
+    top: 0;
+    height: var(--_page-header-height);
+    display: flex;
+    align-items: center;
+    gap: var(--space);
+    background: var(--surface-0);
+  }
+  &:has(.app-shell__header) .app-shell__page-header {
+    top: var(--_header-height);
+  }
+
   .app-shell__footer {
+    /** Global footer: may contain a tab bar for example **/
     display: flex;
     margin-top: auto;
   }
@@ -235,12 +266,20 @@ MARK: AppShell
   }
 
   @media (max-width: 768px) {
-    .app-shell__sidebar-toggle {
-      display: flex;
-    }
+    display: flex;
+    flex-direction: column;
 
     &:not(.is-sidebar-open) .app-shell__sidebar {
       transform: translateX(calc(-100% - var(--space)));
+    }
+
+    .app-shell__main {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .app-shell__sidebar-toggle {
+      display: flex;
     }
 
     .app-shell__sidebar {

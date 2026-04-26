@@ -48,15 +48,6 @@
 
   let stacks = new SvelteMap();
 
-  let shouldDisplayHeader = $derived(
-    header ||
-    title ||
-    withHeader
-  );
-
-  let page = $derived(stacks.get(section) &&
-    stacks.get(section)[stacks.get(section).length - 1]);
-
   $effect(() => {
     if (!sections) {
       stacks.set(null, [{
@@ -100,62 +91,68 @@
     sidebarOpen && `is-sidebar-open`,
   ]}
 >
-  {#if shouldDisplayHeader}
-    <header class="app-shell__header">
-      {#if stacks.has(section) && stacks.get(section).length > 1}
-      <Button
-        class="app-shell__back-button"
-        variant="ghost"
-        onclick={popPage}
-      >&lt; {stacks.get(section)[stacks.get(section).length - 2].title || 'Back'}</Button>
-      {/if}
-      {#if sidebar}
-      <Button
-        class="app-shell__sidebar-toggle"
-        icon="css:sidebar"
-        onclick={() => sidebarOpen = !sidebarOpen}
-      />
-      {/if}
-      {#if page?.title}
-        <div class="app-shell__title">{page.title}</div>
-      {/if}
-      {@render header?.()}
-    </header>
-    <!-- this is another potential location for dock (below/inside header) -->
+  {#if sidebar}
+    <nav class="app-shell__sidebar">
+      {@render sidebar()}
+    </nav>
   {/if}
-  <div class="app-shell__body">
-    <!-- this is another potential location for dock (to the left of sidebar) -->
-    {#if sidebar}
-      <nav class="app-shell__sidebar">
-        {@render sidebar()}
-      </nav>
+
+  <main class="app-shell__main">
+    {#if header || (!withHeader && title)}
+      <header class="app-shell__header">
+        {#if title}
+          <div class="app-shell__title">{title}</div>
+        {/if}
+        {@render header?.()}
+      </header>
+      <!-- this is another potential location for dock (below/inside header) -->
     {/if}
-    <main class="app-shell__main">
-      {#if stacks.has(section)}
-        {#each stacks.get(section) as page, i}
-          <div
-            class={[
-              'app-shell__page',
-            ]}
-            transition:fly={{ x: 200, duration: DurationGentle1 }}
-          >
-            <div class="app-shell__page-header"></div>
-            <div class="app-shell__page-body">
-              <ViewRenderer view={page.view} fallback={children} data={page.data} {...rest}/>
+
+    {#if stacks.has(section)}
+      {#each stacks.get(section) as page, i}
+        <div
+          class={[
+            'app-shell__page',
+          ]}
+          transition:fly={{ x: 200, duration: DurationGentle1 }}
+        >
+          {#if withHeader}
+            <div class="app-shell__page-header">
+              {#if i > 0}
+                <Button
+                  class="app-shell__back-button"
+                  variant="ghost"
+                  onclick={popPage}
+                >⏴{stacks.get(section)[i - 1].title || 'Back'}</Button>
+              {:else if sidebar}
+                <Button
+                  class="app-shell__sidebar-toggle"
+                  icon="css:sidebar"
+                  onclick={() => sidebarOpen = !sidebarOpen}
+                />
+              {/if}
+              {#if page?.title}
+                <div class="app-shell__title">{page.title}</div>
+              {/if}
             </div>
-            {#if footer}
-              <div class="app-shell__footer">
-                {@render footer()}
-              </div>
-            {/if}
+          {/if}
+          <div class="app-shell__page-body">
+            <ViewRenderer view={page.view} fallback={children} data={page.data} {...rest}/>
           </div>
-        {/each}
-      {/if}
-    </main>
-  </div>
-  <!--div class="app-shell__dock">
-    {JSON.stringify(sections)}
-  </div-->
+          <div class="app-shell__page-footer"></div>
+        </div>
+      {/each}
+    {/if}
+
+    {#if footer}
+      <div class="app-shell__footer">
+        {@render footer()}
+        <!--{JSON.stringify(sections)}-->
+      </div>
+    {/if}
+  </main>
+
+  <!-- bottom sheets and modals should live here -->
 
   <div class={[
     'app-shell__toast',

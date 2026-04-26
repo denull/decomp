@@ -133,6 +133,7 @@ MARK: AppShell
   --_sidebar-overlay-border: 1px solid var(--divider);
   --_sidebar-overlay-shadow: var(--menu-shadow);
   --_header-height: 56px;
+  --_page-header-height: 56px;
 }
 
 /**
