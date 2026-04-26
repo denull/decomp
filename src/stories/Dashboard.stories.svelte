@@ -15,6 +15,7 @@
   import Spinner from '$lib/components/Spinner.svelte';
   import Dialog from '$lib/components/Dialog.svelte';
   import Field from '$lib/components/Field.svelte';
+  import AppShell, { showToast } from '$lib/components/AppShell.svelte';
 
   const { Story } = defineMeta({
     title: 'Dashboard',
@@ -27,10 +28,11 @@
   let radioGroup = $state(0);
   let expirience = $state(5);
   let dialog = $state(null);
+  let shell = $state(null);
 </script>
 
-
 <Story name="Dashboard">
+  <AppShell bind:this={shell}>
   <!-- ======== Header ======== -->
   <header class="header">
     <div>
@@ -224,6 +226,8 @@
       <div class="row">
         <Button onclick={() => dialog.show()}>Open Dialog</Button>
 
+        <Button onclick={() => showToast('Hello world!')}>Show toast</Button>
+
         <!--div class="popover-anchor">
           <Button>
             Show Popover
@@ -321,7 +325,7 @@
       <Button variant="primary" onclick={() => dialog.hide()}>Confirm</Button>
     {/snippet}
   </Dialog>
-
+</AppShell>
 </Story>
 <style>
   .header {

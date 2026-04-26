@@ -5,13 +5,13 @@
   import { getContext } from 'svelte';
   import MobileChildPage2 from './MobileChildPage2.svelte';
 
-  const nav = getContext('nav');
+  const shell = getContext('shell');
 </script>
 
 <List>
   <ListSection>
     <ListItem accessory="chevron" onclick={() => {
-      nav.push({
+      shell.pushPage({
         title: 'Page 2',
         view: MobileChildPage2,
       });

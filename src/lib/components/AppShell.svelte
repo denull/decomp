@@ -1,3 +1,15 @@
+<script module>
+  import { DurationLong2 } from '../constants.js';
+  let toast = $state({ view: null, visible: false });
+  let toastTimer = null;
+
+  export function showToast(view) {
+    toast = { view, visible: true };
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(() => { toast.visible = false; }, DurationLong2);
+  }
+</script>
+
 <script>
   import { setContext } from 'svelte';
   import Appearance from './Appearance.svelte';
@@ -30,7 +42,7 @@
     /** @type {Array | null} */
     sections = null,
     /** @type {any} */
-    selected = $bindable(null),
+    section = $bindable(null),
     ...rest
   } = $props();
 
@@ -42,8 +54,8 @@
     withHeader
   );
 
-  let page = $derived(stacks.get(selected) &&
-    stacks.get(selected)[stacks.get(selected).length - 1]);
+  let page = $derived(stacks.get(section) &&
+    stacks.get(section)[stacks.get(section).length - 1]);
 
   $effect(() => {
     if (!sections) {
@@ -62,20 +74,20 @@
     }
   });
 
-  export function push(page) {
-    if (!selected || !stacks.has(selected)) return;
-    stacks.set(selected, [...stacks.get(selected), page]);
+  export function pushPage(page) {
+    if (!section || !stacks.has(section)) return;
+    stacks.set(section, [...stacks.get(section), page]);
   }
 
-  export function pop() {
-    if (!selected || !stacks.has(selected)) return;
-    const stack = stacks.get(selected);
-    stacks.set(selected, stack.slice(0, stack.length - 1));
+  export function popPage() {
+    if (!section || !stacks.has(section)) return;
+    const stack = stacks.get(section);
+    stacks.set(section, stack.slice(0, stack.length - 1));
   }
 
-  setContext('nav', {
-    push, pop,
-    section: selected,
+  setContext('shell', {
+    section, pushPage, popPage,
+    showToast,
   });
 </script>
 
@@ -90,12 +102,12 @@
 >
   {#if shouldDisplayHeader}
     <header class="app-shell__header">
-      {#if stacks.has(selected) && stacks.get(selected).length > 1}
+      {#if stacks.has(section) && stacks.get(section).length > 1}
       <Button
         class="app-shell__back-button"
         variant="ghost"
-        onclick={pop}
-      >&lt; {stacks.get(selected)[stacks.get(selected).length - 2].title || 'Back'}</Button>
+        onclick={popPage}
+      >&lt; {stacks.get(section)[stacks.get(section).length - 2].title || 'Back'}</Button>
       {/if}
       <Button
         class="app-shell__sidebar-toggle"
@@ -117,12 +129,12 @@
       </nav>
     {/if}
     <main class="app-shell__main">
-      {#if stacks.has(selected)}
-        {#each stacks.get(selected) as page, i}
+      {#if stacks.has(section)}
+        {#each stacks.get(section) as page, i}
           <div
             class={[
               'app-shell__page',
-              i < stacks.get(selected).length - 1 && 'is-covered',
+              i < stacks.get(section).length - 1 && 'is-covered',
             ]}
             transition:fly={{ x: 200, duration: 320 }}
           >
@@ -140,4 +152,13 @@
   <!--div class="app-shell__dock">
     {JSON.stringify(sections)}
   </div-->
+
+  <div class={[
+    'app-shell__toast',
+    toast.visible && 'is-visible',
+  ]}>{#if typeof toast.view === 'string'}{
+    toast.view
+  }{:else if typeof toast.view === 'function'}
+    {@render toast.view()}
+  {/if}</div>
 </div>

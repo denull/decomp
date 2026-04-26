@@ -29,7 +29,7 @@
   let shell = $state();
 
   function gotoX(depth) {
-    shell.push({
+    shell.pushPage({
       title: `Child at depth ${depth}`,
       view: 'tasks',
       data: { depth },
@@ -46,13 +46,13 @@
   }, {
     id: 'settings',
     title: 'Settings',
-  }]} selected="tasks" withHeader>
+  }]} section="tasks" withHeader>
     {#snippet tasks({ depth })}
       <List>
         <ListSection header="Section 1">
           <ListItem accessory="chevron" onclick={() => gotoX(depth + 1)}>Go deeper!</ListItem>
           <ListItem accessory="chevron" onclick={() => {
-            shell.push({
+            shell.pushPage({
               title: 'Child 1',
               view: MobileChildPage1,
             });

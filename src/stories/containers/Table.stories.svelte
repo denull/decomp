@@ -58,10 +58,10 @@
   {#snippet template()}
     <Table
       columns={[
-        { title: 'Name', snippet: 'name' },
+        { title: 'Name', value: 'name', view: 'name' },
         { title: 'Role', value: 'role' },
-        { title: 'Status', snippet: 'status' },
-        { title: '', snippet: 'actions' },
+        { title: 'Status', value: 'status', view: 'status' },
+        { title: '', view: 'actions' },
       ]}
       rows={[
         { name: 'Alice Chen', role: 'Frontend', status: 'Active' },
