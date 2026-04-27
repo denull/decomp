@@ -1,0 +1,19 @@
+import{n as e}from"./chunk-BneVvdWh.js";import{A as t,E as n,J as r,K as i,O as a,Q as o,U as s,bt as c,ct as l,et as u,gt as d,nt as f,q as p,st as m,t as h,z as g}from"./client-DVBkriut.js";import{i as _,n as v,r as y,t as b}from"./create-runtime-stories-C7ez5IF4.js";import{n as x,t as S}from"./Tabs-CbqAvdFG.js";function C(e,t){l(t,!0);var c=j(),u=p(c);T(u,{name:`String Tabs`,template:e=>{S(e,{tabs:[`Overview`,`Activity`,`Settings`],get selected(){return g(E)},set selected(e){o(E,e,!0)},children:(e,t)=>{var o=D(),c=r(i(o)),l=i(c,!0);d(c),d(o),s(()=>n(l,g(E))),a(e,o)},$$slots:{default:!0}})},$$slots:{template:!0},parameters:{__svelteCsf:{rawCode:`<Tabs tabs={['Overview', 'Activity', 'Settings']} bind:selected={selected}>
+  <p style="padding-top: 12px;">Current tab: <strong>{selected}</strong></p>
+</Tabs>`}}});var h=r(u,2);T(h,{name:`Object Tabs with Snippets`,template:e=>{S(e,{tabs:[{id:`overview`,title:`Overview`,view:`overview`},{id:`activity`,title:`Activity`,view:`activity`},{id:`settings`,title:`Settings`,view:`settings`}],selected:`overview`,overview:e=>{a(e,O())},activity:e=>{a(e,k())},settings:e=>{a(e,A())},$$slots:{overview:!0,activity:!0,settings:!0}})},$$slots:{template:!0},parameters:{__svelteCsf:{rawCode:`<Tabs tabs={[
+  { id: 'overview', title: 'Overview', view: 'overview' },
+  { id: 'activity', title: 'Activity', view: 'activity' },
+  { id: 'settings', title: 'Settings', view: 'settings' },
+]} selected="overview">
+  {#snippet overview()}
+    <p>Sprint velocity has increased by 12% compared to last quarter, with 3 features shipped ahead of schedule.</p>
+  {/snippet}
+  {#snippet activity()}
+    <p><strong>Today</strong> — Alice pushed 3 commits<br>
+    <strong>Yesterday</strong> — Bob merged PR #142<br>
+    <strong>Mar 8</strong> — Eve updated the project roadmap</p>
+  {/snippet}
+  {#snippet settings()}
+    <p>Settings panel content goes here.</p>
+  {/snippet}
+</Tabs>`}}});var _=r(h,2);T(_,{name:`Many Tabs`,template:e=>{{let t=f(()=>[`Home`,`Profile`,`Messages`,`Notifications`,`Privacy`,`Billing`,`Help`].map(e=>({id:e,title:e})));S(e,{get tabs(){return g(t)},selected:`Home`})}},$$slots:{template:!0},parameters:{__svelteCsf:{rawCode:`<Tabs tabs={['Home', 'Profile', 'Messages', 'Notifications', 'Privacy', 'Billing', 'Help'].map(name => ({ id: name, title: name }))} selected="Home" />`}}});var v=r(_,2);T(v,{name:`Two Tabs`,template:e=>{{let t=f(()=>[`Login`,`Sign Up`].map(e=>({id:e,title:e})));S(e,{get tabs(){return g(t)},selected:`Login`})}},$$slots:{template:!0},parameters:{__svelteCsf:{rawCode:`<Tabs tabs={['Login', 'Sign Up'].map(name => ({ id: name, title: name }))} selected="Login" />`}}}),a(e,c),m()}var w,T,E,D,O,k,A,j,M,N,P,F,I,L;e((()=>{c(),_(),x(),h(),v(),w={title:`Containers/Tabs`,component:S,tags:[`autodocs`]},{Story:T}=y(w),E=u(`Overview`),D=t(`<p style="padding-top: 12px;">Current tab: <strong> </strong></p>`),O=t(`<p>Sprint velocity has increased by 12% compared to last quarter, with 3 features shipped ahead of schedule.</p>`),k=t(`<p><strong>Today</strong> — Alice pushed 3 commits<br/> <strong>Yesterday</strong> — Bob merged PR #142<br/> <strong>Mar 8</strong> — Eve updated the project roadmap</p>`),A=t(`<p>Settings panel content goes here.</p>`),j=t(`<!> <!> <!> <!>`,1),C.__docgen={data:[],name:`Tabs.stories.svelte`},M=b(C,w),N=[`StringTabs`,`ObjectTabsWithSnippets`,`ManyTabs`,`TwoTabs`],P={...M.StringTabs,tags:[`svelte-csf-v5`]},F={...M.ObjectTabsWithSnippets,tags:[`svelte-csf-v5`]},I={...M.ManyTabs,tags:[`svelte-csf-v5`]},L={...M.TwoTabs,tags:[`svelte-csf-v5`]}}))();export{I as ManyTabs,F as ObjectTabsWithSnippets,P as StringTabs,L as TwoTabs,N as __namedExportsOrder,w as default};
