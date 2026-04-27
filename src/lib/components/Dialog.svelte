@@ -50,7 +50,7 @@
   style:--_offset-y={offset[1]}
   style:--_drag-x={dragging && dragging[0]}
   style:--_drag-y={dragging && dragging[1]}
-  onpointerdown={() => onfocus?.()}
+  onclick={() => onfocus?.()}
 >
   <div class="dialog__header">
     <div class="dialog__drag-handle"
@@ -60,7 +60,8 @@
           dragging = null;
           offset = [offset[0] + dx, offset[1] + dy];
         }
-      })}></div>
+      })}
+      onpointerdown={() => onfocus?.()}></div>
     <div class="dialog__title">{title}</div>
     {@render header?.()}
     <div class="dialog__header-buttons">
