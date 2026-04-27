@@ -108,7 +108,7 @@ MARK: AppShell
   grid-template-columns: var(--_sidebar-width) 1fr;
   grid-template-rows: auto 1fr;
   grid-template-areas: "header header" "sidebar main";
-  height: 100dvh;
+  /*height: 100dvh;*/
   min-height: 100vh;
   min-height: 100dvh;
 
@@ -125,16 +125,23 @@ MARK: AppShell
     display: none;
   }
   .app-shell__sidebar {
+    --_sidebar-top: var(--_header-height);
     /** Sidebar sits in the left column on desktop, and can be toggled on mobile **/
     grid-area: sidebar;
     display: flex;
     flex-direction: column;
     gap: var(--space);
-    position: sticky;
-    top: 0;
-    height: 100vh;
-    height: 100dvh;
+    position: fixed;
+    top: var(--_sidebar-top);
+    width: var(--_sidebar-width);
+    /*height: calc(100vh - var(--_sidebar-top));
+    height: calc(100dvh - var(--_sidebar-top));*/
+    min-height: calc(100% - var(--_sidebar-top));
+    flex-shrink: 0;
     padding-left: var(--space);
+  }
+  &::not(:has(.app-shell__header)) .app-shell__sidebar {
+    --_sidebar-top: 0;
   }
 
   .app-shell__body {
@@ -160,6 +167,7 @@ MARK: AppShell
     top: 0;
     height: var(--_header-height);
     display: flex;
+    flex-shrink: 0;
     align-items: center;
     padding: 0 var(--space);
     gap: var(--space);
@@ -285,6 +293,7 @@ MARK: AppShell
       border: none;
     }
     .app-shell__sidebar {
+      --_sidebar-top: 0;
       z-index: 50;
       padding-top: var(--space);
       border-inline-end: var(--_sidebar-overlay-border);
@@ -311,7 +320,6 @@ MARK: AppShell
     &.is-sidebar-sliding {
       .app-shell__sidebar {
         margin-left: calc(-1 * var(--_sidebar-width));
-        width: var(--_sidebar-width);
       }
       .app-shell__main {
         transition: transform var(--duration-quick-1);
