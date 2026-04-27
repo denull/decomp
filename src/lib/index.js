@@ -1,4 +1,4 @@
-export { default as AppShell, showToast } from './components/AppShell.svelte';
+export { default as AppShell } from './components/AppShell.svelte';
 
 export { default as Icon } from './components/Icon.svelte';
 

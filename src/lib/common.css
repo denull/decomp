@@ -104,6 +104,7 @@ MARK: AppShell
   /** App shell is the main layout of the app, centered on desktop by default **/
   --_sidebar-width: 280px;
 
+  position: relative;
   display: grid;
   grid-template-columns: var(--_sidebar-width) 1fr;
   grid-template-rows: auto 1fr;

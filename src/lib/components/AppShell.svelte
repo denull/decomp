@@ -1,16 +1,5 @@
-<script module>
-  import { DurationGentle1, DurationLong2 } from '../constants.js';
-  let toast = $state({ view: null, visible: false });
-  let toastTimer = null;
-
-  export function showToast(view) {
-    toast = { view, visible: true };
-    clearTimeout(toastTimer);
-    toastTimer = setTimeout(() => { toast.visible = false; }, DurationLong2);
-  }
-</script>
-
 <script>
+  import { DurationGentle1, DurationLong2 } from '../constants.js';
   import { setContext } from 'svelte';
   import Appearance from './Appearance.svelte';
   import Button from './Button.svelte';
@@ -48,6 +37,10 @@
     ...rest
   } = $props();
 
+  
+  let toast = $state({ view: null, visible: false });
+  let toastTimer = null;
+
   let stacks = new SvelteMap();
 
   $effect(() => {
@@ -67,6 +60,14 @@
     }
   });
 
+  export function getSection() {
+    return section;
+  }
+
+  export function setSection(newSection) {
+    section = newSection;
+  }
+
   export function pushPage(page) {
     if (!section || !stacks.has(section)) return;
     stacks.set(section, [...stacks.get(section), page]);
@@ -78,8 +79,29 @@
     stacks.set(section, stack.slice(0, stack.length - 1));
   }
 
+  export function isSidebarOpen() {
+    return sidebarOpen;
+  }
+
+  export function openSidebar() {
+    sidebarOpen = true;
+  }
+
+  export function closeSidebar() {
+    sidebarOpen = false;
+  }
+  
+  export function showToast(view) {
+    toast = { view, visible: true };
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(() => { toast.visible = false; }, DurationLong2);
+  }
+
   setContext('shell', {
-    section, pushPage, popPage,
+    getSection, setSection,
+    pushPage, popPage,
+    isSidebarOpen, openSidebar, closeSidebar,
+    // showModal / showWindow ?
     showToast,
   });
 </script>
