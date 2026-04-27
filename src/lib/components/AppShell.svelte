@@ -1,11 +1,12 @@
 <script>
   import { DurationGentle1, DurationLong2 } from '../constants.js';
-  import { setContext } from 'svelte';
+  import { setContext, tick } from 'svelte';
   import Appearance from './Appearance.svelte';
   import Button from './Button.svelte';
   import { SvelteMap } from 'svelte/reactivity';
   import { fly } from 'svelte/transition';
   import ViewRenderer from './ViewRenderer.svelte';
+  import Dialog from './Dialog.svelte';
 
   let {
     /** @type {String} */
@@ -37,6 +38,8 @@
     ...rest
   } = $props();
 
+  let overlays = $state([]);
+  let nextOverlayId = 1;
   
   let toast = $state({ view: null, visible: false });
   let toastTimer = null;
@@ -90,6 +93,44 @@
   export function closeSidebar() {
     sidebarOpen = false;
   }
+
+  export function showOverlay(props, modal = true) {
+    const id = nextOverlayId++;
+    overlays.push({ id, props, comp: null, modal });
+    tick().then(() => {
+      const comp = overlays.find(overlay => overlay.id == id)?.comp;
+      if (modal) {
+        comp?.showModal();
+      } else {
+        comp?.show();
+      }
+    });
+    return id;
+  }
+
+  export function bringOverlayToFront(id) {
+    overlays = [
+      ...overlays.filter(overlay => overlay.id !== id),
+      ...overlays.filter(overlay => overlay.id === id),
+    ];
+    tick().then(() => {
+      for (const overlay of overlays) {
+        overlay.comp?.cancelAnimations();
+      }
+    });
+  }
+
+  export function dismissOverlay(id) {
+    if (id) {
+      overlays = overlays.filter(overlay => overlay.id !== id);
+    } else {
+      overlays = overlays.slice(0, overlays.length - 1);
+    }
+  }
+
+  export function dismissAllOverlays() {
+    overlays = [];
+  }
   
   export function showToast(view) {
     toast = { view, visible: true };
@@ -101,7 +142,7 @@
     getSection, setSection,
     pushPage, popPage,
     isSidebarOpen, openSidebar, closeSidebar,
-    // showModal / showWindow ?
+    showOverlay, bringOverlayToFront, dismissOverlay, dismissAllOverlays,
     showToast,
   });
 </script>
@@ -131,6 +172,7 @@
         {#if sidebar && !withHeader}
           <Button
             class="app-shell__sidebar-toggle"
+            variant="ghost"
             icon="css:sidebar"
             onclick={() => sidebarOpen = !sidebarOpen}
           />
@@ -141,6 +183,13 @@
         {@render header?.()}
       </header>
       <!-- this is another potential location for dock (below/inside header) -->
+    {/if}
+
+    {#if footer}
+      <div class="app-shell__footer">
+        {@render footer()}
+        <!--{JSON.stringify(sections)}-->
+      </div>
     {/if}
 
     {#if stacks.has(section)}
@@ -162,6 +211,7 @@
               {:else if sidebar}
                 <Button
                   class="app-shell__sidebar-toggle"
+                  variant="ghost"
                   icon="css:sidebar"
                   onclick={() => sidebarOpen = !sidebarOpen}
                 />
@@ -178,16 +228,18 @@
         </div>
       {/each}
     {/if}
-
-    {#if footer}
-      <div class="app-shell__footer">
-        {@render footer()}
-        <!--{JSON.stringify(sections)}-->
-      </div>
-    {/if}
   </main>
 
   <!-- bottom sheets and modals should live here -->
+  {#each overlays as overlay (overlay.id)}
+    <Dialog
+      bind:this={overlay.comp}
+      class="app-shell__overlay"
+      {...overlay.props}
+      ondismiss={() => dismissOverlay(overlay.id)}
+      onfocus={() => bringOverlayToFront(overlay.id)}
+      />
+  {/each}
 
   <div class={[
     'app-shell__toast',

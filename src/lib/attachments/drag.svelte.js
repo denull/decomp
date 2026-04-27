@@ -7,10 +7,10 @@ export function drag(callback) {
       if (ev.button !== 0) {
         return;
       }
-      offPointerMove = on(el, 'pointermove', onPointerMove);
-      offPointerUp = on(el, 'pointerup', onPointerUp);
+      offPointerMove = on(window, 'pointermove', onPointerMove);
+      offPointerUp = on(window, 'pointerup', onPointerUp);
+      offPointerCancel = on(window, 'pointercancel', onPointerUp);
       first = last = [ev.clientX, ev.clientY];
-      el.setPointerCapture(ev.pointerId);
       el.style.setProperty('--_drag-x', 0);
       el.style.setProperty('--_drag-y', 0);
       callback?.(0, 0, false);
@@ -31,13 +31,16 @@ export function drag(callback) {
       el.style.removeProperty('--_drag-y');
       offPointerMove?.();
       offPointerUp?.();
-      offPointerMove = offPointerUp = null;
+      offPointerCancel?.();
+      offPointerMove = offPointerUp = offPointerCancel = null;
     }
     const offPointerDown = on(el, 'pointerdown', onPointerDown);
     /** @type Function | null */
     let offPointerMove;
     /** @type Function | null */
     let offPointerUp;
+    /** @type Function | null */
+    let offPointerCancel;
     return () => {
       offPointerDown();
       onPointerUp();

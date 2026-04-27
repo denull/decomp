@@ -15,7 +15,7 @@
   import Spinner from '$lib/components/Spinner.svelte';
   import Dialog from '$lib/components/Dialog.svelte';
   import Field from '$lib/components/Field.svelte';
-  import AppShell, { showToast } from '$lib/components/AppShell.svelte';
+  import AppShell from '$lib/components/AppShell.svelte';
 
   const { Story } = defineMeta({
     title: 'Dashboard',
@@ -27,9 +27,18 @@
 
   let radioGroup = $state(0);
   let expirience = $state(5);
-  let dialog = $state(null);
+  //let dialog = $state(null);
   let shell = $state(null);
 </script>
+
+<!-- todo: this seems ugly -->
+{#snippet dialogBody()}
+  <p>Are you sure you want to proceed with this action? This operation cannot be undone and will permanently affect the selected items.</p>
+{/snippet}
+{#snippet dialogFooter()}
+  <Button onclick={() => shell.dismissOverlay()}>Cancel</Button>
+  <Button variant="primary" onclick={() => shell.dismissOverlay()}>Confirm</Button>
+{/snippet}
 
 <Story name="Dashboard">
   <AppShell bind:this={shell}>
@@ -224,9 +233,21 @@
     <section class="card span-2">
       <div class="card__title">Overlays &amp; Menus</div>
       <div class="row">
-        <Button onclick={() => dialog.show()}>Open Dialog</Button>
+        <Button onclick={() => shell.showOverlay({
+          variant: 'alert',
+          title: 'Confirm Action',
+          children: dialogBody,
+          footer: dialogFooter,
+        })}>Open Dialog</Button>
+        <Button onclick={() => shell.showOverlay({
+          draggable: true,
+          variant: 'alert',
+          title: 'Confirm Action',
+          children: dialogBody,
+        }, false)}>Open Non-Modal Dialog</Button>
+        <Button onclick={() => shell.dismissAllOverlays()}>Dismiss All</Button>
 
-        <Button onclick={() => showToast('Hello world!')}>Show toast</Button>
+        <Button onclick={() => shell.showToast('Hello world!')}>Show toast</Button>
 
         <!--div class="popover-anchor">
           <Button>
@@ -315,16 +336,6 @@
       </div>
     </section>
   </main>
-
-  <!-- ======== Dialog ======== -->
-  <Dialog bind:this={dialog} variant="alert" title="Confirm Action" draggable>
-    <p>Are you sure you want to proceed with this action? This operation cannot be undone and will permanently affect the selected items.</p>
-
-    {#snippet footer()}
-      <Button onclick={() => dialog.hide()}>Cancel</Button>
-      <Button variant="primary" onclick={() => dialog.hide()}>Confirm</Button>
-    {/snippet}
-  </Dialog>
 </AppShell>
 </Story>
 <style>

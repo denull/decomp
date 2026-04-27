@@ -21,7 +21,6 @@
   let alertDialog = $state(null);
   let draggableDialog = $state(null);
   let formDialog = $state(null);
-  let openState = $state(true);
 </script>
 
 <Story name="Basic">
@@ -69,19 +68,5 @@
         <Button variant="primary" onclick={() => formDialog.hide()}>Create</Button>
       {/snippet}
     </Dialog>
-  {/snippet}
-</Story>
-
-<Story name="Bound Open State">
-  {#snippet template()}
-    <Dialog bind:open={openState} title="Bound Open">
-      <p>This dialog uses the bindable <code>open</code> prop instead of imperative show/hide.</p>
-      {#snippet footer()}
-        <Button onclick={() => openState = false}>Close</Button>
-      {/snippet}
-    </Dialog>
-    {#if !openState}
-      <Button onclick={() => openState = true}>Reopen</Button>
-    {/if}
   {/snippet}
 </Story>

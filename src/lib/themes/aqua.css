@@ -64,6 +64,15 @@
 }
 
 /**
+MARK: AppShell
+**/
+
+.app-shell {
+  --_header-height: 56px;
+  --_page-header-height: 56px;
+}
+
+/**
 MARK: Icon
 **/
 .icon {

@@ -137,6 +137,7 @@ MARK: AppShell
     width: var(--_sidebar-width);
     /*height: calc(100vh - var(--_sidebar-top));
     height: calc(100dvh - var(--_sidebar-top));*/
+    height: 100%;
     min-height: calc(100% - var(--_sidebar-top));
     flex-shrink: 0;
     padding-left: var(--space);
@@ -221,7 +222,7 @@ MARK: AppShell
       pointer-events: none;
     }
 
-    &:not(:last-of-type) {
+    &:not(:last-child) {
       position: absolute;
       top: 0;
       left: 0;
@@ -254,6 +255,7 @@ MARK: AppShell
     /** Global footer: may contain a tab bar for example **/
     display: flex;
     margin-top: auto;
+    order: 1000000;
   }
 
   .app-shell__toast {
@@ -739,6 +741,10 @@ MARK: Dialog
 **/
 
 .dialog {
+  z-index: 100;
+  position: fixed;
+  top: 0;
+  bottom: 0;
   margin: auto;
   transform: translate(
     calc(1px * (var(--_offset-x) + var(--_drag-x, 0))),
@@ -756,6 +762,15 @@ MARK: Dialog
     justify-content: space-between;
     touch-action: none;
     user-select: none;
+    position: relative;
+  }
+
+  .dialog__drag-handle {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
   }
 
   .dialog__title {

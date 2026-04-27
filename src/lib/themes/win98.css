@@ -127,6 +127,14 @@ h1, h2, h3 {
 }
 
 /**
+MARK: AppShell
+**/
+.app-shell {
+  --_header-height: 32px;
+  --_page-header-height: 32px;
+}
+
+/**
 MARK: Icon
 **/
 .icon {
