@@ -102,8 +102,10 @@ MARK: AppShell
 
 .app-shell {
   /** App shell is the main layout of the app, centered on desktop by default **/
+  --_sidebar-width: 280px;
+
   display: grid;
-  grid-template-columns: 280px 1fr;
+  grid-template-columns: var(--_sidebar-width) 1fr;
   grid-template-rows: auto 1fr;
   grid-template-areas: "header header" "sidebar main";
   height: 100dvh;
@@ -119,6 +121,9 @@ MARK: AppShell
     grid-template-areas: "header" "main";
   }
 
+  .app-shell__sidebar-backdrop {
+    display: none;
+  }
   .app-shell__sidebar {
     /** Sidebar sits in the left column on desktop, and can be toggled on mobile **/
     grid-area: sidebar;
@@ -267,7 +272,27 @@ MARK: AppShell
 
   @media (max-width: 768px) {
     display: flex;
-    flex-direction: column;
+
+    &.is-sidebar-open .app-shell__sidebar-backdrop {
+      display: block;
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      z-index: 49;
+      background: rgb(0 0 0 / 60%);
+      border: none;
+    }
+    .app-shell__sidebar {
+      z-index: 50;
+      padding-top: var(--space);
+      border-inline-end: var(--_sidebar-overlay-border);
+      box-shadow: var(--_sidebar-overlay-shadow);
+      padding-inline: var(--space);
+      background: var(--surface-0);
+      transition: transform var(--duration-quick-1);
+    }
 
     &:not(.is-sidebar-open) .app-shell__sidebar {
       transform: translateX(calc(-100% - var(--space)));
@@ -276,23 +301,32 @@ MARK: AppShell
     .app-shell__main {
       display: flex;
       flex-direction: column;
+      flex: 1;
     }
 
     .app-shell__sidebar-toggle {
       display: flex;
     }
 
-    .app-shell__sidebar {
+    &.is-sidebar-sliding {
+      .app-shell__sidebar {
+        margin-left: calc(-1 * var(--_sidebar-width));
+        width: var(--_sidebar-width);
+      }
+      .app-shell__main {
+        transition: transform var(--duration-quick-1);
+      }
+
+      &.is-sidebar-open :where(.app-shell__main, .app-shell__sidebar) {
+        transform: translateX(var(--_sidebar-width));
+      }
+    }
+
+    &:not(.is-sidebar-sliding) .app-shell__sidebar {
       position: fixed;
       left: 0;
-      top: var(--_header-height);
+      top: 0;
       bottom: 0;
-      z-index: 20;
-      background: var(--surface-0);
-      padding-inline: var(--space);
-      border-inline-end: var(--_sidebar-overlay-border);
-      box-shadow: var(--_sidebar-overlay-shadow);
-      transition: transform var(--duration-quick-1);
     }
   }
 }

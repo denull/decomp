@@ -36,6 +36,8 @@
     /** @type {import('svelte').Snippet | null} */
     sidebar = null,
     /** @type {boolean} */
+    sidebarSliding = false,
+    /** @type {boolean} */
     sidebarOpen = $bindable(false),
     /** @type {boolean} */
     fullwidth = false,
@@ -88,10 +90,14 @@
   class={[
     'app-shell',
     fullwidth && `is-fullwidth`,
+    sidebarSliding && `is-sidebar-sliding`,
     sidebarOpen && `is-sidebar-open`,
   ]}
 >
   {#if sidebar}
+    <button class="app-shell__sidebar-backdrop"
+      aria-label="Close Sidebar"
+      onclick={() => sidebarOpen = false}></button>
     <nav class="app-shell__sidebar">
       {@render sidebar()}
     </nav>
@@ -100,6 +106,13 @@
   <main class="app-shell__main">
     {#if header || (!withHeader && title)}
       <header class="app-shell__header">
+        {#if sidebar && !withHeader}
+          <Button
+            class="app-shell__sidebar-toggle"
+            icon="css:sidebar"
+            onclick={() => sidebarOpen = !sidebarOpen}
+          />
+        {/if}
         {#if title}
           <div class="app-shell__title">{title}</div>
         {/if}
